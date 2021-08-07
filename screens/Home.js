@@ -5,6 +5,7 @@ import { BackHandler, StyleSheet, ToastAndroid, Vibration } from 'react-native'
 import { Text, View } from "react-native";
 import { FAB, IconButton, List, Snackbar, Menu, Portal } from 'react-native-paper';
 import Dose from '../store/Dose'
+import { SettingsContext } from '../store/SettingsContext';
 import Haptics from '../util/Haptics'
 import { MORE_ICON } from '../util/Util';
 
@@ -48,6 +49,10 @@ function DoseEntry({dose, index, selecting, list}) {
 
 function HomeContextMenu({select, selectAll}) {
   const [menu, setMenu] = useState(false)
+  const {darkTheme, setDarkTheme} = React.useContext(SettingsContext)
+
+  // Returns a function that performs fn(...args) and closes the menu
+  const doAndClose = (fn, ...args) => ( function() { fn(...args); setMenu(false) } )
 
   return (
     <Menu 
@@ -57,8 +62,12 @@ function HomeContextMenu({select, selectAll}) {
         <IconButton icon={MORE_ICON} onPress={() => setMenu(true)} />
       }
     >
-      <Menu.Item onPress={() => { select(); setMenu(false) }} title="Select" />
-      {/*<Menu.Item onPress={() => { selectAll(); setMenu(false) }} title="Select all" />*/}
+      <Menu.Item onPress={doAndClose(select)} title="Select" />
+      {/*<Menu.Item onPress={doseAndClose(selectAll)} title="Select all" />*/}
+      <Menu.Item
+        title={`Switch to ${darkTheme ? 'light' : 'dark'} theme`}
+        onPress={doAndClose(setDarkTheme, !darkTheme)}
+      />
     </Menu>
   )
 }
