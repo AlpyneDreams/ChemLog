@@ -57,7 +57,8 @@ export default function App() {
                 component={AddDose}
                 options={({navigation}) => ({
                   title: 'Add Dose',
-                  presentation: 'card'
+                  presentation: 'modal',
+                  ...TransitionPresets.ModalSlideFromBottomIOS
                 })}
               />
               <Stack.Screen name='DoseDetails' component={DoseDetails} />

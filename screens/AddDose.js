@@ -23,10 +23,15 @@ export default class AddDose extends Component {
   componentDidMount() {
     this.navigation.setOptions({
       headerRight: () => (
-        <Button onPress={() => {
-          let id = Dose.create(this.state).id
-          this.navigation.navigate('Home', id)
-        }}>Add</Button>
+        <Button
+          mode='contained'
+          style={{marginEnd: 8, borderRadius: 20}}
+          uppercase={false}
+          onPress={() => {
+            let id = Dose.create(this.state).id
+            this.navigation.navigate('Home', id)
+          }
+        }>Add</Button>
       )
     })
   }
