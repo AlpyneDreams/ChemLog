@@ -10,9 +10,6 @@ import { useState } from 'react/cjs/react.development'
 import DoseDetails from './screens/DoseDetails'
 
 
-const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'
-
-
 const Stack = createStackNavigator()
 
 /*function Navbar({navigation, back}) {

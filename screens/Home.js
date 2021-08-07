@@ -2,10 +2,11 @@ import { useNavigation } from '@react-navigation/native';
 import React, { Component, useState } from 'react'
 import { useEffect } from 'react';
 import { BackHandler, StyleSheet, ToastAndroid, Vibration } from 'react-native'
-import { Button, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { FAB, IconButton, List, Snackbar, Menu, Portal } from 'react-native-paper';
 import Dose from '../store/Dose'
 import Haptics from '../util/Haptics'
+import { MORE_ICON } from '../util/Util';
 
 function DoseEntry({dose, index, selecting, list}) {
   const navigation = useNavigation()
@@ -24,7 +25,7 @@ function DoseEntry({dose, index, selecting, list}) {
           list.setItemSelected(!selected, setSelected)
         }
       }}
-      onLongPress={e => list.onLongPress(selected, setSelected)}
+      onLongPress={() => list.onLongPress(selected, setSelected)}
       left={() =>
         <List.Icon
           icon={
@@ -44,6 +45,22 @@ function DoseEntry({dose, index, selecting, list}) {
   )
 }
 
+function HomeContextMenu({select, selectAll}) {
+  const [menu, setMenu] = useState(false)
+
+  return (
+    <Menu 
+      visible={menu}
+      onDismiss={() => setMenu(false)}
+      anchor={
+        <IconButton icon={MORE_ICON} onPress={() => setMenu(true)} />
+      }
+    >
+      <Menu.Item onPress={() => { select(); setMenu(false) }} title="Select" />
+      {/*<Menu.Item onPress={() => { selectAll(); setMenu(false) }} title="Select all" />*/}
+    </Menu>
+  )
+}
 
 export default class HomeScreen extends Component {
   state = {
@@ -68,7 +85,7 @@ export default class HomeScreen extends Component {
             onPress={() => this.setSelecting(false)}
           />
         ),
-        title: '0 doses selected'
+        title: 'Select doses'
       })
     } else {
       this.props.navigation.setOptions({headerLeft: undefined, title: undefined})
@@ -116,7 +133,7 @@ export default class HomeScreen extends Component {
 
   componentDidMount() {
     const navigation = this.props.navigation
-    navigation.addListener('focus', () => {
+    this.unsubscribe = navigation.addListener('focus', () => {
       if (this.state.selecting) {
         this.setSelecting(false)
         return false
@@ -125,6 +142,15 @@ export default class HomeScreen extends Component {
       }
     })
 
+    navigation.setOptions({
+      headerRight: () => !this.state.selecting
+        ? <HomeContextMenu select={() => this.setSelecting(true)} /> : null
+      
+    })
+  }
+
+  componentWillUnmount() {
+    this.props.navigation.removeListener(this.unsubscribe)
   }
 
   render() {
@@ -138,12 +164,13 @@ export default class HomeScreen extends Component {
 
           {Dose.doses.map((dose, index) => {
             return (
-              <DoseEntry dose={dose} list={this} index={index} selecting={selecting} />
+              <DoseEntry key={dose.id} dose={dose} list={this} index={index} selecting={selecting} />
             )
           })}
 
         </List.Section>
         <FAB
+          visible={!selecting}
           style={styles.fab}
           icon='plus'
           onPress={() => navigation.navigate('AddDose')}
@@ -153,8 +180,6 @@ export default class HomeScreen extends Component {
           duration={1000}
           onDismiss={() => this.setState({snackbar: false})}
         >Dose deleted.</Snackbar>
-        {/*<Text>Open up App.js to start working on your app!</Text>
-        <Button title="Go to details" onPress={() => navigation.navigate('Details')}/>*/}
       </View>
     )
   }
