@@ -1,6 +1,7 @@
+import { useTheme } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { View, Text, ToastAndroid } from 'react-native'
-import { IconButton, Title, Snackbar } from 'react-native-paper'
+import { IconButton, Title, Snackbar, List } from 'react-native-paper'
 import ConfirmDialog from '../components/ConfirmDialog'
 import { Row } from '../components/Util'
 import Dose from '../store/Dose'
@@ -32,8 +33,29 @@ export default function DoseDetails({navigation, route}) {
 
   return (
     <View style={{padding: 16}}>
-      <Title>{dose.name}</Title>
-      <Text style={{fontFamily: 'monospace'}}>{JSON.stringify(dose, null, 4)}</Text>
+      <View style={{flexDirection: 'row'}}>
+        <List.Section>
+          <List.Subheader>Substance</List.Subheader>
+          <List.Item title={dose.substance} />
+        </List.Section>
+        {dose.amount ? 
+          <List.Section>
+            <List.Subheader>Amount</List.Subheader>
+            <List.Item title={`${dose.amount} ${dose.unit}`} />
+          </List.Section> : null}
+        {dose.roa ? 
+          <List.Section>
+            <List.Subheader>Route</List.Subheader>
+            <List.Item title={dose.roa} />
+          </List.Section> : null}
+
+      </View>
+      {dose.notes ? 
+        <List.Section>
+          <List.Subheader>Notes</List.Subheader>
+          <List.Item title={dose.notes} />
+        </List.Section> : null}
+      {/*<Text style={{fontFamily: 'monospace', color: useTheme().colors.text}}>{JSON.stringify(dose, null, 4)}</Text>*/}
       <ConfirmDialog title='Delete this dose?' acceptLabel='Delete' state={[dialog, setDialog]} onAccept={deleteDose} />
     </View>
   )

@@ -45,5 +45,5 @@ export default class Dose {
 }
 
 console.log('Initialized Dose storage')
-Dose.create({ substance: 'Phenibut' })
+Dose.create({ substance: 'Phenibut', amount: '300', unit: 'mg' })
 
