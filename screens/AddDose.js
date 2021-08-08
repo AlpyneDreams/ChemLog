@@ -16,7 +16,7 @@ export default class AddDose extends Component {
     amount: '', //'30',
     unit: 'mg',
     roa: 'Oral',
-    notes: 'Test dose.',
+    notes: '',
     date: '----',
   }
 
@@ -48,21 +48,25 @@ export default class AddDose extends Component {
         <InputSubstance value={this.state.substance} onChangeText={substance => this.setState({substance})} />
         <InputAmount
           amount={this.state.amount}
-          onChangeAmount={amount => this.setState({amount})}
+          onChangeAmount={amount => {
+            if (!Number.isNaN(Number.parseFloat(amount)) || amount === '')
+              this.setState({amount})
+          }}
           unit={this.state.unit}
           onChangeUnit={unit => this.setState({unit})}
         />
         {/*<InputROA/>*/}
-        <InputExpand title='Add notes' style={{marginTop: 12}}>
+        <InputExpand title='Add notes' icon='note' style={{marginTop: 12}}>
           <TextInput
             placeholder='Add notes'
             mode='contained'
+            multiline={true}
             style={{flex: 1}}
+            value={this.props.notes}
+            onChangeText={notes => this.setState({notes})}
           />
         </InputExpand>
         {/*<InputDate style={{marginTop: 12}} />*/}
-        {/*<Text>Open up App.js to start working on your app!</Text>
-        <Button title="Go to details" onPress={() => navigation.navigate('Details')}/>*/}
       </View>
     )  
   }

@@ -8,7 +8,12 @@ export default function InputExpand(props) {
   return (
     <View style={{flexDirection: 'row', ...props.style}}>
     {!expanded
-    ? <Button mode='outlined' uppercase={false} onPress={() => setExpanded(true)}>{props.title ?? 'Expand'}</Button>
+    ? <Button
+        icon={props.icon}
+        mode='outlined'
+        uppercase={false}
+        onPress={() => setExpanded(true)}
+      >{props.title ?? 'Expand'}</Button>
     : props.children
     }
   </View>
