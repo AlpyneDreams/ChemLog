@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import React, { Component, useState } from 'react'
 import { useEffect } from 'react';
 import { BackHandler, StyleSheet, ToastAndroid, Vibration } from 'react-native'
@@ -9,6 +9,7 @@ import Haptics from '../util/Haptics'
 import { MORE_ICON } from '../util/Util';
 
 function DoseEntry({dose, index, selecting, list}) {
+  const theme = useTheme() 
   const navigation = useNavigation()
   const [selected, setSelected] = useState(false)
 
@@ -35,9 +36,9 @@ function DoseEntry({dose, index, selecting, list}) {
         />
       }
       style={{
-        backgroundColor: 'white',
+        backgroundColor: theme.colors.surface,
         ...(index > 0 ? {
-          borderTopColor: '#e0e0e0',
+          borderTopColor: theme.colors.border,
           borderTopWidth: 1
         } : {})
       }}

@@ -8,6 +8,7 @@ import HomeScreen from './screens/Home'
 import AddDose from './screens/AddDose'
 import { useState } from 'react/cjs/react.development'
 import DoseDetails from './screens/DoseDetails'
+import { DarkTheme, DefaultTheme } from './util/Theme'
 
 
 const Stack = createStackNavigator()
@@ -27,6 +28,8 @@ function HeaderLeft() {
   )
 }
 
+const theme = DarkTheme
+
 export default function App() {
   return (
     /*<View>
@@ -37,11 +40,11 @@ export default function App() {
         <Appbar.Action icon="magnify"></Appbar.Action>
         <Appbar.Action icon={MORE_ICON}></Appbar.Action>
       </Appbar.Header>}*/
-    <View style={{height: '100%', alignItems: 'center'}}>
-      <View style={{maxWidth: 600, width: '100%', height: '100%'}}>
-        <PaperProvider>
-          <StatusBar style="auto" />
-          <NavigationContainer>
+    <PaperProvider theme={theme}>
+      <View style={{height: '100%', alignItems: 'center'}}>
+        <View style={{maxWidth: 600, width: '100%', height: '100%'}}>
+          <StatusBar style={theme.dark ? 'light' : 'dark'} />
+          <NavigationContainer theme={theme}>
             <Stack.Navigator
               initialRouteName='Home'
               screenOptions={{
@@ -64,8 +67,8 @@ export default function App() {
               <Stack.Screen name='DoseDetails' component={DoseDetails} />
             </Stack.Navigator>
           </NavigationContainer>
-        </PaperProvider>
+        </View>
       </View>
-    </View>
+    </PaperProvider>
   )
 }
