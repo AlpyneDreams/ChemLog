@@ -14,7 +14,7 @@ export default function DoseDetails({navigation, route}) {
   function deleteDose() {
     dose.delete()
     //ToastAndroid.show('Dose deleted.', ToastAndroid.SHORT)
-    navigation.navigate('Home', -(dose.id))
+    navigation.navigate('Home', {screen: 'DoseList', params: -(dose.id)})
   }
 
   React.useLayoutEffect(() => {

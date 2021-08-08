@@ -28,8 +28,8 @@ export default class AddDose extends Component {
           style={{marginEnd: 8, borderRadius: 20}}
           uppercase={false}
           onPress={() => {
-            let id = Dose.create(this.state).id
-            this.navigation.navigate('Home', id)
+            let dose = Dose.create(this.state)
+            this.navigation.navigate('Home', {screen: 'DoseList', params: dose.id})
           }
         }>Add</Button>
       )

@@ -72,16 +72,21 @@ function HomeContextMenu({select, selectAll}) {
   )
 }
 
-export default class HomeScreen extends Component {
+export default class DoseList extends Component {
   state = {
+    lastParams: null,
     snackbar: true,
     selecting: false,
     selectedItems: new Set()
   }
 
   componentDidUpdate() {
-    if (!this.state.snackbar)
-      this.setState({snackbar: true})
+    const {params} = this.props.route
+
+    // Reset the snackbar, but only if params have changed.
+    if (params !== this.state.lastParams) {
+      this.setState({snackbar: true, lastParams: params})
+    }
   }
 
   /** Sets if selection mode is enabled */
@@ -98,7 +103,7 @@ export default class HomeScreen extends Component {
         title: 'Select doses'
       })
     } else {
-      this.props.navigation.setOptions({headerLeft: undefined, title: undefined})
+      this.props.navigation.setOptions({headerLeft: undefined, title: 'Doses'})
       for (const setSelected of this.state.selectedItems) {
         setSelected(false)
       }
@@ -160,12 +165,15 @@ export default class HomeScreen extends Component {
   }
 
   componentWillUnmount() {
-    this.props.navigation.removeListener(this.unsubscribe)
+    this.unsubscribe()
   }
 
   render() {
     const {navigation, route} = this.props
     const {selecting, snackbar} = this.state
+
+    // Negative params means a dose was deleted
+    const showSnackbar = (route.params < 0) && snackbar
 
     return (
       <View style={{height: '100%'}}>
@@ -186,9 +194,10 @@ export default class HomeScreen extends Component {
           onPress={() => navigation.navigate('AddDose')}
         />
         <Snackbar 
-          visible={route.params < 0 && snackbar}
+          visible={showSnackbar}
           duration={1000}
           onDismiss={() => this.setState({snackbar: false})}
+          style={{marginBottom: 96}}
         >Dose deleted.</Snackbar>
       </View>
     )
@@ -199,7 +208,7 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     margin: 16,
-    marginBottom: 48,
+    marginBottom: 24,
     right: 0,
     bottom: 0
   }
