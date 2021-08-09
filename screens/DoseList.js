@@ -22,7 +22,7 @@ function DoseEntry({dose, index, selecting, list}) {
   return (
     <List.Item
       key={dose.id}
-      title={dose.substance}
+      title={dose.substanceName}
       description={dose.amount ? `${dose.amount} ${dose.unit??''}` : null}
       onPress={() => {
         if (!selecting) {

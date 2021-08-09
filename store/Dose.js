@@ -7,6 +7,7 @@ export class Dose {
   name
 
   substance
+  substanceName
   amount
   unit
   notes
@@ -16,7 +17,10 @@ export class Dose {
 
     let dose = Object.assign(new Dose(), data)
 
-    dose.name = dose.substance
+    if (!dose.substanceName)
+      dose.substanceName = dose.substance
+
+    dose.name = dose.substanceName
     if (dose.amount) {
       dose.name += ` ${dose.amount}`
       if (dose.unit) {
@@ -63,7 +67,7 @@ export class DoseStorage {
 
     // Development build test doses
     if (DoseStorage.doses.length === 0) {
-      Dose.create({ substance: 'Phenibut', amount: '300', unit: 'mg', roa: 'Oral', notes: 'First dose.' })
+      Dose.create({ substance: 'phenibut', amount: '300', unit: 'mg', roa: 'Oral', notes: 'First dose.' })
     }
 
   }

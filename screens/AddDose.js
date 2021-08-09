@@ -2,22 +2,24 @@ import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from "react-native";
 import { Title, Button, FAB, List, TextInput, IconButton } from 'react-native-paper';
+import DropDown from 'react-native-paper-dropdown'
 import InputAmount from '../components/InputAmount';
 import InputDate from '../components/InputDate';
 import InputExpand from '../components/InputExpand';
 import InputROA from '../components/InputROA';
-import InputSubstance from '../components/InputSubstance';
 import { Row } from '../components/Util'
 import { Dose } from '../store/Dose';
 
 export default class AddDose extends Component {
   state = {
-    substance: 'THC',
+    substance: null,
     amount: '', //'30',
     unit: 'mg',
     roa: 'Oral',
     notes: '',
     date: '----',
+
+    _lastParams: null
   }
 
   componentDidMount() {
@@ -27,25 +29,55 @@ export default class AddDose extends Component {
           mode='contained'
           style={{marginEnd: 8, borderRadius: 20}}
           uppercase={false}
+          disabled={!this.state.substance}
           onPress={() => {
-            let dose = Dose.create(Object.assign({}, this.state, {date: Date()}))
+
+            let data = Object.assign({}, this.state, {date: Date()})
+            data.substanceName = data.substance.name
+            data.substance = data.substance.id
+            delete data._lastParams
+
+            let dose = Dose.create(data)
+
             this.navigation.navigate('Home', {screen: 'DoseList', params: dose.id})
           }
         }>Add</Button>
       )
     })
+
+    // When focused, update state from params
+    this.unsubscribe = this.navigation.addListener('focus', (e) => {
+      const {params} = this.props.route
+      if (params && params !== this.state._lastParams) {
+
+        this.setState({_lastParams: params})
+
+        // New substance picked
+        if (params.substance)
+          this.setState({substance: params?.substance})
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   render() {
     this.navigation = this.props.navigation
+
+    let {substance} = this.state
+
     return (
       <View style={{padding: 12}}>
-        {/*<Row style={{justifyContent: 'space-between'}}>
-          <IconButton icon='close' onPress={navigation.goBack}/>
-          <Button mode='contained'>Add</Button>
-        </Row>*/}
-        {/*<Title style={{marginBottom: 12}}>Add Dose</Title>*/}
-        <InputSubstance value={this.state.substance} onChangeText={substance => this.setState({substance})} />
+        <DropDown 
+          label='Substance'
+          value={substance?.id}
+          list={substance ? [{value: substance.id, label: substance.name}] : []}
+          showDropDown={() => {
+            this.navigation.navigate('SubstancePicker', {current: substance?.id})
+          }}
+        />
         <InputAmount
           amount={this.state.amount}
           onChangeAmount={amount => {

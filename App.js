@@ -121,6 +121,12 @@ export default function App() {
                     ...TransitionPresets.ModalPresentationIOS,
                   }}
                 />
+                <Stack.Screen
+                  name='SubstancePicker'
+                  component={SubstanceList}
+                  initialParams={{pickerMode: true}}
+                  options={{title: 'Select a substance', ...TransitionPresets.BottomSheetAndroid}}
+                />
               </Stack.Navigator>
             </NavigationContainer>
           </View>

@@ -3,12 +3,16 @@ import { setStatusBarStyle } from 'expo-status-bar'
 import React from 'react'
 import { View } from 'react-native'
 import { Text } from 'react-native-paper'
+import substances from '../data/tripsit.drugs.json'
 
 export default function SubstanceScreen({navigation, route}) {
 
   const theme = useTheme()
-  const {substance} = route.params || {substance: {properties: {}}}
+  let {substance} = route.params || {substance: {properties: {}}}
 
+  if (typeof substance === 'string') {
+    substance = substances[substance]
+  }
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
