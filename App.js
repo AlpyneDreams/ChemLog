@@ -13,6 +13,9 @@ import DoseDetails from './screens/DoseDetails'
 import { DarkTheme, DefaultTheme } from './util/Theme'
 import { SettingsContext } from './store/SettingsContext'
 
+// Configure day.js
+import './util/dayjs'
+
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 

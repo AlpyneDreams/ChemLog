@@ -1,18 +1,20 @@
 import { useNavigation, useTheme } from '@react-navigation/native';
 import React, { Component, useState } from 'react'
 import { useEffect } from 'react';
-import { BackHandler, StyleSheet, ToastAndroid, Vibration } from 'react-native'
-import { Text, View } from "react-native";
-import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator } from 'react-native-paper';
+import { View, StyleSheet, ToastAndroid, Vibration } from 'react-native'
+import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator, Text } from 'react-native-paper';
 import { Dose, DoseStorage } from '../store/Dose'
 import { SettingsContext } from '../store/SettingsContext';
 import Haptics from '../util/Haptics'
 import { MORE_ICON } from '../util/Util';
+import dayjs from 'dayjs'
 
 function DoseEntry({dose, index, selecting, list}) {
   const theme = useTheme() 
   const navigation = useNavigation()
   const [selected, setSelected] = useState(false)
+
+  const date = dayjs(dose.date)
 
   const hooks = {id: index, setSelected, delete: dose.delete.bind(dose)}
 
@@ -38,6 +40,12 @@ function DoseEntry({dose, index, selecting, list}) {
           }
         />
       }
+      right={() => date.isValid() ?
+        <Text style={{
+          color: theme.colors.disabled,
+          marginTop: 16, marginRight: 8
+        }}>{date.fromNow()}</Text>
+      : null}
       style={{
         backgroundColor: theme.colors.surface,
         ...(index > 0 ? {

@@ -1,9 +1,19 @@
 import { useTheme } from '@react-navigation/native'
 import React, { useState } from 'react'
-import { View, Text, ToastAndroid } from 'react-native'
-import { IconButton, Title, Snackbar, List } from 'react-native-paper'
+import { View, ToastAndroid } from 'react-native'
+import { IconButton, Text, Snackbar, List } from 'react-native-paper'
 import ConfirmDialog from '../components/ConfirmDialog'
 import { Row } from '../components/Util'
+import dayjs from 'dayjs'
+
+function Stat({label, value, ...props}) {
+  return (value ? 
+    <List.Section {...props}>
+      <List.Subheader>{label}</List.Subheader>
+      <List.Item title={value} />
+    </List.Section> : null
+  )
+}
 
 export default function DoseDetails({navigation, route}) {
   let dose = route.params
@@ -30,30 +40,20 @@ export default function DoseDetails({navigation, route}) {
 
   }, [navigation, route])
 
+  let date = dayjs(dose.date)
+
   return (
     <View style={{padding: 16}}>
-      <View style={{flexDirection: 'row'}}>
-        <List.Section>
-          <List.Subheader>Substance</List.Subheader>
-          <List.Item title={dose.substance} />
-        </List.Section>
-        {dose.amount ? 
-          <List.Section>
-            <List.Subheader>Amount</List.Subheader>
-            <List.Item title={`${dose.amount} ${dose.unit}`} />
-          </List.Section> : null}
-        {dose.roa ? 
-          <List.Section>
-            <List.Subheader>Route</List.Subheader>
-            <List.Item title={dose.roa} />
-          </List.Section> : null}
-
-      </View>
-      {dose.notes ? 
-        <List.Section>
-          <List.Subheader>Notes</List.Subheader>
-          <List.Item title={dose.notes} />
-        </List.Section> : null}
+      <Row>
+        <Stat label='Substance' value={dose.substance} />
+        <Stat label='Amount' value={dose.amount} />
+        <Stat label='Route' value={dose.roa} style={{flex: 1}} />
+      </Row>
+      <Row>
+        <Stat label='When' value={date.fromNow()} visible={date.isValid()} style={{flex: 2}} />
+        <Stat label='Date' value={date.calendar()} visible={date.isValid()} style={{flex: 2}} />
+      </Row>
+      <Stat label='Notes' value={dose.notes} />
       {/*<Text style={{fontFamily: 'monospace', color: useTheme().colors.text}}>{JSON.stringify(dose, null, 4)}</Text>*/}
       <ConfirmDialog title='Delete this dose?' acceptLabel='Delete' state={[dialog, setDialog]} onAccept={deleteDose} />
     </View>
