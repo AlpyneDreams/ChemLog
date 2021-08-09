@@ -8,6 +8,7 @@ import { SettingsContext } from '../store/SettingsContext';
 import Haptics from '../util/Haptics'
 import { MORE_ICON } from '../util/Util';
 import dayjs from 'dayjs'
+import ConfirmDialog from '../components/ConfirmDialog';
 
 function DoseEntry({dose, index, selecting, list}) {
   const theme = useTheme() 
@@ -88,7 +89,8 @@ export default class DoseList extends Component {
     lastParams: null,
     snackbar: true,
     selecting: false,
-    selectedItems: new Map()
+    selectedItems: new Map(),
+    confirmDelete: false
   }
 
   componentDidUpdate() {
@@ -147,8 +149,6 @@ export default class DoseList extends Component {
 
   deleteSelected() {
 
-    // TODO: ConfirmDialog for this.
-
     let count = 0
     for (const [id, item] of this.state.selectedItems) {
       this.setItemSelected(false, item)
@@ -203,7 +203,10 @@ export default class DoseList extends Component {
       headerRight: () => !this.state.selecting
         ? <HomeContextMenu select={() => this.setSelecting(true)} />
         : <>
-          <IconButton icon='delete' onPress={() => this.deleteSelected()} />
+          <IconButton icon='delete' onPress={() => 
+            this.state.selectedItems.size > 0 ?
+              this.setState({confirmDelete: true}) : null
+          }/>
         </>
       
     })
@@ -216,10 +219,12 @@ export default class DoseList extends Component {
 
   render() {
     const {navigation, route} = this.props
-    const {selecting, snackbar} = this.state
+    const {selecting, snackbar, confirmDelete} = this.state
 
     // Negative params means a dose was deleted
     const showSnackbar = (route.params < 0) && snackbar
+
+    const setConfirmDelete = (value) => this.setState({confirmDelete: value}) 
 
     return (
       <View style={{height: '100%'}}>
@@ -240,6 +245,14 @@ export default class DoseList extends Component {
           style={styles.fab}
           icon='plus'
           onPress={() => navigation.navigate('AddDose')}
+        />
+        <ConfirmDialog
+          title={this.state.selectedItems.size === 1 ? 
+            'Delete selected dose?' : 'Delete selected doses?'
+          }
+          acceptLabel='Delete'
+          state={[confirmDelete, setConfirmDelete]}
+          onAccept={() => this.deleteSelected()}
         />
         <Snackbar 
           visible={showSnackbar}
