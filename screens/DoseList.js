@@ -3,8 +3,8 @@ import React, { Component, useState } from 'react'
 import { useEffect } from 'react';
 import { BackHandler, StyleSheet, ToastAndroid, Vibration } from 'react-native'
 import { Text, View } from "react-native";
-import { FAB, IconButton, List, Snackbar, Menu, Portal } from 'react-native-paper';
-import Dose from '../store/Dose'
+import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator } from 'react-native-paper';
+import { Dose, DoseStorage } from '../store/Dose'
 import { SettingsContext } from '../store/SettingsContext';
 import Haptics from '../util/Haptics'
 import { MORE_ICON } from '../util/Util';
@@ -74,6 +74,7 @@ function HomeContextMenu({select, selectAll}) {
 
 export default class DoseList extends Component {
   state = {
+    loaded: DoseStorage.loaded,
     lastParams: null,
     snackbar: true,
     selecting: false,
@@ -146,7 +147,21 @@ export default class DoseList extends Component {
     this.setItemSelected(!selected, setSelected)
   }
 
+  _isMounted = false
+
   componentDidMount() {
+
+    this._isMounted = true
+
+    // Load doses
+    if (!this.state.loaded) {
+      DoseStorage.load().then(() => {
+        // If we aren't mounted anymore, just ignore the warning.
+        if (this._isMounted)
+          this.setState({loaded: true})
+      })
+    }
+
     const navigation = this.props.navigation
     this.unsubscribe = navigation.addListener('focus', () => {
       if (this.state.selecting) {
@@ -159,12 +174,16 @@ export default class DoseList extends Component {
 
     navigation.setOptions({
       headerRight: () => !this.state.selecting
-        ? <HomeContextMenu select={() => this.setSelecting(true)} /> : null
+        ? <HomeContextMenu select={() => this.setSelecting(true)} />
+        : <>
+          <IconButton icon='delete' />
+        </>
       
     })
   }
 
   componentWillUnmount() {
+    this.__isMounted = false
     this.unsubscribe()
   }
 
@@ -180,11 +199,13 @@ export default class DoseList extends Component {
         <List.Section>
           <List.Subheader>Recent Doses</List.Subheader>
 
-          {Dose.doses.map((dose, index) => {
-            return (
+          {DoseStorage.loaded
+            ? DoseStorage.doses.map((dose, index) =>
               <DoseEntry key={dose.id} dose={dose} list={this} index={index} selecting={selecting} />
             )
-          })}
+
+            : <ActivityIndicator />
+          }
 
         </List.Section>
         <FAB

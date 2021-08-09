@@ -8,7 +8,7 @@ import InputExpand from '../components/InputExpand';
 import InputROA from '../components/InputROA';
 import InputSubstance from '../components/InputSubstance';
 import { Row } from '../components/Util'
-import Dose from '../store/Dose';
+import { Dose } from '../store/Dose';
 
 export default class AddDose extends Component {
   state = {

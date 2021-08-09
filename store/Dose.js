@@ -1,10 +1,9 @@
 
-export default class Dose {
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-  static doses = []
-  static #nextDoseId = 0
+export class Dose {
 
-  id = Dose.#nextDoseId++
+  id = DoseStorage.nextDoseId++
   name
 
   substance
@@ -14,16 +13,8 @@ export default class Dose {
   date
 
   static create(data) {
-    /*if (!!data.id) {
-      console.warn('Dose ' + data.id + ' already has an ID, yet addDose was called.')
-      if (data.id < Dose.#nextDoseId) {
-        console.warn('nextDoseId: ' + Dose.#nextDoseId)
-        return
-      }
-    }*/
-    let dose = /* data .id = */ new Dose()
 
-    dose = Object.assign(dose, data)
+    let dose = Object.assign(new Dose(), data)
 
     dose.name = dose.substance
     if (dose.amount) {
@@ -33,17 +24,48 @@ export default class Dose {
       }
     }
 
-    Dose.doses.push(dose)
+    DoseStorage.doses.push(dose)
+    DoseStorage.save()
     return dose
   }
 
   delete() {
-    let index = Dose.doses.findIndex(d => d === this)
-    if (index >= 0)
-      Dose.doses.splice(index, 1)
+    let index = DoseStorage.doses.findIndex(d => d === this)
+    if (index >= 0) {
+      DoseStorage.doses.splice(index, 1)
+      DoseStorage.save()
+    }
   }
 }
 
-console.log('Initialized Dose storage')
-Dose.create({ substance: 'Phenibut', amount: '300', unit: 'mg' })
+
+export class DoseStorage {
+  static loaded = false
+  static doses = []
+  static nextDoseId = 0
+
+  static async save() {
+    let data = {
+      doses: DoseStorage.doses, nextDoseId: DoseStorage.nextDoseId
+    }
+    await AsyncStorage.setItem('doses', JSON.stringify(data)).catch(console.error)
+  }
+
+  static async load() {
+    if (DoseStorage.loaded)
+      return
+    
+    let value = await AsyncStorage.getItem('doses').catch(console.error)
+    let data = JSON.parse(value)
+    DoseStorage.doses = data.doses.map(d => Object.assign(new Dose(), d))
+    DoseStorage.nextDoseId = data.nextDoseId
+    DoseStorage.loaded = true
+
+    // Development build test doses
+    if (DoseStorage.doses.length === 0) {
+      Dose.create({ substance: 'Phenibut', amount: '300', unit: 'mg', roa: 'Oral', notes: 'First dose.' })
+    }
+
+  }
+}
 

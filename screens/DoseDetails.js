@@ -4,7 +4,6 @@ import { View, Text, ToastAndroid } from 'react-native'
 import { IconButton, Title, Snackbar, List } from 'react-native-paper'
 import ConfirmDialog from '../components/ConfirmDialog'
 import { Row } from '../components/Util'
-import Dose from '../store/Dose'
 
 export default function DoseDetails({navigation, route}) {
   let dose = route.params
