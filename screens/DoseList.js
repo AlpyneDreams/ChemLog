@@ -14,6 +14,8 @@ function DoseEntry({dose, index, selecting, list}) {
   const navigation = useNavigation()
   const [selected, setSelected] = useState(false)
 
+  const hooks = {id: index, setSelected, delete: dose.delete.bind(dose)}
+
   return (
     <List.Item
       key={dose.id}
@@ -24,10 +26,10 @@ function DoseEntry({dose, index, selecting, list}) {
           navigation.navigate('DoseDetails', dose)
         } else {
           // Toggle selection
-          list.setItemSelected(!selected, setSelected)
+          list.setItemSelected(!selected, hooks)
         }
       }}
-      onLongPress={() => list.onLongPress(selected, setSelected)}
+      onLongPress={() => list.onLongPress(selected, hooks)}
       left={() =>
         <List.Icon
           icon={
@@ -78,7 +80,7 @@ export default class DoseList extends Component {
     lastParams: null,
     snackbar: true,
     selecting: false,
-    selectedItems: new Set()
+    selectedItems: new Map()
   }
 
   componentDidUpdate() {
@@ -105,7 +107,7 @@ export default class DoseList extends Component {
       })
     } else {
       this.props.navigation.setOptions({headerLeft: undefined, title: 'Doses'})
-      for (const setSelected of this.state.selectedItems) {
+      for (const [id, {setSelected}] of this.state.selectedItems) {
         setSelected(false)
       }
       this.state.selectedItems.clear()
@@ -113,13 +115,13 @@ export default class DoseList extends Component {
   }
 
   /** Sets the selection state of an item */
-  setItemSelected(selected, setSelected) {
+  setItemSelected(selected, item) {
     
-    setSelected(selected)
+    item.setSelected(selected)
     if (selected)
-      this.state.selectedItems.add(setSelected)
+      this.state.selectedItems.set(item.id, item)
     else
-      this.state.selectedItems.delete(setSelected)
+      this.state.selectedItems.delete(item.id)
 
     let size = this.state.selectedItems.size
 
@@ -135,7 +137,21 @@ export default class DoseList extends Component {
     })
   }
 
-  onLongPress(selected, setSelected) {
+  deleteSelected() {
+    let count = 0
+    for (const [id, item] of this.state.selectedItems) {
+      this.setItemSelected(false, item)
+      item.delete()
+      count++
+    }
+
+    console.log(`Deleted ${count} items.`)
+    // TODO: Better way to pop this toast, and reflect if multiple doses were deleted.
+    this.props.navigation.navigate('DoseList', -1)
+    //this.forceUpdate()
+  }
+
+  onLongPress(selected, item) {
     Haptics.longPress()
 
     // Enable selection if it's not enabled
@@ -144,7 +160,7 @@ export default class DoseList extends Component {
     }
 
     // Toggle selection state
-    this.setItemSelected(!selected, setSelected)
+    this.setItemSelected(!selected, item)
   }
 
   _isMounted = false
@@ -176,7 +192,7 @@ export default class DoseList extends Component {
       headerRight: () => !this.state.selecting
         ? <HomeContextMenu select={() => this.setSelecting(true)} />
         : <>
-          <IconButton icon='delete' />
+          <IconButton icon='delete' onPress={() => this.deleteSelected()} />
         </>
       
     })
