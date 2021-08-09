@@ -4,7 +4,7 @@ import { Platform, StyleSheet, Text, View } from 'react-native'
 import { Button, Appbar, IconButton, Provider as PaperProvider } from 'react-native-paper'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import DoseList from './screens/DoseList'
 import SubstanceList from './screens/SubstanceList'
 import SubstanceView from './screens/Substance'
@@ -60,6 +60,11 @@ function Home({ navigation, route }) {
   )
 }
 
+function CloseBackButton() {
+  const navigation = useNavigation()
+  return <IconButton icon='close' onPress={() => navigation.goBack()}/>
+}
+
 export default function App() {
   const [darkTheme, setDarkTheme] = React.useState(true)
 
@@ -81,7 +86,7 @@ export default function App() {
       </Appbar.Header>}*/
     <SettingsContext.Provider value={settings}>
       <PaperProvider theme={theme}>
-        <View style={{height: '100%', alignItems: 'center'}}>
+        <View style={{height: '100%', alignItems: 'center', backgroundColor: theme.colors.background}}>
           <View style={{maxWidth: 600, width: '100%', height: '100%'}}>
             <StatusBar style={theme.dark ? 'light' : 'dark'} />
             <NavigationContainer theme={theme}>
@@ -105,7 +110,17 @@ export default function App() {
                   })}
                 />
                 <Stack.Screen name='DoseDetails' component={DoseDetails} />
-                <Stack.Screen name='Substance'   component={SubstanceView} />
+                <Stack.Screen
+                  name='Substance'
+                  component={SubstanceView}
+                  options={{
+                    headerLeft: CloseBackButton,
+                    headerStyle: {backgroundColor: theme.colors.surface, elevation: 0},
+                    cardStyle: {backgroundColor: theme.colors.surface},
+                    gestureEnabled: true,
+                    ...TransitionPresets.ModalPresentationIOS,
+                  }}
+                />
               </Stack.Navigator>
             </NavigationContainer>
           </View>

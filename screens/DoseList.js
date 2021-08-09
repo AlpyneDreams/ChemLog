@@ -146,6 +146,9 @@ export default class DoseList extends Component {
   }
 
   deleteSelected() {
+
+    // TODO: ConfirmDialog for this.
+
     let count = 0
     for (const [id, item] of this.state.selectedItems) {
       this.setItemSelected(false, item)
