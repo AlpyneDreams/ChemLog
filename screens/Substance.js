@@ -28,9 +28,17 @@ export default function SubstanceScreen({navigation, route}) {
 
   }, [navigation, route])
 
+  let aliases = substance.properties?.aliases ?? substance.aliases
 
   return (
     <View style={{paddingHorizontal: 20}}>
+
+      {aliases ? 
+        <Text style={{
+          fontSize: 14, color: theme.colors.placeholder
+        }}>{aliases.join(', ')}</Text>
+      : null}
+
       <View style={{paddingVertical: 15}}>
         <Text>{substance.properties.summary}</Text>
       </View>

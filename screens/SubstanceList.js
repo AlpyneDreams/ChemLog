@@ -18,10 +18,14 @@ export default function SubstanceList() {
       //getItem={(data, index) => substances[index]}
       //getItemCount={(data) => substances.length}
       renderItem={({item: s}) => {
+
+        const aliases = s.properties?.aliases ?? s.aliases
+
         return (
           <List.Item 
             key={s.id || s.name}
             title={s.pretty_name}
+            description={aliases ? aliases.join(', ') : null}
             left={() => <List.Icon icon='pill' />}
             onPress={() => navigation.navigate('Substance', {substance: s})}
           />
