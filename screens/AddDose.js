@@ -90,7 +90,7 @@ export default class AddDose extends Component {
           unit={this.state.unit}
           onChangeUnit={unit => this.setState({unit})}
         />
-        {/*<InputROA/>*/}
+        <InputROA value={this.state.roa} onChange={roa => this.setState({roa})} />
         <InputExpand title='Add notes' icon='note' style={{marginTop: 12}}>
           <TextInput
             placeholder='Add notes'
