@@ -59,7 +59,7 @@ export default function SubstanceList() {
             onLongPress={pickerMode ? () => {
               Haptics.longPress()
               // TODO: Update substance page to add 'Select' button when pickerMode is true
-              navigation.navigate('Substance', {substance: s, pickerMode: true})
+              navigation.navigate('Substance', {substance: s, pickerMode: true, returnTo})
             } : null}
             right={props =>  pickerMode && key === params.current ? 
               <IconButton icon='check'/>

@@ -2,13 +2,13 @@ import { useTheme } from '@react-navigation/native'
 import { setStatusBarStyle } from 'expo-status-bar'
 import React from 'react'
 import { View } from 'react-native'
-import { Text } from 'react-native-paper'
+import { Button, Text } from 'react-native-paper'
 import substances from '../data/tripsit.drugs.json'
 
 export default function SubstanceScreen({navigation, route}) {
 
   const theme = useTheme()
-  let {substance} = route.params || {substance: {properties: {}}}
+  let {substance, pickerMode, returnTo} = route.params || {substance: {properties: {}}}
 
   if (typeof substance === 'string') {
     substance = substances[substance]
@@ -16,7 +16,21 @@ export default function SubstanceScreen({navigation, route}) {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: substance.pretty_name || 'Substance'
+      title: substance.pretty_name || 'Substance',
+      headerRight: () => 
+        <Button
+          uppercase={false}
+          style={pickerMode ? {marginEnd: 8, borderRadius: 20} : {}}
+          onPress={() => {
+            navigation.navigate({
+              name: pickerMode ? returnTo : 'AddDose', 
+              params: {
+                substance:{name: substance.pretty_name, id: substance.name},
+              },
+              merge: true
+            })
+          }}
+        >{pickerMode ? 'Select' : 'New Dose'}</Button>
     })
     
     // In light theme, we need to invert the status bar
