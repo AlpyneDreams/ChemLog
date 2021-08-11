@@ -97,7 +97,7 @@ export default class AddDose extends Component {
             mode='contained'
             multiline={true}
             style={{flex: 1}}
-            value={this.props.notes}
+            value={this.state.notes}
             onChangeText={notes => this.setState({notes})}
           />
         </InputExpand>
