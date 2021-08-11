@@ -13,11 +13,11 @@ import { Dose } from '../store/Dose';
 export default class AddDose extends Component {
   state = {
     substance: null,
-    amount: '', //'30',
+    amount: '',
     unit: 'mg',
     roa: 'Oral',
     notes: '',
-    date: '----',
+    date: null,
 
     _lastParams: null
   }
@@ -32,9 +32,12 @@ export default class AddDose extends Component {
           disabled={!this.state.substance}
           onPress={() => {
 
-            let data = Object.assign({}, this.state, {date: Date()})
+            let data = Object.assign({}, this.state)
+
             data.substanceName = data.substance.name
             data.substance = data.substance.id
+            data.date = (data.date ?? new Date()).getTime()
+
             delete data._lastParams
 
             let dose = Dose.create(data)
@@ -98,7 +101,10 @@ export default class AddDose extends Component {
             onChangeText={notes => this.setState({notes})}
           />
         </InputExpand>
-        {/*<InputDate style={{marginTop: 12}} />*/}
+        <InputDate 
+          value={this.state.date}
+          onChange={date => this.setState({date})}
+        />
       </View>
     )  
   }
