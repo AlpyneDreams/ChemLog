@@ -9,18 +9,14 @@ const units = Object.values(Units)
   .filter(u => !u.hidden)
   .map(u => ({label: u.symbol, value: u.symbol}))
 
-export default function InputAmount(props) {
+export default function InputAmount({startOpen = false, ...props}) {
   const {colors} = useTheme()
   const [unitMenu, showUnits] = useState(false)
-
-  // HACK?: Need a separate copy to make dropdown update.
-  const [unit, setUnitDisplay] = useState('mg')
-  const setUnit = (u) => {setUnitDisplay(u); props.onChangeUnit(u)}
 
   let placeholderColor = unitMenu ? colors.primary : colors.placeholder
 
   return (
-    <InputExpand title='Add amount' icon='beaker' style={{paddingTop: 12}}>
+    <InputExpand title='Add amount' icon='beaker' style={{paddingTop: 12}} startOpen={startOpen}>
       <TextInput
         label='Amount'
         mode='contained'
@@ -35,8 +31,8 @@ export default function InputAmount(props) {
           visible={unitMenu}
           showDropDown={() => showUnits(true)}
           onDismiss={() => showUnits(false)}
-          setValue={setUnit}
-          value={unit}
+          setValue={props.onChangeUnit}
+          value={props.unit}
           list={units}
         />
       </View>

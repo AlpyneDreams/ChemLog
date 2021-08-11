@@ -13,10 +13,7 @@ export class Dose {
   notes
   date
 
-  static create(data) {
-
-    let dose = Object.assign(new Dose(), data)
-
+  static configure(dose) {
     if (!dose.substanceName)
       dose.substanceName = dose.substance
 
@@ -27,10 +24,32 @@ export class Dose {
         dose.name += ` ${dose.unit}`
       }
     }
+    return dose
+  }
+
+  static create(data, save = true) {
+
+    let dose = Object.assign(new Dose(), data)
+
+    dose = Dose.configure(dose)
 
     DoseStorage.doses.push(dose)
     DoseStorage.save()
     return dose
+  }
+
+  static edit(id, data) {
+    let idx = DoseStorage.doses.findIndex(d => d.id === id)
+    if (idx >= 0) {
+      let dose = Object.assign(new Dose(), data, {id})
+      dose = Dose.configure(dose)
+      DoseStorage.doses[idx] = dose
+      DoseStorage.save()
+      return dose
+    }
+  }
+
+  configure() {
   }
 
   delete() {
@@ -67,7 +86,7 @@ export class DoseStorage {
 
     // Development build test doses
     if (DoseStorage.doses.length === 0) {
-      Dose.create({ substance: 'phenibut', amount: '300', unit: 'mg', roa: 'Oral', notes: 'First dose.' })
+      Dose.create({ substance: 'phenibut', substanceName: 'Phenibut', amount: '300', unit: 'mg', roa: 'Oral', notes: 'First dose.', date: Date() })
     }
 
   }

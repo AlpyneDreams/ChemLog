@@ -24,7 +24,7 @@ export default function DoseDetails({navigation, route}) {
   function deleteDose() {
     dose.delete()
     //ToastAndroid.show('Dose deleted.', ToastAndroid.SHORT)
-    navigation.navigate('Home', {screen: 'DoseList', params: -(dose.id)})
+    navigation.navigate({name: 'DoseList', params: { id: dose.id, deleted: 1 }})
   }
 
   React.useLayoutEffect(() => {
@@ -32,7 +32,9 @@ export default function DoseDetails({navigation, route}) {
     navigation.setOptions({
       title: dose.name,
       headerRight: () => <Row>
-        <IconButton icon='pencil' />
+        <IconButton icon='pencil' onPress={() => {
+          navigation.navigate('EditDose', {dose})
+        }} />
         <IconButton icon='delete' onPress={() => {
           setDialog(true)
         }} />

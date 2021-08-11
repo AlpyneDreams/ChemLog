@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { View } from 'react-native'
 import { Button, TextInput } from 'react-native-paper'
 
-export default function InputExpand(props) {
-  const [expanded, setExpanded] = useState(false)
+export default function InputExpand({startOpen = false, ...props}) {
+  const [expanded, setExpanded] = useState(startOpen)
 
   return (
     <View style={{flexDirection: 'row', ...props.style}}>

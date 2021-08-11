@@ -104,9 +104,17 @@ export default function App() {
                   name='AddDose'
                   component={AddDose}
                   options={({navigation}) => ({
-                    title: 'Add Dose',
+                    title: 'Add Dose', presentation: 'modal'
+                  })}
+                />
+                <Stack.Screen
+                  name='EditDose'
+                  component={AddDose}
+                  initialParams={{edit: true}}
+                  options={({navigation}) => ({
+                    title: 'Edit Dose',
                     presentation: 'modal',
-                    ...TransitionPresets.ModalSlideFromBottomIOS
+                    headerLeft: () => <IconButton icon='close' onPress={() => navigation.goBack()}/>
                   })}
                 />
                 <Stack.Screen name='DoseDetails' component={DoseDetails} />

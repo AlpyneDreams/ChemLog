@@ -11,7 +11,7 @@ const substances = Object.entries(Substances).map( ([id, s]) => ({id, ...s}) )
 export default function SubstanceList() {
 
   const params = useRoute().params ?? {}
-  const {pickerMode} = params
+  const {pickerMode, returnTo} = params
 
   const navigation = useNavigation()
   const [endReached, setEndReached] = React.useState(false)
@@ -46,7 +46,7 @@ export default function SubstanceList() {
         const aliases = s.properties?.aliases ?? s.aliases
 
         const onPress = pickerMode
-          ? () => navigation.navigate('AddDose', {substance: {name: s.pretty_name, id: key}, merge: true})
+          ? () => navigation.navigate({name: returnTo, params: {substance: {name: s.pretty_name, id: key}}, merge: true})
           : () => navigation.navigate('Substance', {substance: s})
 
         return (

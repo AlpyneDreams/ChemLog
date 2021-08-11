@@ -26,7 +26,7 @@ function DoseEntry({dose, index, selecting, list}) {
       description={dose.amount ? `${dose.amount} ${dose.unit??''}` : null}
       onPress={() => {
         if (!selecting) {
-          navigation.navigate('DoseDetails', dose)
+          navigation.navigate('DoseDetails', {dose})
         } else {
           // Toggle selection
           list.setItemSelected(!selected, hooks)
@@ -157,9 +157,7 @@ export default class DoseList extends Component {
     }
 
     console.log(`Deleted ${count} items.`)
-    // TODO: Better way to pop this toast, and reflect if multiple doses were deleted.
-    this.props.navigation.navigate('DoseList', -1)
-    //this.forceUpdate()
+    this.props.navigation.navigate('DoseList', {deleted: count})
   }
 
   onLongPress(selected, item) {
@@ -221,8 +219,7 @@ export default class DoseList extends Component {
     const {navigation, route} = this.props
     const {selecting, snackbar, confirmDelete} = this.state
 
-    // Negative params means a dose was deleted
-    const showSnackbar = (route.params < 0) && snackbar
+    const showSnackbar = (route.params?.deleted) && snackbar
 
     const setConfirmDelete = (value) => this.setState({confirmDelete: value}) 
 
@@ -259,7 +256,7 @@ export default class DoseList extends Component {
           duration={1000}
           onDismiss={() => this.setState({snackbar: false})}
           style={{marginBottom: 96}}
-        >Dose deleted.</Snackbar>
+        >{route.params?.deleted === 1 ? 'Dose deleted.' : `Deleted ${route.params?.deleted} doses.`}</Snackbar>
       </View>
     )
   }
