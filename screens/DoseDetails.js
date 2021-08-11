@@ -5,18 +5,19 @@ import { IconButton, Text, Snackbar, List, Chip } from 'react-native-paper'
 import ConfirmDialog from '../components/ConfirmDialog'
 import { Row } from '../components/Util'
 import dayjs from 'dayjs'
+import { CALENDAR_DATE_ONLY_COMPACT } from '../util/dayjs'
 
-function Stat({label, value, children, ...props}) {
-  return ((value ?? children) ? 
-    <List.Section {...props}>
+function Stat({label, value, visible, children, style, ...props}) {
+  return (((visible ?? value) ?? children) ? 
+    <List.Section {...props} style={{flex: 1, ...style}}>
       <List.Subheader>{label}</List.Subheader>
-      <List.Item title={value} left={() => children} />
+      <List.Item title={value} left={() => children} titleNumberOfLines={2} />
     </List.Section> : null
   )
 }
 
 export default function DoseDetails({navigation, route}) {
-  let dose = route.params
+  let {dose} = route.params
   
   let [dialog, setDialog] = useState(false)
 
@@ -52,12 +53,15 @@ export default function DoseDetails({navigation, route}) {
             onPress={() => navigation.navigate('Substance', {substance: dose.substance})}
           >{dose.substanceName}</Chip>
         </Stat>
-        <Stat label='Amount' value={dose.amount} />
-        <Stat label='Route' value={dose.roa} />
       </Row>
       <Row>
-        <Stat label='When' value={date.fromNow()} visible={date.isValid()} style={{flex: 2}} />
-        <Stat label='Date' value={date.calendar()} visible={date.isValid()} style={{flex: 2}} />
+        <Stat label='Amount' visible={dose.amount} value={`${dose.amount} ${dose.unit}`} style={{flex: 1.25}} />
+        <Stat label='Route' value={dose.roa} style={{flex: 2}} />
+      </Row>
+      <Row>
+        <Stat label='When' value={date.fromNow()} visible={date.isValid()} style={{flex: 1.25}} />
+        <Stat label='Date' value={date.calendar(null, CALENDAR_DATE_ONLY_COMPACT)} visible={date.isValid()} />
+        <Stat label='Time' value={date.format('HH:mm')} visible={date.isValid()} />
       </Row>
       <Stat label='Notes' value={dose.notes} />
       {/*<Text style={{fontFamily: 'monospace', color: useTheme().colors.text}}>{JSON.stringify(dose, null, 4)}</Text>*/}
