@@ -1,7 +1,7 @@
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native"
 import React from "react"
 import { View, FlatList } from "react-native"
-import { Text, List, ActivityIndicator, IconButton } from "react-native-paper"
+import { Text, List, ActivityIndicator, IconButton, Searchbar } from "react-native-paper"
 import Substances from '../data/tripsit.drugs.json'
 import Haptics from "../util/Haptics"
 
@@ -15,10 +15,29 @@ export default function SubstanceList() {
 
   const navigation = useNavigation()
   const [endReached, setEndReached] = React.useState(false)
+  const [query, setQuery] = React.useState(null)
 
-  return (
+  // TODO: Better matching, including aliases, maybe s.name
+  const queryMatches = (s) => !query || s.pretty_name.toLowerCase().includes(query)
+
+  // TODO: Sort substances by relevance to query
+  // (i.e. indexOf: "phen" -> "Phenibut" before "Ephenidine"; prefer exact match, etc)
+  // and other things factors for relevance
+
+  // TODO: Is it better to update FlatList.data or conditionally hide items in renderItem?
+
+  return (<View>
+    <Searchbar
+      style={{
+        marginTop: 8,
+        marginHorizontal: 8,
+        borderRadius: 30
+      }}
+      placeholder='Search'
+      value={query} onChangeText={setQuery}
+    />
     <FlatList
-      data={substances.slice()}
+      data={!query ? substances.slice() : substances.slice().filter(queryMatches)}
       //getItem={(data, index) => substances[index]}
       //getItemCount={(data) => substances.length}
       renderItem={({item: s}) => {
@@ -55,6 +74,6 @@ export default function SubstanceList() {
       }
       onEndReached={() => setEndReached(true)}
     />
-  )
+  </View>)
 
 }
