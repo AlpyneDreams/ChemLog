@@ -1,62 +1,13 @@
-import { useNavigation, useTheme } from '@react-navigation/native';
 import React, { Component, useState } from 'react'
 import { useEffect } from 'react';
 import { View, StyleSheet, ToastAndroid, Vibration } from 'react-native'
-import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator, Text } from 'react-native-paper';
+import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator } from 'react-native-paper';
 import { Dose, DoseStorage } from '../store/Dose'
 import { SettingsContext } from '../store/SettingsContext';
 import Haptics from '../util/Haptics'
 import { MORE_ICON } from '../util/Util';
-import dayjs from 'dayjs'
 import ConfirmDialog from '../components/ConfirmDialog';
-
-function DoseEntry({dose, index, selecting, list}) {
-  const theme = useTheme() 
-  const navigation = useNavigation()
-  const [selected, setSelected] = useState(false)
-
-  const date = dayjs(dose.date)
-
-  const hooks = {id: index, setSelected, delete: dose.delete.bind(dose)}
-
-  return (
-    <List.Item
-      key={dose.id}
-      title={dose.substanceName}
-      description={dose.amount ? `${dose.amount} ${dose.unit??''}` : null}
-      onPress={() => {
-        if (!selecting) {
-          navigation.navigate('DoseDetails', {dose})
-        } else {
-          // Toggle selection
-          list.setItemSelected(!selected, hooks)
-        }
-      }}
-      onLongPress={() => list.onLongPress(selected, hooks)}
-      left={() =>
-        <List.Icon
-          icon={
-            selecting ? (selected ? 'checkbox-marked' : 'checkbox-blank-outline')
-                      : 'pill'
-          }
-        />
-      }
-      right={() => date.isValid() ?
-        <Text style={{
-          color: theme.colors.disabled,
-          marginTop: 16, marginRight: 8
-        }}>{date.fromNow()}</Text>
-      : null}
-      style={{
-        backgroundColor: theme.colors.surface,
-        ...(index > 0 ? {
-          borderTopColor: theme.colors.border,
-          borderTopWidth: 1
-        } : {})
-      }}
-    />
-  )
-}
+import DoseEntry from '../components/DoseEntry'
 
 function HomeContextMenu({select, selectAll}) {
   const [menu, setMenu] = useState(false)
