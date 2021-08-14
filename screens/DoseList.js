@@ -197,6 +197,9 @@ export default class DoseList extends Component {
       }
     })
 
+    // Update header based on if we're selecting
+    this.setSelecting(this.state.selecting)
+
     navigation.setOptions({
       headerRight: () => !this.state.selecting
         ? <HomeContextMenu select={() => this.setSelecting(true)} />
@@ -211,7 +214,7 @@ export default class DoseList extends Component {
   }
 
   componentWillUnmount() {
-    this.__isMounted = false
+    this._isMounted = false
     this.unsubscribe()
   }
 
