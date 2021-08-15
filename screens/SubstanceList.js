@@ -1,9 +1,9 @@
 import { useNavigation, useRoute, useScrollToTop, useTheme } from "@react-navigation/native"
 import React from "react"
 import { View, FlatList, VirtualizedList } from "react-native"
-import { Text, List, ActivityIndicator, IconButton, Searchbar } from "react-native-paper"
+import { Text, List, ActivityIndicator, IconButton, Searchbar, Chip } from "react-native-paper"
 import Substances from '../data/tripsit.drugs.json'
-import { categoryOrder as CATEGORY_ORDER, categories as CATEGORIES } from "../data/Categories"
+import { categories as CATEGORIES } from "../data/Categories"
 import Haptics from "../util/Haptics"
 import CategoryChip from "../components/CategoryChip"
 import { Row } from "../components/Util"
@@ -11,6 +11,58 @@ import { useForcedUpdate } from "../util/Util"
 
 // Add id property to substances
 const substances = Object.entries(Substances).map( ([id, s]) => ({id, ...s}) )
+
+const mainCategories = Object.values(CATEGORIES)
+  .filter(c => c.order !== Number.MAX_SAFE_INTEGER)
+  .sort((c1, c2) => c1.order - c2.order)
+
+const extraCategories = Object.values(CATEGORIES)
+  .filter(c => c.order === Number.MAX_SAFE_INTEGER)
+
+
+function ListHeader({showCats, setShowCats, forceUpdate}) {
+
+  const [catsExpanded, setCatsExpanded] = React.useState(false)
+
+  const catChip = (name) => (
+    <CategoryChip 
+      key={name}
+      category={name}
+      selectable={true}
+      onChange={(cat, state) => {
+        if (state)
+          showCats.add(cat)
+        else
+          showCats.delete(cat)
+        setShowCats(new Set(showCats))
+        forceUpdate()
+      }}/>
+  )  
+
+  return (
+    <>
+      <Row style={{marginTop: 8, marginLeft: 16, flexWrap: 'wrap'}}>
+        {mainCategories.map(category => 
+          catChip(category.name)
+        )}
+        <Chip
+          onPress={() => setCatsExpanded(!catsExpanded)}
+          mode='outlined'
+          style={{margin: 4, backgroundColor: 'transparent'}}
+        >
+          {!catsExpanded ? 'More...' : 'Less...'}
+        </Chip>
+        {catsExpanded ? (
+          <Row style={{flexWrap: 'wrap'}}>
+            {extraCategories.map(category =>
+              catChip(category.name)
+            )}
+          </Row>
+        ) : null}
+      </Row>
+    </>
+  )
+}
 
 export default function SubstanceList() {
 
@@ -59,24 +111,7 @@ export default function SubstanceList() {
       getItemCount={(data) => data.length}
       keyExtractor={(item, index) => item.name}
       ref={scrollRef}
-      ListHeaderComponent={
-        <Row style={{marginTop: 8, marginLeft: 16, flexWrap: 'wrap'}}>
-          {Object.entries(CATEGORIES).map( ([name, category]) => 
-            <CategoryChip 
-              key={name}
-              category={name}
-              selectable={true}
-              onChange={(cat, state) => {
-                if (state)
-                  showCats.add(cat)
-                else
-                  showCats.delete(cat)
-                setShowCats(new Set(showCats))
-                forceUpdate()
-              }}/>
-          )}
-        </Row>
-      }
+      ListHeaderComponent={<ListHeader {...{showCats, setShowCats, forceUpdate}} />}
       renderItem={({item: s, ...props}) => {
         const key = s.id || s.name
         const aliases = s.properties?.aliases ?? s.aliases
@@ -88,13 +123,17 @@ export default function SubstanceList() {
         let color
         let categories = s.categories ?? s.properties?.categories
         
+        // Pick primary category's color based on category priority
         if (categories) {
-          let primary = categories.reduce((a, b) => {
-            const ai = CATEGORY_ORDER.indexOf(a),
-                  bi = CATEGORY_ORDER.indexOf(b)
-            return (ai < bi || bi < 0) ? a : b
+          let primary = categories
+          .map(c => CATEGORIES[c] ?? {})
+          .reduce((a, b) => {
+            const ai = a.priority,
+                  bi = b.priority
+            return (ai < bi) ? a : b
           })
-          color = CATEGORIES[primary]?.color
+
+          color = primary.color
         }
 
         return (

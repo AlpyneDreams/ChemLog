@@ -5,7 +5,7 @@ import { View } from 'react-native'
 import { Button, Text } from 'react-native-paper'
 import { Row } from '../components/Util'
 import substances from '../data/tripsit.drugs.json'
-import { categories as CATEGORIES, categoryOrder as CATEGORY_ORDER } from '../data/Categories'
+import { categories as CATEGORIES } from '../data/Categories'
 import CategoryChip from '../components/CategoryChip'
 
 export default function SubstanceScreen({navigation, route}) {
@@ -52,7 +52,7 @@ export default function SubstanceScreen({navigation, route}) {
   let aliases = substance.properties?.aliases ?? substance.aliases
   let categories = substance.properties?.categories ?? substance.categories
 
-  categories = categories.sort((a, b) => CATEGORY_ORDER.indexOf(b) - CATEGORY_ORDER.indexOf(a))
+  categories = categories.map(c => CATEGORIES[c] ?? {}).sort((a, b) => a.priority - b.priority)
 
   return (
     <View style={{paddingHorizontal: 20}}>
@@ -65,7 +65,7 @@ export default function SubstanceScreen({navigation, route}) {
 
       {categories ?
         <Row style={{marginTop: 8, flexWrap: 'wrap'}}>
-          {categories.map(c => <CategoryChip key={c} category={c} />)}
+          {categories.map(c => <CategoryChip key={c.name} category={c.name} />)}
         </Row>
       : null}
 

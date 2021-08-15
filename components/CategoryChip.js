@@ -21,7 +21,7 @@ export default function CategoryChip({category, selectable = false, onChange = (
         onChange(category, !active)
       } : null}
     >
-      {category}
+      {c.pretty_name || category}
     </Chip>
   )
 }
