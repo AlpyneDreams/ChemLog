@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react'
 import { useEffect } from 'react';
-import { View, StyleSheet, ToastAndroid, Vibration } from 'react-native'
+import { View, StyleSheet, ToastAndroid, Vibration, ScrollView } from 'react-native'
 import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator } from 'react-native-paper';
 import { Dose, DoseStorage } from '../store/Dose'
 import { SettingsContext } from '../store/SettingsContext';
@@ -179,18 +179,20 @@ export default class DoseList extends Component {
 
     return (
       <View style={{height: '100%'}}>
-        <List.Section>
-          <List.Subheader>Recent Doses</List.Subheader>
+        <ScrollView>
+          <List.Section style={{paddingBottom: 64}}>
+            <List.Subheader>Recent Doses</List.Subheader>
 
-          {DoseStorage.loaded
-            ? DoseStorage.doses.map((dose, index) =>
-              <DoseEntry key={dose.id} dose={dose} list={this} index={index} selecting={selecting} />
-            )
+            {DoseStorage.loaded
+              ? DoseStorage.doses.map((dose, index) =>
+                <DoseEntry key={dose.id} dose={dose} list={this} index={index} selecting={selecting} />
+              )
 
-            : <ActivityIndicator />
-          }
+              : <ActivityIndicator />
+            }
 
-        </List.Section>
+          </List.Section>
+        </ScrollView>
         <FAB
           visible={!selecting}
           style={styles.fab}
