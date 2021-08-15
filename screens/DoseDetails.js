@@ -35,7 +35,7 @@ export default function DoseDetails({navigation, route}) {
       title: note ? 'Note' : dose.name,
       headerRight: () => <Row>
         <IconButton icon='pencil' onPress={() => {
-          navigation.navigate(note ? 'EditNote' : 'EditDose', {dose})
+          navigation.navigate(note ? 'EditNote' : 'EditDose', note ? {note: dose} : {dose})
         }} />
         <IconButton icon='delete' onPress={() => {
           setDialog(true)

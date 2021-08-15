@@ -11,9 +11,17 @@ export default class AddNote extends Component {
     date: null,
   }
 
-  componentDidUpdate() {
-    const {edit} = this.props.route.params ?? {}
+  componentDidMount() {
+    const {edit, note} = this.props.route.params ?? {}
     
+    if (edit) {
+      this.setState({...note, date: new Date(note.date)})
+    }
+  }
+
+  componentDidUpdate() {
+    const {edit, note} = this.props.route.params ?? {}
+
     this.navigation.setOptions({
       headerRight: () => {
         return (
@@ -32,14 +40,14 @@ export default class AddNote extends Component {
                 let note = Dose.create(data)
                 this.navigation.navigate({name: 'DoseList', params: {id: note.id}})
               } else {
-                /*let result = Dose.edit(dose.id, data)
+                let result = Dose.edit(note.id, data)
                 this.navigation.reset({
                   index: 1,
                   routes: [
                     {name: 'Home', params: {id: result.id, edited: true}},
                     {name: 'DoseDetails', params: {dose: result, edited: true}},
                   ]
-                })*/
+                })
               }
 
             }

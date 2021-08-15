@@ -4,7 +4,7 @@ import { Platform, StyleSheet, Text, View } from 'react-native'
 import { Button, Appbar, IconButton, Provider as PaperProvider } from 'react-native-paper'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { NavigationContainer, useNavigation } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import DoseList from './screens/DoseList'
 import SubstanceList from './screens/SubstanceList'
 import SubstanceView from './screens/Substance'
@@ -13,6 +13,7 @@ import AddNote from './screens/AddNote'
 import DoseDetails from './screens/DoseDetails'
 import { DarkTheme, DefaultTheme } from './util/Theme'
 import { SettingsContext } from './store/SettingsContext'
+import { CloseBackButton } from './components/Util'
 
 // Configure day.js
 import './util/dayjs'
@@ -59,11 +60,6 @@ function Home({ navigation, route }) {
       />
     </Tab.Navigator>
   )
-}
-
-function CloseBackButton() {
-  const navigation = useNavigation()
-  return <IconButton icon='close' onPress={() => navigation.goBack()}/>
 }
 
 export default function App() {
@@ -115,7 +111,7 @@ export default function App() {
                   options={({navigation}) => ({
                     title: 'Edit Dose',
                     presentation: 'modal',
-                    headerLeft: () => <IconButton icon='close' onPress={() => navigation.goBack()}/>
+                    headerLeft: CloseBackButton
                   })}
                 />
                 <Stack.Screen
@@ -123,6 +119,16 @@ export default function App() {
                   component={AddNote}
                   options={({navigation}) => ({
                     title: 'Add Note', presentation: 'modal'
+                  })}
+                />
+                <Stack.Screen
+                  name='EditNote'
+                  component={AddNote}
+                  initialParams={{edit: true}}
+                  options={({navigation}) => ({
+                    title: 'Edit Note',
+                    presentation: 'modal',
+                    headerLeft: CloseBackButton
                   })}
                 />
                 <Stack.Screen name='DoseDetails' component={DoseDetails} />
