@@ -8,6 +8,7 @@ import Haptics from '../util/Haptics'
 import { MORE_ICON } from '../util/Util';
 import ConfirmDialog from '../components/ConfirmDialog';
 import DoseEntry from '../components/DoseEntry'
+import MainFABGroup from '../components/MainFABGroup'
 
 function HomeContextMenu({select, selectAll}) {
   const [menu, setMenu] = useState(false)
@@ -193,11 +194,10 @@ export default class DoseList extends Component {
 
           </List.Section>
         </ScrollView>
-        <FAB
+        <MainFABGroup
           visible={!selecting}
-          style={styles.fab}
-          icon='plus'
-          onPress={() => navigation.navigate('AddDose')}
+          addDose={() => navigation.navigate('AddDose')}
+          addNote={() => navigation.navigate('AddNote')}
         />
         <ConfirmDialog
           title={this.state.selectedItems.size === 1 ? 

@@ -11,7 +11,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
   const navigation = useNavigation()
   const [selected, setSelected] = useState(false)
 
-  const date = dayjs(dose.date)
+  const note = (dose.type === 'note')
   const date = dayjs(dose.date).locale(LOCALE_COMPACT)
 
   const hooks = {id: index, setSelected, delete: dose.delete.bind(dose)}
@@ -45,9 +45,30 @@ export default function DoseEntry({dose, index, selecting, list}) {
         onPress={onPress}
         onLongPress={onLongPress}
       >
+      {note ? (
+        <Row style={{padding: 16, justifyContent: 'space-between'}}>
+          <View style={{flex: 1}}>
+            <Text style={{fontSize: 15, lineHeight: 20}}>
+              {dose.notes}
+            </Text>
+          </View>
+          {date.isValid() ?
+            <Row style={{flex: 0, alignItems: 'flex-start'}}>
+              <Text style={{color: theme.colors.disabled}}>
+                {
+                  // Render with U+00A0 NO-BREAK SPACE to prevent break
+                  date.fromNow().replace(/\s/g, '\u00A0')
+                }
+              </Text>
+            </Row>
+          : null}
+        </Row>
+      ) : (
         <List.Item
           title={dose.substanceName}
           description={dose.amount ? `${dose.amount} ${dose.unit??''}` : null}
+
+          // Left: pill icon or checkbox
           left={() => selecting
             ? <View style={styles.left}>
                 <Checkbox
@@ -57,15 +78,21 @@ export default function DoseEntry({dose, index, selecting, list}) {
               </View>
             : <IconButton style={styles.left} icon='pill' />
           }
+
+          // Right: relative time
           right={() => date.isValid() ?
-            <Text style={{
-              color: theme.colors.disabled,
-              marginTop: 17, marginRight: 8
-            }}>
-              {date.fromNow()}
-            </Text>
+            <View style={{alignItems: 'flex-end', justifyContent: 'center'}}>
+              <Text style={{
+                color: theme.colors.disabled,
+                textAlign: 'right',
+                marginEnd: 8,
+              }}>
+                {date.fromNow()}
+              </Text>
+            </View>
           : null}
         />
+      )}
       </TouchableRipple>
     </Card>
   )

@@ -9,6 +9,7 @@ import DoseList from './screens/DoseList'
 import SubstanceList from './screens/SubstanceList'
 import SubstanceView from './screens/Substance'
 import AddDose from './screens/AddDose'
+import AddNote from './screens/AddNote'
 import DoseDetails from './screens/DoseDetails'
 import { DarkTheme, DefaultTheme } from './util/Theme'
 import { SettingsContext } from './store/SettingsContext'
@@ -115,6 +116,13 @@ export default function App() {
                     title: 'Edit Dose',
                     presentation: 'modal',
                     headerLeft: () => <IconButton icon='close' onPress={() => navigation.goBack()}/>
+                  })}
+                />
+                <Stack.Screen
+                  name='AddNote'
+                  component={AddNote}
+                  options={({navigation}) => ({
+                    title: 'Add Note', presentation: 'modal'
                   })}
                 />
                 <Stack.Screen name='DoseDetails' component={DoseDetails} />

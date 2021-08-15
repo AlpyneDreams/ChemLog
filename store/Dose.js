@@ -14,6 +14,10 @@ export class Dose {
   date
 
   static configure(dose) {
+    
+    if (dose.type === 'note')
+      return dose
+
     if (!dose.substanceName)
       dose.substanceName = dose.substance
 
@@ -27,7 +31,7 @@ export class Dose {
     return dose
   }
 
-  static create(data, save = true) {
+  static create(data) {
 
     let dose = Object.assign(new Dose(), data)
 

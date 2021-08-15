@@ -1,6 +1,9 @@
 import React from 'react'
-import { View } from "react-native";
+import { View, ViewProps } from 'react-native'
 
+/**
+ * @param {ViewProps} props
+ */
 export function Row(props) {
   return <View
     {...props}
