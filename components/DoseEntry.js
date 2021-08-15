@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Text, List, Card, TouchableRipple, useTheme, Checkbox, IconButton } from 'react-native-paper'
 import dayjs from 'dayjs'
 import { Row } from './Util'
+import { LOCALE_COMPACT } from '../util/dayjs'
 
 export default function DoseEntry({dose, index, selecting, list}) {
   const theme = useTheme() 
@@ -11,6 +12,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
   const [selected, setSelected] = useState(false)
 
   const date = dayjs(dose.date)
+  const date = dayjs(dose.date).locale(LOCALE_COMPACT)
 
   const hooks = {id: index, setSelected, delete: dose.delete.bind(dose)}
 
