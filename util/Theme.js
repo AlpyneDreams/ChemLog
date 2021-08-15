@@ -1,3 +1,4 @@
+import merge from 'lodash.merge'
 import {
   DefaultTheme as PaperLight,
   DarkTheme as PaperDark
@@ -11,20 +12,14 @@ import {
 // Merge react-native-paper and react-navigation themes
 // See https://callstack.github.io/react-native-paper/theming-with-react-navigation.html
 
-export const DefaultTheme = {
-  ...PaperLight, ...NavLight,
+export const DefaultTheme = merge(PaperLight, NavLight, {
   colors: {
-    ...PaperLight.colors, ...NavLight.colors,
-    
     primary: PaperLight.colors.primary
   }
-}
+})
 
-export const DarkTheme = {
-  ...PaperDark, ...NavDark,
-  colors: {
-    ...PaperDark.colors, ...NavDark.colors,
-    
+export const DarkTheme = merge(PaperDark, NavDark, {
+  colors: {    
     primary: '#7855ed' //PaperLight.colors.primary
   }
-} 
+})
