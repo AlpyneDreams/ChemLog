@@ -53,7 +53,7 @@ function ListHeader({showCats, setShowCats, forceUpdate}) {
           {!catsExpanded ? 'More...' : 'Less...'}
         </Chip>
         {catsExpanded ? (
-          <Row style={{flexWrap: 'wrap'}}>
+          <Row style={{flexWrap: 'wrap', maxWidth: '100%'}}>
             {extraCategories.map(category =>
               catChip(category.name)
             )}
@@ -74,7 +74,7 @@ export default function SubstanceList() {
 
   const navigation = useNavigation()
   const [endReached, setEndReached] = React.useState(false)
-  const [query, setQuery] = React.useState(null)
+  const [query, setQuery] = React.useState('')
   const forceUpdate = useForcedUpdate()
 
   const [showCats, setShowCats] = React.useState(new Set())

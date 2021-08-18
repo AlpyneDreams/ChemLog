@@ -53,7 +53,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
             </Text>
           </View>
           {date.isValid() ?
-            <Row style={{flex: 0, alignItems: 'flex-start'}}>
+            <Row style={{flexGrow: 0, alignItems: 'flex-start'}}>
               <Text style={{color: theme.colors.disabled}}>
                 {
                   // Render with U+00A0 NO-BREAK SPACE to prevent break
@@ -64,6 +64,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
           : null}
         </Row>
       ) : (
+        <View pointerEvents='none'>
         <List.Item
           title={dose.substanceName}
           description={dose.amount ? `${dose.amount} ${dose.unit??''}` : null}
@@ -92,6 +93,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
             </View>
           : null}
         />
+        </View>
       )}
       </TouchableRipple>
     </Card>

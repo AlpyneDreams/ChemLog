@@ -11,6 +11,8 @@ export default class AddNote extends Component {
     date: null,
   }
 
+  textInput = React.createRef()
+
   componentDidMount() {
     const {edit, note} = this.props.route.params ?? {}
     
@@ -65,7 +67,8 @@ export default class AddNote extends Component {
         <TextInput
           placeholder='Add note'
           autoFocus={true}
-          onLayout={(e) => {e.target.focus()}}
+          ref={this.textInput}
+          onLayout={(e) => {this.textInput.current.focus()}}
           mode='outlined'
           multiline={true}
           numberOfLines={4}
