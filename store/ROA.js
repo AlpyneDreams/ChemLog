@@ -1,4 +1,5 @@
 export default {
+  default: 'Oral',
   roas: [
     {
       name: "Oral",

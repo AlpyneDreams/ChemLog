@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View } from 'react-native'
 import { Button, TextInput } from 'react-native-paper'
 
-export default function InputExpand({startOpen = false, ...props}) {
+export default function InputExpand({startOpen = false, onExpand, ...props}) {
   const [expanded, setExpanded] = useState(startOpen)
 
   return (
@@ -12,7 +12,10 @@ export default function InputExpand({startOpen = false, ...props}) {
         icon={props.icon}
         mode='outlined'
         uppercase={false}
-        onPress={() => setExpanded(true)}
+        onPress={() => {
+          setExpanded(true)
+          onExpand && onExpand()
+        }}
       >{props.title ?? 'Expand'}</Button>
     : props.children
     }

@@ -16,7 +16,7 @@ export default class AddDose extends Component {
     substance: null,
     amount: '',
     unit: 'mg',
-    roa: 'Oral',
+    roa: null,
     notes: '',
     date: null,
 

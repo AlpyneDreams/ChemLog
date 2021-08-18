@@ -18,12 +18,18 @@ const roas = ROA.roas.map(roa => ({
   )
 }))
 
+roas.unshift({
+  label: '(None)', value: null
+})
+
 export default function InputROA({value, onChange, startOpen = false}) {
 
   const [open, setOpen] = useState(false)
 
+  const onExpand = () => {onChange(ROA.default)}
+
   return (
-    <InputExpand title='Route of administration' style={{paddingTop: 12}} startOpen={startOpen}>
+    <InputExpand title='Route of administration' style={{paddingTop: 12}} startOpen={startOpen} onExpand={onExpand}>
       <View style={{flex: 1}}>
         <DropDown
           label='Route'
