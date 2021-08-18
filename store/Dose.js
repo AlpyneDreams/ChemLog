@@ -83,7 +83,7 @@ export class DoseStorage {
       return
     
     let value = await AsyncStorage.getItem('doses').catch(console.error)
-    let data = JSON.parse(value)
+    let data = JSON.parse(value) ?? DoseStorage
     DoseStorage.doses = data.doses.map(d => Object.assign(new Dose(), d))
     DoseStorage.nextDoseId = data.nextDoseId
     DoseStorage.loaded = true
