@@ -147,7 +147,7 @@ export default function App() {
                   name='SubstancePicker'
                   component={SubstanceList}
                   initialParams={{pickerMode: true}}
-                  options={{title: 'Select a substance', ...TransitionPresets.BottomSheetAndroid}}
+                  options={{title: 'Select a substance', ...TransitionPresets.ModalSlideFromBottomIOS}}
                 />
               </Stack.Navigator>
             </NavigationContainer>
