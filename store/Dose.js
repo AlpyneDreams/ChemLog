@@ -1,5 +1,5 @@
 
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import Storage from './Storage'
 
 export class Dose {
 
@@ -53,9 +53,6 @@ export class Dose {
     }
   }
 
-  configure() {
-  }
-
   delete() {
     let index = DoseStorage.doses.findIndex(d => d === this)
     if (index >= 0) {
@@ -75,15 +72,14 @@ export class DoseStorage {
     let data = {
       doses: DoseStorage.doses, nextDoseId: DoseStorage.nextDoseId
     }
-    await AsyncStorage.setItem('doses', JSON.stringify(data)).catch(console.error)
+    await Storage.set('doses', data)
   }
 
   static async load() {
     if (DoseStorage.loaded)
       return
     
-    let value = await AsyncStorage.getItem('doses').catch(console.error)
-    let data = JSON.parse(value) ?? DoseStorage
+    let data = await Storage.get('doses', DoseStorage)
     DoseStorage.doses = data.doses.map(d => Object.assign(new Dose(), d))
     DoseStorage.nextDoseId = data.nextDoseId
     DoseStorage.loaded = true
