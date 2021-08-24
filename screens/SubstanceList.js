@@ -1,13 +1,14 @@
-import { useNavigation, useRoute, useScrollToTop, useTheme } from "@react-navigation/native"
+import { useScrollToTop, useTheme } from "@react-navigation/native"
 import React from "react"
-import { View, FlatList, VirtualizedList } from "react-native"
+import { StyleSheet, View, FlatList, VirtualizedList } from "react-native"
 import { Text, List, ActivityIndicator, IconButton, Searchbar, Chip } from "react-native-paper"
 import Substances from '../data/tripsit.drugs.json'
 import { categories as CATEGORIES } from "../data/Categories"
-import Haptics from "../util/Haptics"
 import CategoryChip from "../components/CategoryChip"
 import { Row } from "../components/Util"
 import { useForcedUpdate } from "../util/Util"
+import UserData from '../store/UserData'
+import SubstanceListItem from '../components/SubstanceListItem'
 
 // Add id property to substances
 const substances = Object.entries(Substances).map( ([id, s]) => ({id, ...s}) )
@@ -60,7 +61,28 @@ function ListHeader({showCats, setShowCats, forceUpdate}) {
           </Row>
         ) : null}
       </Row>
+      <RecentSubstanceList />
+      <List.Subheader style={{marginTop: 8}}>All Substances</List.Subheader>
     </>
+  )
+}
+
+function RecentSubstanceList() {
+  const {recentSubstances} = UserData.useContext()
+
+  if (recentSubstances.length === 0) return null
+
+  let list = recentSubstances.map(id => Substances[id])
+
+  return (
+    <List.Section>
+      <List.Subheader>Recent Substances</List.Subheader>
+      <FlatList
+        data={list}
+        keyExtractor={(item, index) => item.name}
+        renderItem={(props) => <SubstanceListItem {...props} />}
+      />
+    </List.Section>
   )
 }
 
@@ -69,10 +91,6 @@ export default function SubstanceList() {
   const scrollRef = React.useRef(null)
   useScrollToTop(scrollRef)
 
-  const params = useRoute().params ?? {}
-  const {pickerMode, returnTo} = params
-
-  const navigation = useNavigation()
   const [endReached, setEndReached] = React.useState(false)
   const [query, setQuery] = React.useState('')
   const forceUpdate = useForcedUpdate()
@@ -87,7 +105,7 @@ export default function SubstanceList() {
     )
   )
 
-  const list = substances.slice().filter(queryMatches)    
+  const list = substances.slice().filter(queryMatches)
 
   // TODO: Sort substances by relevance to query
   // (i.e. indexOf: "phen" -> "Phenibut" before "Ephenidine"; prefer exact match, etc)
@@ -112,48 +130,7 @@ export default function SubstanceList() {
       keyExtractor={(item, index) => item.name}
       ref={scrollRef}
       ListHeaderComponent={<ListHeader {...{showCats, setShowCats, forceUpdate}} />}
-      renderItem={({item: s, ...props}) => {
-        const key = s.id || s.name
-        const aliases = s.properties?.aliases ?? s.aliases
-
-        const onPress = pickerMode
-          ? () => navigation.navigate({name: returnTo, params: {substance: {name: s.pretty_name, id: key}}, merge: true})
-          : () => navigation.navigate('Substance', {substance: s})
-        
-        let color
-        let categories = s.categories ?? s.properties?.categories
-        
-        // Pick primary category's color based on category priority
-        if (categories) {
-          let primary = categories
-          .map(c => CATEGORIES[c] ?? {})
-          .reduce((a, b) => {
-            const ai = a.priority,
-                  bi = b.priority
-            return (ai < bi) ? a : b
-          })
-
-          color = primary.color
-        }
-
-        return (
-          <List.Item 
-            key={key}
-            title={s.pretty_name}
-            description={aliases ? aliases.join(', ') : null}
-            left={() => <List.Icon icon='pill' color={color} />}
-            onPress={onPress}
-            onLongPress={pickerMode ? () => {
-              Haptics.longPress()
-              // TODO: Update substance page to add 'Select' button when pickerMode is true
-              navigation.navigate('Substance', {substance: s, pickerMode: true, returnTo})
-            } : null}
-            right={props =>  pickerMode && key === params.current ? 
-              <IconButton icon='check'/>
-            : null}
-          />
-        )
-      }}
+      renderItem={(props) => <SubstanceListItem {...props} />}
       ListFooterComponent={() =>
         <View style={{paddingVertical: 20, display: endReached ? 'none' : 'flex'}}>
           <ActivityIndicator animating={true} />

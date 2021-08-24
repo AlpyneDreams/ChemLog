@@ -10,8 +10,11 @@ import InputROA from '../components/InputROA';
 import { Row } from '../components/Util'
 import { Dose } from '../store/Dose';
 import Substances from '../data/tripsit.drugs.json'
+import UserData from '../store/UserData';
 
 export default class AddDose extends Component {
+  static contextType = UserData.Context
+
   state = {
     substance: null,
     amount: '',
@@ -55,6 +58,9 @@ export default class AddDose extends Component {
             
             if (!edit) {
               let dose = Dose.create(data)
+
+              this.context.addRecentSubstance(dose.substance)
+
               this.navigation.navigate({name: 'DoseList', params: {id: dose.id}})
             } else {
               let result = Dose.edit(dose.id, data)

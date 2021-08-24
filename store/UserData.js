@@ -5,10 +5,13 @@ import Storage from './Storage'
 import merge from 'lodash.merge'
 import { useForcedUpdate } from '../util/Util'
 
+const MAX_RECENT_SUBSTANCES = 20
+
 const defaultUserData = {
   prefs: {
     darkTheme: true
   },
+  recentSubstances: [],
 
   setDarkTheme: () => {},
 }
@@ -41,6 +44,16 @@ function UserDataProvider({children}) {
   // UserData functions that use update()
   const stateFunctions = {
     setDarkTheme: (darkTheme) => update({prefs: {darkTheme}}),
+    addRecentSubstance: (id) => {
+      let idx = state.recentSubstances.indexOf(id)
+      if (idx >= 0) {
+        state.recentSubstances.splice(idx, 1)
+      }
+      state.recentSubstances.unshift(id)
+      state.recentSubstances = state.recentSubstances.slice(0, MAX_RECENT_SUBSTANCES)
+      save(state)
+      forceUpdate()
+    }
   }
 
   // Load user data on mount (can't use top-level await)
@@ -58,7 +71,7 @@ function UserDataProvider({children}) {
   })
 
   return (
-    <UserDataContext.Provider value={{...state, ...stateFunctions}}>
+    <UserDataContext.Provider value={merge(state, stateFunctions)}>
       {children}
     </UserDataContext.Provider>
   )

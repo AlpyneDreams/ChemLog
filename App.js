@@ -54,6 +54,7 @@ function Home({ navigation, route }) {
         component={SubstanceList}
         options={{
           title: 'Substances', tabBarLabel: 'Substances',
+          unmountOnBlur: true,
           tabBarIcon: ({focused, color, size}) => 
             <IconButton icon='pill' color={color} size={size} />
         }}
