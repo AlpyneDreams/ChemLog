@@ -185,7 +185,7 @@ export default class DoseList extends Component {
             <List.Subheader>Recent Doses</List.Subheader>
 
             {DoseStorage.loaded
-              ? DoseStorage.doses.map((dose, index) =>
+              ? DoseStorage.doses.slice().reverse().map((dose, index) =>
                 <DoseEntry key={dose.id} dose={dose} list={this} index={index} selecting={selecting} />
               )
 
