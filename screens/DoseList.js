@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { View, StyleSheet, ToastAndroid, Vibration, ScrollView } from 'react-native'
 import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator } from 'react-native-paper';
 import { Dose, DoseStorage } from '../store/Dose'
-import { SettingsContext } from '../store/SettingsContext';
+import UserData from '../store/UserData'
 import Haptics from '../util/Haptics'
 import { MORE_ICON } from '../util/Util';
 import ConfirmDialog from '../components/ConfirmDialog';
@@ -12,7 +12,7 @@ import MainFABGroup from '../components/MainFABGroup'
 
 function HomeContextMenu({select, selectAll}) {
   const [menu, setMenu] = useState(false)
-  const {darkTheme, setDarkTheme} = React.useContext(SettingsContext)
+  const {prefs: {darkTheme}, setDarkTheme} = UserData.useContext()
 
   // Returns a function that performs fn(...args) and closes the menu
   const doAndClose = (fn, ...args) => ( function() { fn(...args); setMenu(false) } )

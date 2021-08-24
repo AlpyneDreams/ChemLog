@@ -12,7 +12,7 @@ import AddDose from './screens/AddDose'
 import AddNote from './screens/AddNote'
 import DoseDetails from './screens/DoseDetails'
 import { DarkTheme, DefaultTheme } from './util/Theme'
-import { SettingsContext } from './store/SettingsContext'
+import UserData from './store/UserData'
 import { CloseBackButton } from './components/Util'
 
 // Configure day.js
@@ -63,14 +63,17 @@ function Home({ navigation, route }) {
 }
 
 export default function App() {
-  const [darkTheme, setDarkTheme] = React.useState(true)
 
-  let theme = darkTheme ? DarkTheme : DefaultTheme
-
-  const settings = React.useMemo(
-    () => ({setDarkTheme,darkTheme}),
-    [setDarkTheme, darkTheme]
+  return (
+    <UserData.Provider>
+      <AppLayout />
+    </UserData.Provider>
   )
+}
+
+function AppLayout() {
+  const userData = UserData.useContext()
+  const theme = userData.prefs?.darkTheme ? DarkTheme : DefaultTheme
 
   return (
     /*<View>
@@ -81,7 +84,6 @@ export default function App() {
         <Appbar.Action icon="magnify"></Appbar.Action>
         <Appbar.Action icon={MORE_ICON}></Appbar.Action>
       </Appbar.Header>}*/
-    <SettingsContext.Provider value={settings}>
       <PaperProvider theme={theme}>
         <View style={{height: '100%', alignItems: 'center', backgroundColor: theme.colors.background}}>
           <View style={{maxWidth: 600, width: '100%', height: '100%'}}>
@@ -154,6 +156,5 @@ export default function App() {
           </View>
         </View>
       </PaperProvider>
-    </SettingsContext.Provider>
   )
 }
