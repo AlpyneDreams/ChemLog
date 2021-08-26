@@ -53,6 +53,14 @@ function UserDataProvider({children}) {
       state.recentSubstances = state.recentSubstances.slice(0, MAX_RECENT_SUBSTANCES)
       save(state)
       forceUpdate()
+    },
+    removeRecentSubstance: (id) => {
+      let idx = state.recentSubstances.indexOf(id)
+      if (idx >= 0) {
+        state.recentSubstances.splice(idx, 1)
+      }
+      save(state)
+      forceUpdate()
     }
   }
 

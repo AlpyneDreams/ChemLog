@@ -14,9 +14,16 @@ import DoseDetails from './screens/DoseDetails'
 import { DarkTheme, DefaultTheme } from './util/Theme'
 import UserData from './store/UserData'
 import { CloseBackButton } from './components/Util'
+import { UIManager } from 'react-native'
 
 // Configure day.js
 import './util/dayjs'
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true)
+  }
+}
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()

@@ -8,7 +8,7 @@ import CategoryChip from "../components/CategoryChip"
 import { Row } from "../components/Util"
 import { useForcedUpdate } from "../util/Util"
 import UserData from '../store/UserData'
-import SubstanceListItem from '../components/SubstanceListItem'
+import { SubstanceListItem, SwipeableSubstanceListItem } from '../components/SubstanceListItem'
 
 // Add id property to substances
 const substances = Object.entries(Substances).map( ([id, s]) => ({id, ...s}) )
@@ -77,11 +77,9 @@ function RecentSubstanceList() {
   return (
     <List.Section>
       <List.Subheader>Recent Substances</List.Subheader>
-      <FlatList
-        data={list}
-        keyExtractor={(item, index) => item.name}
-        renderItem={(props) => <SubstanceListItem {...props} />}
-      />
+      {list.map(item => 
+        <SwipeableSubstanceListItem key={item.name} item={item} />
+      )}
     </List.Section>
   )
 }
