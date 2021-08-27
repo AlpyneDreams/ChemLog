@@ -5,6 +5,8 @@ import { Text, List, Card, TouchableRipple, useTheme, Checkbox, IconButton } fro
 import dayjs from 'dayjs'
 import { Row } from './Util'
 import { LOCALE_COMPACT } from '../util/dayjs'
+import { getMainCategory } from '../data/Categories'
+import Substances from '../data/tripsit.drugs.json'
 
 export default function DoseEntry({dose, index, selecting, list}) {
   const theme = useTheme() 
@@ -25,6 +27,8 @@ export default function DoseEntry({dose, index, selecting, list}) {
     }
   }
   const onLongPress = () => list.onLongPress(selected, hooks)
+
+  const category = getMainCategory(Substances[dose.substance]) ?? {}
 
   return (
     <Card
@@ -77,7 +81,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
                   color={theme.colors.primary}
                 />
               </View>
-            : <IconButton style={styles.left} icon='pill' />
+            : <IconButton style={styles.left} color={category.color} icon='pill' />
           }
 
           // Right: relative time
