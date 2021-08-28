@@ -21,7 +21,7 @@ const extraCategories = Object.values(CATEGORIES)
   .filter(c => c.order === Number.MAX_SAFE_INTEGER)
 
 
-function ListHeader({showCats, setShowCats, forceUpdate}) {
+function ListHeader({showCats, setShowCats, forceUpdate, search}) {
 
   const [catsExpanded, setCatsExpanded] = React.useState(false)
 
@@ -61,7 +61,7 @@ function ListHeader({showCats, setShowCats, forceUpdate}) {
           </Row>
         ) : null}
       </Row>
-      <RecentSubstanceList />
+      {!search ? <RecentSubstanceList /> : null}
       <List.Subheader style={{marginTop: 8}}>All Substances</List.Subheader>
     </>
   )
@@ -127,7 +127,7 @@ export default function SubstanceList() {
       getItemCount={(data) => data.length}
       keyExtractor={(item, index) => item.name}
       ref={scrollRef}
-      ListHeaderComponent={<ListHeader {...{showCats, setShowCats, forceUpdate}} />}
+      ListHeaderComponent={<ListHeader {...{showCats, setShowCats, forceUpdate, search: !!query}} />}
       renderItem={(props) => <SubstanceListItem {...props} />}
       ListFooterComponent={() =>
         <View style={{paddingVertical: 20, display: endReached ? 'none' : 'flex'}}>
