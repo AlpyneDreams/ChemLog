@@ -6,6 +6,7 @@ import ConfirmDialog from '../components/ConfirmDialog'
 import { Row } from '../components/Util'
 import dayjs from 'dayjs'
 import { CALENDAR_DATE_ONLY_COMPACT } from '../util/dayjs'
+import SubstanceChip from '../components/SubstanceChip'
 
 function Stat({label, value, visible, children, style, ...props}) {
   return (((visible ?? value) ?? children) ? 
@@ -52,11 +53,7 @@ export default function DoseDetails({navigation, route}) {
       {!note ? <>
         <Row>
           <Stat label='Substance'>
-            <Chip 
-              mode='outlined'
-              icon='pill'
-              onPress={() => navigation.navigate('Substance', {substance: dose.substance})}
-            >{dose.substanceName}</Chip>
+            <SubstanceChip substance={dose.substance} />
           </Stat>
         </Row>
         <Row>
