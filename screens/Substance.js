@@ -7,6 +7,7 @@ import substances from '../data/tripsit.drugs.json'
 import { categories as CATEGORIES } from '../data/Categories'
 import CategoryChip from '../components/CategoryChip'
 import SubstanceDose from '../components/substance/SubstanceDose'
+import SubstanceEffects from '../components/substance/SubstanceEffects'
 import SubstanceDuration from '../components/substance/SubstanceDuration'
 
 export default function SubstanceScreen({navigation, route}) {
@@ -82,6 +83,7 @@ export default function SubstanceScreen({navigation, route}) {
         <Text>{substance.properties.summary}</Text>
       </View>
 
+      <SubstanceEffects substance={substance} />
       <SubstanceDose substance={substance} />
       <SubstanceDuration substance={substance} />
     </ScrollView>
