@@ -8,6 +8,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { RectButton } from "react-native-gesture-handler"
 import UserData from "../store/UserData"
 import { LayoutAnimation } from "react-native"
+import { LayoutAnims } from "../util/Util"
 
 export function SubstanceListItem({item: s, swipeable, ...props}) {
 
@@ -51,8 +52,6 @@ export function SubstanceListItem({item: s, swipeable, ...props}) {
   )
 }
 
-const layoutAnim = { ...LayoutAnimation.Presets.easeInEaseOut, duration: 200}
-
 export function SwipeableSubstanceListItem(props) {
 
   const theme = useTheme()
@@ -80,7 +79,7 @@ export function SwipeableSubstanceListItem(props) {
       renderRightActions={(progress, dragX) => renderSideActions(true, progress, dragX)}
       onSwipeableWillOpen={() => {
         removeRecentSubstance(props.item.name)
-        LayoutAnimation.configureNext(layoutAnim)
+        LayoutAnimation.configureNext(LayoutAnims.ease)
         setRemoved(true)
       }}
     >
