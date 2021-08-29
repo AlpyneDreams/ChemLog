@@ -17,7 +17,7 @@ export default function SubstanceChip({substance: id}) {
     <Chip
       mode='outlined'
       icon='pill'
-      onPress={() => navigation.navigate('Substance', {substance})}
+      onPress={() => navigation.navigate('Substance', {substance: id})}
       style={color ? {
         backgroundColor: color.slice(0, 7) + '40',
         borderColor: color,

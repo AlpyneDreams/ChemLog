@@ -2,7 +2,7 @@ import { useTheme } from '@react-navigation/native'
 import { setStatusBarStyle } from 'expo-status-bar'
 import React from 'react'
 import { View } from 'react-native'
-import { Button, Text } from 'react-native-paper'
+import { Button, Text, Title, useTheme } from 'react-native-paper'
 import { Row } from '../components/Util'
 import substances from '../data/tripsit.drugs.json'
 import { categories as CATEGORIES } from '../data/Categories'
@@ -12,23 +12,28 @@ export default function SubstanceScreen({navigation, route}) {
 
   const theme = useTheme()
   let {substance, pickerMode, returnTo} = route.params || {substance: {properties: {}}}
+  let id
 
   if (typeof substance === 'string') {
-    substance = substances[substance]
+    id = substance
+    substance = substances[id]
+  } else {
+    id = substance?.name
   }
-
+  
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: substance.pretty_name || 'Substance',
+      title: substance?.pretty_name || 'Substance',
       headerRight: () => 
         <Button
           uppercase={false}
           style={pickerMode ? {marginEnd: 8, borderRadius: 20} : {}}
+          disabled={!substance}
           onPress={() => {
             navigation.navigate({
               name: pickerMode ? returnTo : 'AddDose', 
               params: {
-                substance:{name: substance.pretty_name, id: substance.name},
+                substance:{name: substance?.pretty_name, id: id},
               },
               merge: true
             })
@@ -48,6 +53,9 @@ export default function SubstanceScreen({navigation, route}) {
     }
 
   }, [navigation, route])
+
+  if (!substance)
+    return <Title style={{paddingHorizontal: 20}}>Error: Unknown substance '{id}'</Title>
 
   let aliases = substance.properties?.aliases ?? substance.aliases
   let categories = substance.properties?.categories ?? substance.categories
