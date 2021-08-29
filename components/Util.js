@@ -1,6 +1,6 @@
 import React from 'react'
 import { LayoutAnimation, View, ViewProps } from 'react-native'
-import { Card, IconButton, TouchableRipple } from 'react-native-paper'
+import { Card, IconButton, TouchableRipple, Text } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import { LayoutAnims } from '../util/Util'
 
@@ -16,6 +16,10 @@ export function Row(props) {
       ...props.style
     }}
   />
+}
+
+export function Bold(props) {
+  return <Text {...props} style={[props?.style, {fontWeight: 'bold'}]} />
 }
 
 export function CloseBackButton({navigation}) {
