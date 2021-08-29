@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native'
 import { Chip, ThemeProvider, useTheme } from 'react-native-paper'
 import Substances from '../data/tripsit.drugs.json'
 import { getMainCategory } from '../data/Categories'
-import merge from 'lodash.merge'
 
 export default function SubstanceChip({substance: id}) {
 

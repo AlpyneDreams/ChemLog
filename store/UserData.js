@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { STORAGE_PREFIX } from './Dose'
 import Storage from './Storage'
-import merge from 'lodash.merge'
+import { merge } from 'lodash'
 import { useForcedUpdate } from '../util/Util'
 
 const MAX_RECENT_SUBSTANCES = 20

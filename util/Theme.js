@@ -1,4 +1,4 @@
-import merge from 'lodash.merge'
+import { merge } from 'lodash'
 import {
   DefaultTheme as PaperLight,
   DarkTheme as PaperDark

@@ -1,4 +1,4 @@
-import merge from 'lodash.merge'
+import { merge } from 'lodash'
 import Categories from './tripsit.categories.json'
 
 /** Order of importance of information of categories.
