@@ -50,6 +50,8 @@ export default function SubstanceDuration({substance}) {
     )
   }
 
+  if (tables.length === 0) return null
+
   return (<>
     <Title style={styles.header}>Duration</Title>
 

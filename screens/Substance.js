@@ -94,6 +94,7 @@ export default function SubstanceScreen({navigation, route}) {
       <SubstanceMisc substance={substance} details={true} />
 
       <SubstanceInteractions substance={substance} />
+      <View style={{height: 20}} />
     </ScrollView>
   )
 }
