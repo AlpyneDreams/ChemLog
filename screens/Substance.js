@@ -1,12 +1,12 @@
-import { useTheme } from '@react-navigation/native'
 import { setStatusBarStyle } from 'expo-status-bar'
 import React from 'react'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { Button, Text, Title, useTheme } from 'react-native-paper'
 import { Row } from '../components/Util'
 import substances from '../data/tripsit.drugs.json'
 import { categories as CATEGORIES } from '../data/Categories'
 import CategoryChip from '../components/CategoryChip'
+import SubstanceDose from '../components/substance/SubstanceDose'
 
 export default function SubstanceScreen({navigation, route}) {
 
@@ -63,7 +63,7 @@ export default function SubstanceScreen({navigation, route}) {
   categories = categories.map(c => CATEGORIES[c] ?? {}).sort((a, b) => a.priority - b.priority)
 
   return (
-    <View style={{paddingHorizontal: 20}}>
+    <ScrollView style={{paddingHorizontal: 20}}>
 
       {aliases ? 
         <Text style={{
@@ -80,6 +80,8 @@ export default function SubstanceScreen({navigation, route}) {
       <View style={{paddingVertical: 15}}>
         <Text>{substance.properties.summary}</Text>
       </View>
-    </View>
+
+      <SubstanceDose substance={substance} />
+    </ScrollView>
   )
 }

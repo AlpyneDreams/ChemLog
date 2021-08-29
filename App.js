@@ -147,8 +147,8 @@ function AppLayout() {
                   component={SubstanceView}
                   options={{
                     headerLeft: CloseBackButton,
-                    headerStyle: {backgroundColor: theme.colors.surface, elevation: 0},
-                    cardStyle: {backgroundColor: theme.colors.surface},
+                    headerStyle: {backgroundColor: theme.dark ? theme.colors.surface : theme.colors.background, elevation: 0},
+                    cardStyle: {backgroundColor: theme.dark ? theme.colors.surface : theme.colors.background},
                     gestureEnabled: true,
                     ...TransitionPresets.ModalPresentationIOS,
                   }}
