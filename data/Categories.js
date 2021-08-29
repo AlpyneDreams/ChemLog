@@ -51,6 +51,8 @@ export function getMainCategory(substance) {
     )
 }
 
+// Colors must be in #rrggbb format only.
+
 export const categories = Object.fromEntries(Object.entries(
   merge(Categories, {
 

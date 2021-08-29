@@ -9,6 +9,7 @@ import CategoryChip from '../components/CategoryChip'
 import SubstanceDose from '../components/substance/SubstanceDose'
 import SubstanceEffects from '../components/substance/SubstanceEffects'
 import SubstanceDuration from '../components/substance/SubstanceDuration'
+import SubstanceInteractions from '../components/substance/SubstanceInteractions'
 
 export default function SubstanceScreen({navigation, route}) {
 
@@ -86,6 +87,8 @@ export default function SubstanceScreen({navigation, route}) {
       <SubstanceEffects substance={substance} />
       <SubstanceDose substance={substance} />
       <SubstanceDuration substance={substance} />
+
+      <SubstanceInteractions substance={substance} />
     </ScrollView>
   )
 }

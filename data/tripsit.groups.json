@@ -1,0 +1,47 @@
+// From https://github.com/TripSit/factsheets/blob/master/routes/index.js#L13
+{
+  "dox": {
+    "pname": "DOx",
+    "wiki": "https://wiki.tripsit.me/wiki/DOx"
+  },
+  "nbomes": {
+    "pname": "NBOMes",
+    "wiki": "https://wiki.tripsit.me/wiki/NBOMes"
+  },
+  "2c-x": {
+    "pname": "2C-x",
+    "wiki": "https://wiki.tripsit.me/wiki/2C-X"
+  },
+  "2c-t-x": {
+    "pname": "2C-T-x",
+    "wiki": "https://wiki.tripsit.me/wiki/2C-X"
+  },
+  "5-meo-xxt": {
+    "pname": "5-MeO-xxT",
+    "wiki": "https://wiki.tripsit.me/wiki/5-MeO-DMT"
+  },
+  "amphetamines": {
+    "pname": "Amphetamines",
+    "wiki": "https://wiki.tripsit.me/wiki/Amphetamine"
+  },
+  "benzodiazepines": {
+    "pname": "Benzodiazepines",
+    "wiki": "https://wiki.tripsit.me/wiki/Benzodiazepines"
+  },
+  "maois": {
+    "pname": "MAOIs",
+    "wiki": "https://wiki.tripsit.me/wiki/Antidepressants#MAOIs"
+  },
+  "ssris": {
+    "pname": "SSRIs",
+    "wiki": "https://wiki.tripsit.me/wiki/Antidepressants#SSRIs"
+  },
+  "opioids": {
+    "pname": "Opioids",
+    "wiki": "https://wiki.tripsit.me/wiki/Opioids"
+  },
+  "ghb/gbl": {
+    "pname": "GHB/GBL",
+    "wiki": "https://wiki.tripsit.me/wiki/GHB"
+  }  
+}
