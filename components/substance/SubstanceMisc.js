@@ -39,7 +39,7 @@ export default function SubstanceMisc({substance, details}) {
       <DataTable>
 
         {rows.map(([name, key, value]) => (name !== null && value) &&
-          <MultilineRow>
+          <MultilineRow key={key}>
             <Caption style={{flex: 2}}>{name}</Caption>
             <Text>{value ?? ''}</Text>
           </MultilineRow>
