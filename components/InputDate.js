@@ -22,10 +22,10 @@ export default function InputDate({value, onChange}) {
     // If either modal is open, do not redraw
     if (timePicker || datePicker) return
 
-    // On the next second, tick the clock, and set an interval to keep ticking
+    // On the next minute, tick the clock, and set an interval to keep ticking
     let interval
     const timeout = setTimeout(() => {
-      // Update now, and then every second 
+      // Update now, and then every minute 
       tickClock()
       interval = setInterval(tickClock, 60 * 1000)
 

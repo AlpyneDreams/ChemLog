@@ -9,6 +9,7 @@ import { MORE_ICON } from '../util/Util';
 import ConfirmDialog from '../components/ConfirmDialog';
 import DoseEntry from '../components/DoseEntry'
 import MainFABGroup from '../components/MainFABGroup'
+import dayjs from 'dayjs'
 
 function HomeContextMenu({select, selectAll}) {
   const [menu, setMenu] = useState(false)
@@ -124,11 +125,21 @@ export default class DoseList extends Component {
     this.setItemSelected(!selected, item)
   }
 
+  refreshInterval
+  startRefreshTimeout
   _isMounted = false
 
   componentDidMount() {
 
     this._isMounted = true
+
+    // Refresh every minute (for timestamps, see also: InputDate)
+    this.startRefreshTimeout = setTimeout(() => {
+      this.forceUpdate()
+      this.refreshInterval = setInterval(() => {
+        this.forceUpdate()
+      }, 1000 * 60)
+    }, 1000 * (60 - dayjs().second()))
 
     // Load doses
     if (!this.state.loaded) {
@@ -167,7 +178,10 @@ export default class DoseList extends Component {
 
   componentWillUnmount() {
     this._isMounted = false
-    this.unsubscribe()
+    if (this.unsubscribe)
+      this.unsubscribe()
+    clearTimeout(this.startRefreshTimeout)
+    clearInterval(this.refreshInterval)
   }
 
   render() {
