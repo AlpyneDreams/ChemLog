@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { Platform, StyleSheet, Text, View } from 'react-native'
-import { Button, Appbar, IconButton, Provider as PaperProvider } from 'react-native-paper'
+import { Button, Appbar, IconButton, Provider as PaperProvider, useTheme } from 'react-native-paper'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import DoseList from './screens/DoseList'
 import SubstanceList from './screens/SubstanceList'
 import SubstanceView from './screens/Substance'
@@ -45,6 +46,8 @@ function HeaderLeft() {
 
 
 function Home({ navigation, route }) {
+  const theme = useTheme()
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -52,6 +55,7 @@ function Home({ navigation, route }) {
         component={DoseList}
         options={{
           title: 'Doses', tabBarLabel: 'Doses',
+          headerStyle: {backgroundColor: theme.colors.background, elevation: 0},
           tabBarIcon: ({focused, color, size}) => 
             <IconButton icon={focused ? 'beaker' : 'beaker-outline'} color={color} size={size} />
         }}
@@ -62,6 +66,7 @@ function Home({ navigation, route }) {
         options={{
           title: 'Substances', tabBarLabel: 'Substances',
           unmountOnBlur: true,
+          headerShown: false,
           tabBarIcon: ({focused, color, size}) => 
             <IconButton icon='pill' color={color} size={size} />
         }}
@@ -92,6 +97,7 @@ function AppLayout() {
         <Appbar.Action icon="magnify"></Appbar.Action>
         <Appbar.Action icon={MORE_ICON}></Appbar.Action>
       </Appbar.Header>}*/
+      <SafeAreaProvider>
       <PaperProvider theme={theme}>
         <View style={{height: '100%', alignItems: 'center', backgroundColor: theme.colors.background}}>
           <View style={{maxWidth: 600, width: '100%', height: '100%'}}>
@@ -141,7 +147,14 @@ function AppLayout() {
                     headerLeft: CloseBackButton
                   })}
                 />
-                <Stack.Screen name='DoseDetails' component={DoseDetails} />
+                <Stack.Screen
+                  name='DoseDetails'
+                  component={DoseDetails}
+                  options={{
+                    headerStyle: {backgroundColor: theme.colors.surface, elevation: 0},
+                    cardStyle: {backgroundColor: theme.colors.surface}
+                  }}
+                />
                 <Stack.Screen
                   name='Substance'
                   component={SubstanceView}
@@ -164,5 +177,6 @@ function AppLayout() {
           </View>
         </View>
       </PaperProvider>
+      </SafeAreaProvider>
   )
 }

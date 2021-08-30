@@ -1,4 +1,4 @@
-import { useScrollToTop, useTheme } from "@react-navigation/native"
+import { useScrollToTop, useTheme, useRoute } from "@react-navigation/native"
 import React from "react"
 import { StyleSheet, View, FlatList, VirtualizedList } from "react-native"
 import { Text, List, ActivityIndicator, IconButton, Searchbar, Chip } from "react-native-paper"
@@ -9,6 +9,7 @@ import { Row } from "../components/Util"
 import { useForcedUpdate } from "../util/Util"
 import UserData from '../store/UserData'
 import { SubstanceListItem, SwipeableSubstanceListItem } from '../components/SubstanceListItem'
+import { SafeAreaView } from "react-native-safe-area-context"
 
 // Add id property to substances
 const substances = Object.entries(Substances).map( ([id, s]) => ({id, ...s}) )
@@ -86,6 +87,8 @@ function RecentSubstanceList() {
 
 export default function SubstanceList() {
 
+  const theme = useTheme()
+
   const scrollRef = React.useRef(null)
   useScrollToTop(scrollRef)
 
@@ -111,14 +114,22 @@ export default function SubstanceList() {
 
   // TODO: Is it better to update FlatList.data or conditionally hide items in renderItem?
   
-  return (<>
+  // In pickerMode we have a top bar
+  const pickerMode = useRoute()?.params?.pickerMode
+  const Wrapper = pickerMode ? View : SafeAreaView 
+
+  return (<Wrapper>
     <Searchbar
       style={{
         marginTop: 8,
         marginHorizontal: 8,
-        borderRadius: 30
+        borderRadius: 30,
+        // on dark: blend in; on light: stand out
+        backgroundColor: theme.dark ? theme.colors.background : theme.colors.surface,
+        marginBottom: theme.dark ? 8 : 0,
+        elevation: theme.dark ? 0 : 2
       }}
-      placeholder='Search'
+      placeholder='Search substances'
       value={query} onChangeText={setQuery}
     />
     <VirtualizedList
@@ -136,6 +147,6 @@ export default function SubstanceList() {
       }
       onEndReached={() => setEndReached(true)}
     />
-  </>)
+  </Wrapper>)
 
 }
