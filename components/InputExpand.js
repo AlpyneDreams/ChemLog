@@ -1,24 +1,30 @@
 import React, { useState } from 'react'
-import { View } from 'react-native'
-import { Button, TextInput } from 'react-native-paper'
+import { LayoutAnimation, View } from 'react-native'
+import { Button, IconButton, TextInput, useTheme } from 'react-native-paper'
+import { LayoutAnims } from '../util/Util'
 
 export default function InputExpand({startOpen = false, onExpand, ...props}) {
+  const theme = useTheme()
   const [expanded, setExpanded] = useState(startOpen)
 
-  return (
+  return (!expanded ?
+    <Button
+      icon={props.icon}
+      uppercase={false}
+      style={{borderBottomWidth: 1, borderBottomColor: theme.colors.border, paddingVertical: 2}}
+      contentStyle={{paddingVertical: 4, justifyContent: 'flex-start'}}
+      onPress={() => {
+        setExpanded(true)
+        onExpand && onExpand()
+        // FIXME: This breaks TextInput labels
+        LayoutAnimation.spring()
+      }}
+    >
+      {props.title ?? 'Expand'}
+    </Button>
+    :
     <View style={{flexDirection: 'row', ...props.style}}>
-    {!expanded
-    ? <Button
-        icon={props.icon}
-        mode='outlined'
-        uppercase={false}
-        onPress={() => {
-          setExpanded(true)
-          onExpand && onExpand()
-        }}
-      >{props.title ?? 'Expand'}</Button>
-    : props.children
-    }
-  </View>
-)
+      {props.children}
+    </View>
+  )
 }

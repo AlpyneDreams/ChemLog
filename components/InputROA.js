@@ -29,7 +29,7 @@ export default function InputROA({value, onChange, startOpen = false}) {
   const onExpand = () => {onChange(ROA.default)}
 
   return (
-    <InputExpand title='Route of administration' style={{paddingTop: 12}} startOpen={startOpen} onExpand={onExpand}>
+    <InputExpand title='Route of administration' icon='eyedropper' style={{paddingTop: 12}} startOpen={startOpen} onExpand={onExpand}>
       <View style={{flex: 1}}>
         <DropDown
           label='Route'
