@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { TouchableRipple, Text, useTheme } from 'react-native-paper'
+import { TouchableRipple, Text, TextInput, useTheme } from 'react-native-paper'
 
 /**
  * Button that looks like a TextInput (for opening modals, etc.)
@@ -11,36 +11,35 @@ export default function GenericInput({
   value,
   onPress,
   style,
-  textStyle,
+  dimText,
   ...props
 }) {
-  const {colors} = useTheme()
-
-  let mainColor = focused ? colors.primary : colors.placeholder
+  const theme = useTheme()
+  const {colors} = theme
 
   return (
-    <TouchableRipple 
-      icon='chevron-down' mode='outlined' uppercase={false}
-      onPress={onPress}
-      {...props}
-      style={{
-        height: 64, paddingStart: 12, paddingTop: 8,
-        borderBottomWidth: focused ? 2 : 1,
-        borderBottomColor: focused ? colors.primary : colors.disabled,
-        ...style
-      }}
-    >
-      <View>
-        <Text style={{
-          fontSize: 12,
-          color: mainColor
-        }}>{label}</Text>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: 6}}>
-          <Text style={{fontSize: 16, ...textStyle}}>{value}</Text>
-          {/*<IconButton icon='chevron-down' style={{marginTop: -8}} color={mainColor}/>*/}
-        </View>
+    <View style={style}>
+      <View 
+        pointerEvents='none'
+        style={{position: 'absolute', width: '100%'}}
+      >
+        <TextInput
+          label={label}
+          value={value}
+          {...props}
+          outlineColor={focused ? colors.primary : null}
+          underlineColor={focused ? colors.primary : null}
+          theme={dimText ? {colors: {text: colors.disabled}} : null}
+        />
       </View>
-    </TouchableRipple>
+      <TouchableRipple 
+        icon='chevron-down' mode='outlined' uppercase={false}
+        onPress={onPress}
+        style={{borderRadius: theme.roundness}}
+      >
+        <View style={{height: 64}} />
+      </TouchableRipple>
+    </View>
   )
 
 }

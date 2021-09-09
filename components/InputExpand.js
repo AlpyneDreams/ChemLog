@@ -17,7 +17,7 @@ export default function InputExpand({startOpen = false, onExpand, ...props}) {
         setExpanded(true)
         onExpand && onExpand()
         // FIXME: This breaks TextInput labels
-        LayoutAnimation.spring()
+        //LayoutAnimation.spring()
       }}
     >
       {props.title ?? 'Expand'}

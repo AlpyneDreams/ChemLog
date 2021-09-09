@@ -39,7 +39,7 @@ export default function InputDate({value, onChange}) {
 
 
   // Dim text if we're using current time
-  let textStyle = (value == null) ? {color: theme.colors.disabled} : {}
+  let dimText = (value == null)
   let date = dayjs(value ?? currentTime)
 
   const updateTime = (e, val) => {
@@ -59,7 +59,7 @@ export default function InputDate({value, onChange}) {
       value={date.format('MMM D, YYYY')}
       focused={datePicker}
       style={{flex: 1}}
-      textStyle={textStyle}
+      dimText={dimText}
       onPress={() => showDate(true)}
     />
     {datePicker && (
@@ -75,7 +75,7 @@ export default function InputDate({value, onChange}) {
       value={date.format('HH:mm')}
       focused={timePicker}
       style={{marginStart: 8, flex: 1}}
-      textStyle={textStyle}
+      dimText={dimText}
       onPress={() => showTime(true)}
     />
     {timePicker && (
