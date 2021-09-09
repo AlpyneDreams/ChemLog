@@ -107,6 +107,7 @@ export default class AddDose extends Component {
       <View style={{padding: 12}}>
         <DropDown 
           label='Substance'
+          mode='outlined'
           value={substance?.id}
           list={substance ? [{value: substance.id, label: substance.name}] : []}
           showDropDown={() => {
@@ -127,7 +128,7 @@ export default class AddDose extends Component {
         <InputExpand title='Add notes' icon='note' style={{marginTop: 12}} startOpen={edit && oldDose.notes}>
           <TextInput
             placeholder='Add notes'
-            mode='contained'
+            mode='outlined'
             multiline={true}
             style={{flex: 1}}
             value={this.state.notes}

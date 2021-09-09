@@ -19,7 +19,7 @@ export default function InputAmount({startOpen = false, ...props}) {
     <InputExpand title='Add amount' icon='beaker' style={{paddingTop: 12}} startOpen={startOpen}>
       <TextInput
         label='Amount'
-        mode='contained'
+        mode='outlined'
         value={props.amount}
         keyboardType='numeric'
         onChangeText={props.onChangeAmount}
@@ -28,6 +28,7 @@ export default function InputAmount({startOpen = false, ...props}) {
       <View style={{flex: 1}}>
         <DropDown
           label='Unit'
+          mode='outlined'
           visible={unitMenu}
           showDropDown={() => showUnits(true)}
           onDismiss={() => showUnits(false)}

@@ -56,6 +56,7 @@ export default function InputDate({value, onChange}) {
   return (<Row style={{marginTop: 12}}>
     <GenericInput 
       label='Date'
+      mode='outlined'
       value={date.format('MMM D, YYYY')}
       focused={datePicker}
       style={{flex: 1}}
@@ -72,6 +73,7 @@ export default function InputDate({value, onChange}) {
     )}
     <GenericInput 
       label='Time'
+      mode='outlined'
       value={date.format('HH:mm')}
       focused={timePicker}
       style={{marginStart: 8, flex: 1}}
