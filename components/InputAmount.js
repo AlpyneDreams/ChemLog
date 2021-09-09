@@ -16,7 +16,7 @@ export default function InputAmount({startOpen = false, ...props}) {
   let placeholderColor = unitMenu ? colors.primary : colors.placeholder
 
   return (
-    <InputExpand title='Add amount' icon='beaker' style={{paddingTop: 12}} startOpen={startOpen}>
+    <InputExpand title='Add amount' icon='beaker' style={{paddingTop: 12}} buttonStyle={{marginTop: 8}} startOpen={startOpen}>
       <TextInput
         label='Amount'
         mode='outlined'
