@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { Row } from './Util'
 import GenericInput from '../components/GenericInput'
 import { useTheme } from 'react-native-paper'
+import InputExpand from './InputExpand';
 
 /**
  * Displays the current live time if no value is provided.
@@ -53,7 +54,7 @@ export default function InputDate({value, onChange}) {
     onChange(val)
   }
 
-  return (<Row style={{marginTop: 12}}>
+  return (<InputExpand title='Change time & date' startOpen={!dimText} icon='clock' style={{marginTop: 12}}>
     <GenericInput 
       label='Date'
       mode='outlined'
@@ -88,6 +89,6 @@ export default function InputDate({value, onChange}) {
         onChange={updateTime}
       />
     )}
-  </Row>)
+  </InputExpand>)
 
 }
