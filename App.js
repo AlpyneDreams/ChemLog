@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
+import { useColorScheme, Platform, StyleSheet, Text, View } from 'react-native'
 import { Button, Appbar, IconButton, Provider as PaperProvider, useTheme } from 'react-native-paper'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import DoseList from './screens/DoseList'
+import Settings from './screens/Settings'
 import SubstanceList from './screens/SubstanceList'
 import SubstanceView from './screens/Substance'
 import AddDose from './screens/AddDose'
@@ -84,9 +85,29 @@ export default function App() {
   )
 }
 
+function getTheme(themePref, systemPref) {
+  switch (themePref) {
+    case true:  return DarkTheme
+    case false: return DefaultTheme
+    
+    // System default
+    case null:
+    default:
+      switch (systemPref) {
+        case 'light': return DefaultTheme
+        case 'dark':  return DarkTheme
+        
+        default:
+        case null:
+          return DarkTheme
+      }
+  }
+}
+
 function AppLayout() {
   const userData = UserData.useContext()
-  const theme = userData.prefs?.darkTheme ? DarkTheme : DefaultTheme
+  const theme = getTheme(userData.prefs?.darkTheme, useColorScheme())
+
 
   return (
     /*<View>
@@ -113,6 +134,7 @@ function AppLayout() {
                 }}
               >
                 <Stack.Screen name='Home' component={Home} options={{headerShown: false}} />
+                <Stack.Screen name='Settings' component={Settings} options={{headerStyle: {backgroundColor: theme.colors.background, elevation: 0}}} />
                 <Stack.Screen
                   name='AddDose'
                   component={AddDose}

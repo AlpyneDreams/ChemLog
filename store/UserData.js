@@ -9,7 +9,7 @@ const MAX_RECENT_SUBSTANCES = 20
 
 const defaultUserData = {
   prefs: {
-    darkTheme: true
+    darkTheme: null
   },
   recentSubstances: [],
 

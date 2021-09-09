@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { View, StyleSheet, ToastAndroid, Vibration, ScrollView } from 'react-native'
 import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator } from 'react-native-paper';
 import { Dose, DoseStorage } from '../store/Dose'
-import UserData from '../store/UserData'
+import { useNavigation } from '@react-navigation/native'
 import Haptics from '../util/Haptics'
 import { MORE_ICON } from '../util/Util';
 import ConfirmDialog from '../components/dialogs/ConfirmDialog';
@@ -12,8 +12,8 @@ import MainFABGroup from '../components/MainFABGroup'
 import dayjs from 'dayjs'
 
 function HomeContextMenu({select, selectAll}) {
+  const navigation = useNavigation()
   const [menu, setMenu] = useState(false)
-  const {prefs: {darkTheme}, setDarkTheme} = UserData.useContext()
 
   // Returns a function that performs fn(...args) and closes the menu
   const doAndClose = (fn, ...args) => ( function() { fn(...args); setMenu(false) } )
@@ -22,16 +22,14 @@ function HomeContextMenu({select, selectAll}) {
     <Menu 
       visible={menu}
       onDismiss={() => setMenu(false)}
+      style={{minWidth: 150}}
       anchor={
         <IconButton icon={MORE_ICON} onPress={() => setMenu(true)} />
       }
     >
       <Menu.Item onPress={doAndClose(select)} title="Select" />
       {/*<Menu.Item onPress={doseAndClose(selectAll)} title="Select all" />*/}
-      <Menu.Item
-        title={`Switch to ${darkTheme ? 'light' : 'dark'} theme`}
-        onPress={doAndClose(setDarkTheme, !darkTheme)}
-      />
+      <Menu.Item title="Settings" onPress={doAndClose(() => navigation.navigate('Settings'))} />
     </Menu>
   )
 }
