@@ -74,7 +74,7 @@ export default class AddDose extends Component {
             }
 
           }
-        }>{!edit ? 'Add' : 'Edit'}</Button>
+        }>{!edit ? 'Add' : 'Save'}</Button>
       )
     })
 
