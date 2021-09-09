@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Portal, Dialog, Button, Paragraph } from "react-native-paper";
+import React, { useState } from 'react'
+import { Portal, Dialog, Button, Paragraph } from 'react-native-paper'
 
 
 export default function ConfirmDialog({
@@ -7,9 +7,6 @@ export default function ConfirmDialog({
   acceptLabel='Ok', cancelLabel='Cancel', children
 }) {
   const [visible, setVisible] = state ?? useState(false)
-
-  //const showDialog = () => setVisible(true)
-  //const hideDialog = () => setVisible(false)
 
   const cancel = () => {
     setVisible(false)

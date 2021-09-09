@@ -6,7 +6,7 @@ import { Dose, DoseStorage } from '../store/Dose'
 import UserData from '../store/UserData'
 import Haptics from '../util/Haptics'
 import { MORE_ICON } from '../util/Util';
-import ConfirmDialog from '../components/ConfirmDialog';
+import ConfirmDialog from '../components/dialogs/ConfirmDialog';
 import DoseEntry from '../components/DoseEntry'
 import MainFABGroup from '../components/MainFABGroup'
 import dayjs from 'dayjs'
