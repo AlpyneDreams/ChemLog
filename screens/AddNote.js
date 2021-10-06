@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { View } from "react-native"
-import { Button, TextInput } from 'react-native-paper'
+import { Button, FAB, TextInput, withTheme } from 'react-native-paper'
 import InputDate from '../components/InputDate'
 import { Dose } from '../store/Dose'
 
-export default class AddNote extends Component {
+class AddNote extends Component {
   state = {
     type: 'note',
     notes: '',
@@ -18,6 +18,8 @@ export default class AddNote extends Component {
     
     if (edit) {
       this.setState({...note, date: new Date(note.date)})
+    } else {
+      this.forceUpdate()
     }
   }
 
@@ -32,38 +34,42 @@ export default class AddNote extends Component {
             style={{marginEnd: 8, borderRadius: 20}}
             uppercase={false}
             disabled={!this.state.notes}
-            onPress={() => {
-
-              let data = Object.assign({}, this.state)
-
-              data.date = (data.date ?? new Date()).getTime()
-              
-              if (!edit) {
-                let note = Dose.create(data)
-                this.navigation.navigate({name: 'DoseList', params: {id: note.id}})
-              } else {
-                let result = Dose.edit(note.id, data)
-                this.navigation.reset({
-                  index: 1,
-                  routes: [
-                    {name: 'Home', params: {id: result.id, edited: true}},
-                    {name: 'DoseDetails', params: {dose: result, edited: true}},
-                  ]
-                })
-              }
-
-            }
-          }>{!edit ? 'Add' : 'Edit'}</Button>
+            onPress={() => this.submit(edit, note)}
+          >
+            {!edit ? 'Add' : 'Edit'}
+          </Button>
         )
       }
     })
   }
 
+  submit(edit, note) {
+    let data = Object.assign({}, this.state)
+
+    data.date = (data.date ?? new Date()).getTime()
+    
+    if (!edit) {
+      let note = Dose.create(data)
+      this.navigation.navigate({name: 'DoseList', params: {id: note.id}})
+    } else {
+      let result = Dose.edit(note.id, data)
+      this.navigation.reset({
+        index: 1,
+        routes: [
+          {name: 'Home', params: {id: result.id, edited: true}},
+          {name: 'DoseDetails', params: {dose: result, edited: true}},
+        ]
+      })
+    }
+  }
+
   render() {
     this.navigation = this.props.navigation
+    const theme = this.props.theme
+    const {edit, note} = this.props.route.params ?? {}
 
     return (
-      <View style={{padding: 12}}>
+      <View style={{padding: 12, height: '100%'}}>
         <TextInput
           placeholder='Add note'
           autoFocus={true}
@@ -79,7 +85,20 @@ export default class AddNote extends Component {
           value={this.state.date}
           onChange={date => this.setState({date})}
         />
+        <FAB
+          icon={edit ? 'pencil' : 'plus'}
+          uppercase={false}
+          label={edit ? 'Edit' : 'Add'}
+          disabled={!this.state.notes}
+          style={[{
+            position: 'absolute', bottom: 8, right: 0,
+            margin: 16,
+          }, !this.state.notes ? null : {backgroundColor: theme.colors.primary} ]}
+          onPress={() => this.submit()}
+        />
       </View>
     )  
   }
 }
+
+export default withTheme(AddNote)
