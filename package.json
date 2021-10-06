@@ -31,7 +31,8 @@
     "expo-constants": "~11.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "react-native-console-time-polyfill": "^1.2.3"
   },
   "private": true
 }

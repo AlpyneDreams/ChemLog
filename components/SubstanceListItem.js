@@ -1,7 +1,7 @@
 import { useNavigation, useRoute, useScrollToTop, useTheme } from "@react-navigation/native"
 import React from "react"
 import { StyleSheet, View, FlatList, VirtualizedList } from "react-native"
-import { List, IconButton } from "react-native-paper"
+import { List, IconButton, Text } from "react-native-paper"
 import { getMainCategory } from "../data/Categories"
 import Haptics from '../util/Haptics'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
@@ -9,8 +9,9 @@ import { RectButton } from "react-native-gesture-handler"
 import UserData from "../store/UserData"
 import { LayoutAnimation } from "react-native"
 import { LayoutAnims } from "../util/Util"
+import SearchRanking from "../util/SearchRanking"
 
-export function SubstanceListItem({item: s, swipeable, ...props}) {
+export function SubstanceListItem({item: s, priority: score = 0, swipeable, ...props}) {
 
   const theme = useTheme()
   const navigation = useNavigation()
@@ -26,6 +27,14 @@ export function SubstanceListItem({item: s, swipeable, ...props}) {
     
   const category = getMainCategory(s) ?? {}
 
+  let icon = null
+  if (pickerMode && key === params.current) {
+    icon = 'check'
+  } else {
+    if (score <= SearchRanking.EXACT_MATCH)
+      icon = 'star'
+  }
+
   return (
     <List.Item 
       key={key}
@@ -37,9 +46,7 @@ export function SubstanceListItem({item: s, swipeable, ...props}) {
         Haptics.longPress()
         navigation.navigate('Substance', {substance: s, pickerMode: true, returnTo})
       } : null}
-      right={props =>  pickerMode && key === params.current ? 
-        <IconButton icon='check'/>
-      : null}
+      right={props =>  icon && <IconButton icon={icon} />}
       style={[
         {backgroundColor: theme.colors.background},
         swipeable ? {
