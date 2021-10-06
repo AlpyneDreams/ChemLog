@@ -1,5 +1,5 @@
-// From https://github.com/TripSit/factsheets/blob/master/routes/index.js#L13
 {
+  "_comment": "From https://github.com/TripSit/factsheets/blob/master/routes/index.js#L13",
   "dox": {
     "pname": "DOx",
     "wiki": "https://wiki.tripsit.me/wiki/DOx"
