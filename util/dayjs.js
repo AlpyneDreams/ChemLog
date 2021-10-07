@@ -56,6 +56,12 @@ export const CALENDAR_DATE_ONLY = {
   sameElse: 'MMMM D, YYYY'
 }
 
+export const CALENDAR_DATE_ONLY_MEDIUM = {
+  ...CALENDAR_DATE_ONLY,
+  nextWeek: 'MMMM D, YYYY',
+  lastWeek: 'MMMM D, YYYY'
+}
+
 export const CALENDAR_DATE_ONLY_COMPACT = {
   ...CALENDAR_DATE_ONLY,
   nextWeek: 'MM/DD/YY',

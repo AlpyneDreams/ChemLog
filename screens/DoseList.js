@@ -5,11 +5,13 @@ import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator } from
 import { Dose, DoseStorage } from '../store/Dose'
 import { useNavigation } from '@react-navigation/native'
 import Haptics from '../util/Haptics'
-import { MORE_ICON } from '../util/Util';
+import { DAY_MS, MORE_ICON } from '../util/Util';
 import ConfirmDialog from '../components/dialogs/ConfirmDialog';
 import DoseEntry from '../components/DoseEntry'
 import MainFABGroup from '../components/MainFABGroup'
 import dayjs from 'dayjs'
+import { sortBy } from 'lodash';
+import { CALENDAR_DATE_ONLY, CALENDAR_DATE_ONLY_MEDIUM } from '../util/dayjs';
 
 function HomeContextMenu({select, selectAll}) {
   const navigation = useNavigation()
@@ -94,7 +96,7 @@ export default class DoseList extends Component {
     
     // Update header text
     this.props.navigation.setOptions({
-      title: `${size} dose${size===1?'':'s'} selected`
+      title: `${size} ${size===1 ? 'entry' : 'entries'} selected`
     })
   }
 
@@ -170,7 +172,6 @@ export default class DoseList extends Component {
               this.setState({confirmDelete: true}) : null
           }/>
         </>
-      
     })
   }
 
@@ -182,25 +183,41 @@ export default class DoseList extends Component {
     clearInterval(this.refreshInterval)
   }
 
+  getDoses() {
+    let doses = DoseStorage.doses.slice()
+
+    // Build a set of all calendar dates
+    const dates = [...new Set(
+      doses.map(d => Math.ceil(d.date / DAY_MS) * DAY_MS)
+    )]
+
+    // Add those dates as objects to the dose list
+    doses.push(...(dates.map(date => ({type: 'date', date}))))
+
+    // Sort by newest first
+    return sortBy(doses, d => -d.date)
+  }
+
   render() {
     const {navigation, route} = this.props
     const {selecting, snackbar, confirmDelete} = this.state
 
     const showSnackbar = (route.params?.deleted) && snackbar
 
-    const setConfirmDelete = (value) => this.setState({confirmDelete: value}) 
+    const setConfirmDelete = (value) => this.setState({confirmDelete: value})
+
+    const doses = this.state.loaded ? this.getDoses() : []
 
     return (
       <View style={{height: '100%'}}>
         <ScrollView>
           <List.Section style={{paddingBottom: 64}}>
-            <List.Subheader>Recent Doses</List.Subheader>
-
-            {DoseStorage.loaded
-              ? DoseStorage.doses.slice().reverse().map((dose, index) =>
-                <DoseEntry key={dose.id} dose={dose} list={this} index={index} selecting={selecting} />
+            {this.state.loaded ? doses.map((dose, index) => 
+                dose.type === 'date' ?
+                  <List.Subheader key={dose.date}>{dayjs(dose.date).calendar(null, CALENDAR_DATE_ONLY_MEDIUM)}</List.Subheader>
+                :
+                  <DoseEntry key={dose.id} dose={dose} list={this} index={index} selecting={selecting} />
               )
-
               : <ActivityIndicator />
             }
 
@@ -212,8 +229,9 @@ export default class DoseList extends Component {
           addNote={() => navigation.navigate('AddNote')}
         />
         <ConfirmDialog
-          title={this.state.selectedItems.size === 1 ? 
-            'Delete selected dose?' : 'Delete selected doses?'
+          title={
+            this.state.selectedItems.size === 1 ? 
+              'Delete selected entries?' : 'Delete selected entries?'
           }
           acceptLabel='Delete'
           state={[confirmDelete, setConfirmDelete]}
@@ -224,7 +242,7 @@ export default class DoseList extends Component {
           duration={1000}
           onDismiss={() => this.setState({snackbar: false})}
           style={{marginBottom: 96}}
-        >{route.params?.deleted === 1 ? 'Dose deleted.' : `Deleted ${route.params?.deleted} doses.`}</Snackbar>
+        >{route.params?.deleted === 1 ? 'Entry deleted.' : `Deleted ${route.params?.deleted} entries.`}</Snackbar>
       </View>
     )
   }

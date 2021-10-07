@@ -86,7 +86,7 @@ export class DoseStorage {
 
     // Development build test doses
     if (DoseStorage.doses.length === 0) {
-      Dose.create({ substance: 'phenibut', substanceName: 'Phenibut', amount: '300', unit: 'mg', roa: 'Oral', notes: 'First dose.', date: Date() })
+      Dose.create({ substance: 'phenibut', substanceName: 'Phenibut', amount: '300', unit: 'mg', roa: 'Oral', notes: 'First dose.', date: Date.now() })
     }
 
   }
