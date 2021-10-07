@@ -18,6 +18,8 @@ export default function DoseEntry({dose, index, selecting, list}) {
 
   const hooks = {id: index, setSelected, delete: dose.delete.bind(dose)}
 
+  list.state.selectableItems.add(hooks)
+
   const onPress = () => {
     if (!selecting) {
       navigation.navigate('DoseDetails', {dose})

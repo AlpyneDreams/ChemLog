@@ -29,9 +29,9 @@ function HomeContextMenu({select, selectAll}) {
         <IconButton icon={MORE_ICON} onPress={() => setMenu(true)} />
       }
     >
-      <Menu.Item onPress={doAndClose(select)} title="Select" />
-      {/*<Menu.Item onPress={doseAndClose(selectAll)} title="Select all" />*/}
       <Menu.Item title="Settings" onPress={doAndClose(() => navigation.navigate('Settings'))} />
+      <Menu.Item onPress={doAndClose(select)} title="Select" />
+      <Menu.Item onPress={doAndClose(selectAll)} title="Select all" />
     </Menu>
   )
 }
@@ -43,6 +43,7 @@ export default class DoseList extends Component {
     snackbar: true,
     selecting: false,
     selectedItems: new Map(),
+    selectableItems: new Set(),
     confirmDelete: false
   }
 
@@ -74,6 +75,13 @@ export default class DoseList extends Component {
         setSelected(false)
       }
       this.state.selectedItems.clear()
+    }
+  }
+
+  selectAll() {
+    this.setSelecting(true)
+    for (const entry of this.state.selectableItems) {
+      this.setItemSelected(true, entry)
     }
   }
 
@@ -165,7 +173,7 @@ export default class DoseList extends Component {
 
     navigation.setOptions({
       headerRight: () => !this.state.selecting
-        ? <HomeContextMenu select={() => this.setSelecting(true)} />
+        ? <HomeContextMenu select={() => this.setSelecting(true)} selectAll={() => this.selectAll()} />
         : <>
           <IconButton icon='delete' onPress={() => 
             this.state.selectedItems.size > 0 ?
