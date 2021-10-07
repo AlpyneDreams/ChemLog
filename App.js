@@ -20,6 +20,7 @@ import { UIManager } from 'react-native'
 
 // Configure day.js
 import './util/dayjs'
+import { merge } from 'lodash'
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -174,7 +175,14 @@ function AppLayout() {
                   component={DoseDetails}
                   options={{
                     headerStyle: {backgroundColor: theme.colors.surface, elevation: 0},
-                    cardStyle: {backgroundColor: theme.colors.surface}
+                    cardStyle: {backgroundColor: theme.colors.surface},
+                    ...merge(TransitionPresets.DefaultTransition, {
+                      transitionSpec: {
+                        open: {config: {duration: 125}},
+                        close: {config: {duration: 125}}
+                      }
+                    })
+
                   }}
                 />
                 <Stack.Screen
