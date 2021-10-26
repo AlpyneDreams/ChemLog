@@ -46,35 +46,8 @@ export class AddDose extends Component {
           style={{marginEnd: 8, borderRadius: 20}}
           uppercase={false}
           disabled={!this.state.substance}
-          onPress={() => {
-
-            let data = Object.assign({}, this.state)
-
-            data.substanceName = data.substance.name
-            data.substance = data.substance.id
-            data.date = (data.date ?? new Date()).getTime()
-
-            delete data._lastParams
-            
-            if (!edit) {
-              let dose = Dose.create(data)
-
-              this.context.addRecentSubstance(dose.substance)
-
-              this.navigation.navigate({name: 'DoseList', params: {id: dose.id}})
-            } else {
-              let result = Dose.edit(dose.id, data)
-              this.navigation.reset({
-                index: 1,
-                routes: [
-                  {name: 'Home', params: {id: result.id, edited: true}},
-                  {name: 'DoseDetails', params: {dose: result, edited: true}},
-                ]
-              })
-            }
-
-          }
-        }>{!edit ? 'Add' : 'Save'}</Button>
+          onPress={() => this.submit(edit, dose)}
+        >{!edit ? 'Add' : 'Save'}</Button>
       )
     })
 
@@ -94,6 +67,33 @@ export class AddDose extends Component {
 
   componentWillUnmount() {
     this.unsubscribe()
+  }
+
+  submit(edit, dose) {
+    let data = Object.assign({}, this.state)
+
+    data.substanceName = data.substance.name
+    data.substance = data.substance.id
+    data.date = (data.date ?? new Date()).getTime()
+
+    delete data._lastParams
+    
+    if (!edit) {
+      let dose = Dose.create(data)
+
+      this.context.addRecentSubstance(dose.substance)
+
+      this.navigation.navigate({name: 'DoseList', params: {id: dose.id}})
+    } else {
+      let result = Dose.edit(dose.id, data)
+      this.navigation.reset({
+        index: 1,
+        routes: [
+          {name: 'Home', params: {id: result.id, edited: true}},
+          {name: 'DoseDetails', params: {dose: result, edited: true}},
+        ]
+      })
+    }
   }
 
   render() {
@@ -148,7 +148,7 @@ export class AddDose extends Component {
             position: 'absolute', bottom: 8, right: 0,
             margin: 16,
           }, !this.state.substance ? null : {backgroundColor: theme.colors.primary} ]}
-          onPress={() => this.submit()}
+          onPress={() => this.submit(edit, oldDose)}
         />
       </View>
     )  

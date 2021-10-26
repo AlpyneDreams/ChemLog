@@ -94,7 +94,7 @@ class AddNote extends Component {
             position: 'absolute', bottom: 8, right: 0,
             margin: 16,
           }, !this.state.notes ? null : {backgroundColor: theme.colors.primary} ]}
-          onPress={() => this.submit()}
+          onPress={() => this.submit(edit, note)}
         />
       </View>
     )  
