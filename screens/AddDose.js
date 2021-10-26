@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from "react-native";
-import { Title, Button, FAB, List, TextInput, IconButton } from 'react-native-paper';
+import { Title, Button, FAB, List, TextInput, IconButton, withTheme } from 'react-native-paper';
 import DropDown from 'react-native-paper-dropdown'
 import InputAmount from '../components/InputAmount';
 import InputDate from '../components/InputDate';
@@ -12,7 +12,7 @@ import { Dose } from '../store/Dose';
 import Substances from '../data/tripsit.drugs.json'
 import UserData from '../store/UserData';
 
-export default class AddDose extends Component {
+export class AddDose extends Component {
   static contextType = UserData.Context
 
   state = {
@@ -98,13 +98,13 @@ export default class AddDose extends Component {
 
   render() {
     this.navigation = this.props.navigation
-
+    const theme = this.props.theme
     const {edit, dose: oldDose} = this.props.route.params ?? {}
 
     let {substance} = this.state
 
     return (
-      <View style={{padding: 12}}>
+      <View style={{padding: 12, height: '100%'}}>
         <DropDown 
           label='Substance'
           mode='outlined'
@@ -139,7 +139,20 @@ export default class AddDose extends Component {
           value={this.state.date}
           onChange={date => this.setState({date})}
         />
+        <FAB
+          icon={edit ? 'pencil' : 'plus'}
+          uppercase={false}
+          label={edit ? 'Save' : 'Add'}
+          disabled={!this.state.substance}
+          style={[{
+            position: 'absolute', bottom: 8, right: 0,
+            margin: 16,
+          }, !this.state.substance ? null : {backgroundColor: theme.colors.primary} ]}
+          onPress={() => this.submit()}
+        />
       </View>
     )  
   }
 }
+
+export default withTheme(AddDose)
