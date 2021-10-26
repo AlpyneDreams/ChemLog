@@ -7,6 +7,7 @@ import { Row } from './Util'
 import { LOCALE_COMPACT } from '../util/dayjs'
 import { getMainCategory } from '../data/Categories'
 import Substances from '../data/tripsit.drugs.json'
+import { DAY_MS } from '../util/Util'
 
 export default function DoseEntry({dose, index, selecting, list}) {
   const theme = useTheme() 
@@ -14,7 +15,10 @@ export default function DoseEntry({dose, index, selecting, list}) {
   const [selected, setSelected] = useState(false)
 
   const note = (dose.type === 'note')
+
   const date = dayjs(dose.date).locale(LOCALE_COMPACT)
+  const isRecent = dayjs().diff(date) <= (DAY_MS * 2)
+  const timestamp = isRecent ? date.fromNow() : date.format('H:mm')
 
   const hooks = {id: index, setSelected, delete: dose.delete.bind(dose)}
 
@@ -65,10 +69,10 @@ export default function DoseEntry({dose, index, selecting, list}) {
           </View>
           {date.isValid() ?
             <Row style={{flexGrow: 0, alignItems: 'flex-start'}}>
-              <Text style={{color: theme.colors.disabled}}>
+              <Text style={{color: theme.colors.disabled, marginLeft: 2}}>
                 {
                   // Render with U+00A0 NO-BREAK SPACE to prevent break
-                  date.fromNow().replace(/\s/g, '\u00A0')
+                  timestamp.replace(/\s/g, '\u00A0')
                 }
               </Text>
             </Row>
@@ -99,7 +103,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
                 textAlign: 'right',
                 marginEnd: 8,
               }}>
-                {date.fromNow()}
+                {timestamp}
               </Text>
             </View>
           : null}
