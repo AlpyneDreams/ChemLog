@@ -18,7 +18,12 @@ export default function DoseEntry({dose, index, selecting, list}) {
 
   const hooks = {id: index, setSelected, delete: dose.delete.bind(dose)}
 
-  list.state.selectableItems.add(hooks)
+  React.useEffect(() => {
+    list.state.selectableItems.add(hooks)
+    return () => {
+      list.state.selectableItems.delete(hooks)
+    }
+  }, [])
 
   const onPress = () => {
     if (!selecting) {

@@ -113,6 +113,7 @@ export default class DoseList extends Component {
     let count = 0
     for (const [id, item] of this.state.selectedItems) {
       this.setItemSelected(false, item)
+      this.state.selectableItems.delete(item)
       item.delete()
       count++
     }
