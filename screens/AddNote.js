@@ -36,7 +36,7 @@ class AddNote extends Component {
             disabled={!this.state.notes}
             onPress={() => this.submit(edit, note)}
           >
-            {!edit ? 'Add' : 'Edit'}
+            {!edit ? 'Add' : 'Save'}
           </Button>
         )
       }
@@ -88,7 +88,7 @@ class AddNote extends Component {
         <FAB
           icon={edit ? 'pencil' : 'plus'}
           uppercase={false}
-          label={edit ? 'Edit' : 'Add'}
+          label={edit ? 'Save' : 'Add'}
           disabled={!this.state.notes}
           style={[{
             position: 'absolute', bottom: 8, right: 0,
