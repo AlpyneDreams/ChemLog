@@ -197,7 +197,7 @@ export default class DoseList extends Component {
 
     // Build a set of all calendar dates
     const dates = [...new Set(
-      doses.map(d => Math.ceil(d.date / DAY_MS) * DAY_MS)
+      doses.map(d => dayjs(d.date).endOf('day').valueOf())
     )]
 
     // Add those dates as objects to the dose list
