@@ -11,6 +11,7 @@ import SubstanceEffects from '../components/substance/SubstanceEffects'
 import SubstanceDuration from '../components/substance/SubstanceDuration'
 import SubstanceMisc from '../components/substance/SubstanceMisc'
 import SubstanceInteractions from '../components/substance/SubstanceInteractions'
+import * as Linking from 'expo-linking'
 
 export default function SubstanceScreen({navigation, route}) {
 
@@ -86,6 +87,24 @@ export default function SubstanceScreen({navigation, route}) {
       </View>
 
       <SubstanceMisc substance={substance} details={false} />
+
+      <Row style={{justifyContent: 'space-evenly', flexGrow: 1}}>
+        <Button
+          uppercase={false}
+          icon='link'
+          onPress={() => Linking.openURL(`https://drugs.tripsit.me/${id}`)}
+        >
+          TripSit
+        </Button>
+        <Button
+          uppercase={false}
+          icon='magnify'
+          onPress={() => Linking.openURL(`https://psychonautwiki.org/w/index.php?search=${id}`)}
+        >
+          PsychonautWiki
+        </Button>
+      </Row>
+      
 
       <SubstanceEffects substance={substance} />
       <SubstanceDose substance={substance} />
