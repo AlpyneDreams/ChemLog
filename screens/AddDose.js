@@ -11,6 +11,8 @@ import { Row } from '../components/Util'
 import { Dose } from '../store/Dose';
 import Substances from '../data/tripsit.drugs.json'
 import UserData from '../store/UserData';
+import { categories, getMainCategory } from '../data/Categories';
+import GenericInput from '../components/GenericInput';
 
 export class AddDose extends Component {
   static contextType = UserData.Context
@@ -103,14 +105,17 @@ export class AddDose extends Component {
 
     let {substance} = this.state
 
+    const category = substance ? getMainCategory(Substances[substance?.id]) : {}
+
     return (
       <View style={{padding: 12, height: '100%'}}>
-        <DropDown 
+        <GenericInput
           label='Substance'
           mode='outlined'
-          value={substance?.id}
-          list={substance ? [{value: substance.id, label: substance.name}] : []}
-          showDropDown={() => {
+          value={substance?.name}
+          left={substance ? <TextInput.Icon name='pill' color={category.color}/> : null}
+          right={<TextInput.Icon name='menu-down'/>}
+          onPress={() => {
             this.navigation.navigate('SubstancePicker', {current: substance?.id, returnTo: !edit ? 'AddDose' : 'EditDose'})
           }}
         />
