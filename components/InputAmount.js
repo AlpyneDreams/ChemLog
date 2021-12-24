@@ -22,7 +22,10 @@ export default function InputAmount({startOpen = false, ...props}) {
         mode='outlined'
         value={props.amount}
         keyboardType='numeric'
-        onChangeText={props.onChangeAmount}
+        onChangeText={amount => {
+          if (!Number.isNaN(Number.parseFloat(amount)) || amount === '')
+            props.onChangeAmount(amount)
+        }}
         style={{flex: 1, marginEnd: 8}}
       />
       <View style={{flex: 1}}>

@@ -121,10 +121,7 @@ export class AddDose extends Component {
         />
         <InputAmount
           amount={this.state.amount}
-          onChangeAmount={amount => {
-            if (!Number.isNaN(Number.parseFloat(amount)) || amount === '')
-              this.setState({amount})
-          }}
+          onChangeAmount={amount => this.setState({amount})}
           unit={this.state.unit}
           onChangeUnit={unit => this.setState({unit})}
           startOpen={edit && oldDose.amount}
