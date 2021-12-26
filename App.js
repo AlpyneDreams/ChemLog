@@ -7,6 +7,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import DoseList from './screens/DoseList'
+import StashList from './screens/stashes/StashList'
+import AddStash from './screens/stashes/AddStash'
 import Settings from './screens/Settings'
 import SubstanceList from './screens/SubstanceList'
 import SubstanceView from './screens/Substance'
@@ -17,10 +19,10 @@ import { DarkTheme, DefaultTheme } from './util/Theme'
 import UserData from './store/UserData'
 import { CloseBackButton } from './components/Util'
 import { UIManager } from 'react-native'
+import { merge } from 'lodash'
 
 // Configure day.js
 import './util/dayjs'
-import { merge } from 'lodash'
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -62,6 +64,16 @@ function Home({ navigation, route }) {
             <IconButton icon={focused ? 'beaker' : 'beaker-outline'} color={color} size={size} />
         }}
       />
+      {/*<Tab.Screen
+        name='StashList'
+        component={StashList}
+        options={{
+          title: 'Stashes', tabBarLabel: 'Stashes',
+          headerStyle: {backgroundColor: theme.colors.background, elevation: 0},
+          tabBarIcon: ({focused, color, size}) => 
+            <IconButton icon={focused ? 'archive' : 'archive-outline'} color={color} size={size} />
+        }}
+      />*/}
       <Tab.Screen
         name='SubstanceList'
         component={SubstanceList}
@@ -184,6 +196,13 @@ function AppLayout() {
                     })
 
                   }}
+                />
+                <Stack.Screen
+                  name='AddStash'
+                  component={AddStash}
+                  options={({navigation}) => ({
+                    title: 'Add Stash', presentation: 'modal'
+                  })}
                 />
                 <Stack.Screen
                   name='Substance'

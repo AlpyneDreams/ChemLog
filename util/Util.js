@@ -16,3 +16,7 @@ export const LayoutAnims = {
   }
 }
 
+// Debug: slowly(fn) returns a function that calls fn(...) after a second
+function slowly(action) {
+  return (...args) => setTimeout(action, 1000, ...args)
+}

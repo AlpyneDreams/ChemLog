@@ -2,6 +2,8 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Card, FAB, Portal, Provider, useTheme, Colors } from 'react-native-paper'
 import Haptics from '../util/Haptics'
+import CommonStyles from '../components/CommonStyles'
+import { Row } from './Util'
 
 export default function MainFABGroup({visible, addDose, addNote}) {
   const [open, setOpen] = React.useState(false)
@@ -19,7 +21,7 @@ export default function MainFABGroup({visible, addDose, addNote}) {
     />
     {!open && // Invisible FAB detects long presses
       <FAB
-        style={[styles.container, {backgroundColor: 'transparent', elevation: 0}]}
+        style={[CommonStyles.fab, {backgroundColor: 'transparent', elevation: 0}]}
         onPress={() => setOpen(!open)}
         onLongPress={() => {
           if (!open) {
@@ -49,14 +51,3 @@ export default function MainFABGroup({visible, addDose, addNote}) {
   )
   */
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    margin: 16,
-    marginBottom: 24,
-    right: 0,
-    bottom: 0
-  }
-})
