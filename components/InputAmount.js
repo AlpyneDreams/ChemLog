@@ -21,6 +21,7 @@ export default function InputAmount({startOpen = false, ...props}) {
         label='Amount'
         mode='outlined'
         value={props.amount}
+        autoFocus={!startOpen}
         keyboardType='numeric'
         onChangeText={amount => {
           if (!Number.isNaN(Number.parseFloat(amount)) || amount === '')

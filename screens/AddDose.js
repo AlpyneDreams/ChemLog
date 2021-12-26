@@ -107,6 +107,8 @@ export class AddDose extends Component {
 
     const category = substance ? getMainCategory(Substances[substance?.id]) : {}
 
+    const noteOpen = (edit && oldDose.notes)
+
     return (
       <View style={{padding: 12, height: '100%'}}>
         <GenericInput
@@ -127,9 +129,10 @@ export class AddDose extends Component {
           startOpen={edit && oldDose.amount}
         />
         <InputROA value={this.state.roa} onChange={roa => this.setState({roa})} startOpen={edit && oldDose.roa} />
-        <InputExpand title='Add notes' icon='note' style={{marginTop: 12}} startOpen={edit && oldDose.notes}>
+        <InputExpand title='Add notes' icon='note' style={{marginTop: 12}} startOpen={noteOpen}>
           <TextInput
             placeholder='Add notes'
+            autoFocus={!noteOpen}
             mode='outlined'
             multiline={true}
             style={{flex: 1}}
