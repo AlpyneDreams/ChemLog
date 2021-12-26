@@ -1,7 +1,7 @@
 import { useTheme } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { View, ToastAndroid } from 'react-native'
-import { IconButton, Text, Snackbar, List, Chip } from 'react-native-paper'
+import { IconButton, Text, Snackbar, List, Chip, Card } from 'react-native-paper'
 import ConfirmDialog from '../components/dialogs/ConfirmDialog'
 import { Row } from '../components/Util'
 import dayjs from 'dayjs'
@@ -75,6 +75,9 @@ export default function DoseDetails({navigation, route}) {
           </Stat>
         : null}
       </Row>
+      {/*<Card style={{padding: 16, elevation: 4}}>
+        <Text>Substance Info</Text>
+        </Card>*/}
       {/*<Text style={{fontFamily: 'monospace', color: useTheme().colors.text}}>{JSON.stringify(dose, null, 4)}</Text>*/}
       <ConfirmDialog title='Delete this dose?' acceptLabel='Delete' state={[dialog, setDialog]} onAccept={deleteDose} />
     </View>

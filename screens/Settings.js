@@ -4,11 +4,29 @@ import { RadioButton, Dialog, List, Portal, Divider } from 'react-native-paper'
 import ChooseDialog from '../components/dialogs/ChooseDialog'
 import UserData from '../store/UserData'
 import Constants from 'expo-constants'
+import { DevMenu } from './DevMenu'
 
 export default function Settings() {
   const {prefs: {darkTheme}, setDarkTheme} = UserData.useContext()
 
   const [themePicker, showThemePicker] = React.useState(false)
+  const [devMenu, setDevMenu] = React.useState(false)
+
+  function Version() {
+    const [knocks, setKnocks] = React.useState(0)
+    return (
+      <List.Item
+        title='Version'
+        description={Constants.manifest?.version ?? Constants.nativeAppVersion}
+        onPress={() => {
+          setKnocks(knocks+1)
+          if (knocks+1 >= 4) {
+            setDevMenu(true)
+          }
+        }}
+      />
+    )
+  }
 
   return (
     <ScrollView>
@@ -29,13 +47,11 @@ export default function Settings() {
           onChange={setDarkTheme}
         />
         <Divider/>
-        <List.Item
-          title='Version'
-          description={Constants.manifest?.version ?? Constants.nativeAppVersion}
-          onPress={() => {}}
-        />
+        <Version/>
+        {devMenu && <DevMenu/>}
       </List.Section>
       
     </ScrollView>
   )
 }
+
