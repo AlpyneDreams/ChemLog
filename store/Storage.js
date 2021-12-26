@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const STORAGE_PREFIX = '' // 'prod-', 'debug-', etc.
 
@@ -11,4 +11,32 @@ async function set(key, value) {
   return await AsyncStorage.setItem(STORAGE_PREFIX+key, JSON.stringify(value)).catch(console.error)
 }
 
-export default {get, set}
+const Storage = {get, set}
+export default Storage
+
+export class DataStore {
+  static loaded = false
+  static key = null
+  static type = null
+  static items = []
+  static nextId = 0
+
+  static async save() {
+    let data = {
+      items: this.items, nextId: this.nextId
+    }
+
+    await Storage.set(this.key, data)
+  }
+
+  static async load() {
+    if (this.loaded)
+      return
+
+    // Load data
+    let data = await Storage.get(this.key, this)
+    this.items = data.items.map(d => Object.assign(new this.type(), d))
+    this.nextId = data.nextId
+    this.loaded = true
+  }
+}

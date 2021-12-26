@@ -1,17 +1,14 @@
 
-import Storage from './Storage'
+import { BaseItem } from './BaseItem'
+import Storage, { DataStore } from './Storage'
 
-export class Dose {
+export class Dose extends BaseItem {
 
-  id = DoseStorage.nextDoseId++
-  name
+  static store // = DoseStorage
 
-  substance
-  substanceName
-  amount
-  unit
-  notes
-  date
+  id = DoseStorage.nextId++
+  
+  roa
 
   static configure(dose) {
     
@@ -31,64 +28,28 @@ export class Dose {
     return dose
   }
 
-  static create(data) {
-
-    let dose = Object.assign(new Dose(), data)
-
-    dose = Dose.configure(dose)
-
-    DoseStorage.doses.push(dose)
-    DoseStorage.save()
-    return dose
-  }
-
-  static edit(id, data) {
-    let idx = DoseStorage.doses.findIndex(d => d.id === id)
-    if (idx >= 0) {
-      let dose = Object.assign(new Dose(), data, {id})
-      dose = Dose.configure(dose)
-      DoseStorage.doses[idx] = dose
-      DoseStorage.save()
-      return dose
-    }
-  }
-
-  delete() {
-    let index = DoseStorage.doses.findIndex(d => d === this)
-    if (index >= 0) {
-      DoseStorage.doses.splice(index, 1)
-      DoseStorage.save()
-    }
-  }
 }
 
+export class DoseStorage extends DataStore {
 
-export class DoseStorage {
-  static loaded = false
-  static doses = []
-  static nextDoseId = 0
-
-  static async save() {
-    let data = {
-      doses: DoseStorage.doses, nextDoseId: DoseStorage.nextDoseId
-    }
-    await Storage.set('doses', data)
-  }
+  static key = 'doses'
+  static type = Dose
 
   static async load() {
-    if (DoseStorage.loaded)
+    if (this.loaded)
       return
-    
-    let data = await Storage.get('doses', DoseStorage)
-    DoseStorage.doses = data.doses.map(d => Object.assign(new Dose(), d))
-    DoseStorage.nextDoseId = data.nextDoseId
-    DoseStorage.loaded = true
+
+    // Load data. Remap legacy key names
+    let data = await Storage.get(this.key, this)
+    this.items = (data.items ?? data.doses).map(d => Object.assign(new this.type(), d))
+    this.nextId = (data.nextId ?? data.nextDoseId)
+    this.loaded = true
 
     // Development build test doses
-    if (DoseStorage.doses.length === 0) {
+    if (this.items.length === 0) {
       Dose.create({ substance: 'phenibut', substanceName: 'Phenibut', amount: '300', unit: 'mg', roa: 'Oral', notes: 'First dose.', date: Date.now() })
     }
-
   }
 }
 
+Dose.store = DoseStorage

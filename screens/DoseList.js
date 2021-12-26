@@ -193,7 +193,7 @@ export default class DoseList extends Component {
   }
 
   getDoses() {
-    let doses = DoseStorage.doses.slice()
+    let doses = DoseStorage.items.slice()
 
     // Build a set of all calendar dates
     const dates = [...new Set(
