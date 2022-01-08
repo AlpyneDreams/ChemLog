@@ -10,11 +10,10 @@ import { LayoutAnims } from '../util/Util'
 export function Row(props) {
   return <View
     {...props}
-    style={{
+    style={[{
       flexDirection: 'row',
-      alignItems: 'flex-start',
-      ...props.style
-    }}
+      alignItems: 'flex-start'
+    }, props.style]}
   />
 }
 

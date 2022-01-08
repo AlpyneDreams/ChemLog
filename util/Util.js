@@ -9,6 +9,17 @@ export function useForcedUpdate() {
   return setState
 }
 
+/** React Hook: Returns the previous value of prop, if it has changed. */
+export function usePrevious(prop) {
+  const [current, setCurrent] = useState(prop)
+  const [prev, setPrev] = useState(prop)
+  if (prop !== current) {
+    setPrev(current)
+    setCurrent(prop)
+  }
+  return prev
+}
+
 export const LayoutAnims = {
   ease: {
     ...LayoutAnimation.Presets.easeInEaseOut,

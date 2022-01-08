@@ -44,8 +44,10 @@ export default class DoseList extends Component {
     selecting: false,
     selectedItems: new Map(),
     selectableItems: new Set(),
-    confirmDelete: false
+    confirmDelete: false,
+    scrolledDown: false,
   }
+  scrollY = 0
 
   componentDidUpdate() {
     const {params} = this.props.route
@@ -173,6 +175,9 @@ export default class DoseList extends Component {
     this.setSelecting(this.state.selecting)
 
     navigation.setOptions({
+      headerTitleStyle: {
+        marginTop: 4, // ScrollView extra margin
+      },
       headerRight: () => !this.state.selecting
         ? <HomeContextMenu select={() => this.setSelecting(true)} selectAll={() => this.selectAll()} />
         : <>
@@ -209,7 +214,7 @@ export default class DoseList extends Component {
 
   render() {
     const {navigation, route} = this.props
-    const {selecting, snackbar, confirmDelete} = this.state
+    const {selecting, snackbar, confirmDelete, scrolledDown} = this.state
 
     const showSnackbar = (route.params?.deleted) && snackbar
 
@@ -219,7 +224,40 @@ export default class DoseList extends Component {
 
     return (
       <View style={{height: '100%'}}>
-        <ScrollView>
+        <MainFABGroup
+          visible={!selecting}
+          moveUp={scrolledDown}
+          addDose={() => navigation.navigate('AddDose')}
+          addNote={() => navigation.navigate('AddNote')}
+        />
+        {/* TODO: Use FlatList */}
+        <ScrollView
+          onScroll={(e) => {
+            const y = e.nativeEvent.contentOffset.y
+            const down = (y - this.scrollY) > 0
+            
+            if (down) {
+              if (y >= 10) {
+                !scrolledDown && this.setState({scrolledDown: true})
+              }
+            } else {
+              if (y <= 50) {
+                scrolledDown && this.setState({scrolledDown: false})
+              }
+            }
+
+            this.scrollY = y
+          }}
+          style={[{
+            // MainFABGroup is about 70 px at full size
+            paddingTop: 66,
+            marginTop: 4,
+          },
+          !scrolledDown && {
+            position: 'relative',
+            top: -66, marginBottom: -66,
+          }]}
+        >
           <List.Section style={{paddingBottom: 64}}>
             {this.state.loaded ? doses.map((dose, index) => 
                 dose.type === 'date' ?
@@ -232,11 +270,7 @@ export default class DoseList extends Component {
 
           </List.Section>
         </ScrollView>
-        <MainFABGroup
-          visible={!selecting}
-          addDose={() => navigation.navigate('AddDose')}
-          addNote={() => navigation.navigate('AddNote')}
-        />
+        
         <ConfirmDialog
           title={
             this.state.selectedItems.size === 1 ? 
