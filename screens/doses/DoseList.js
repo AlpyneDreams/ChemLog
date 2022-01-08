@@ -2,16 +2,16 @@ import React, { Component, useState } from 'react'
 import { useEffect } from 'react';
 import { View, StyleSheet, ToastAndroid, Vibration, ScrollView } from 'react-native'
 import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator } from 'react-native-paper';
-import { Dose, DoseStorage } from '../store/Dose'
+import { Dose, DoseStorage } from '../../store/Dose'
 import { useNavigation } from '@react-navigation/native'
-import Haptics from '../util/Haptics'
-import { DAY_MS, MORE_ICON } from '../util/Util';
-import ConfirmDialog from '../components/dialogs/ConfirmDialog';
-import DoseEntry from '../components/DoseEntry'
-import MainFABGroup from '../components/MainFABGroup'
+import Haptics from '../../util/Haptics'
+import { DAY_MS, MORE_ICON } from '../../util/Util';
+import ConfirmDialog from '../../components/dialogs/ConfirmDialog';
+import DoseEntry from '../../components/doses/DoseEntry'
+import MainFABGroup from '../../components/doses/MainFABGroup'
 import dayjs from 'dayjs'
 import { sortBy } from 'lodash';
-import { CALENDAR_DATE_ONLY, CALENDAR_DATE_ONLY_MEDIUM } from '../util/dayjs';
+import { CALENDAR_DATE_ONLY, CALENDAR_DATE_ONLY_MEDIUM } from '../../util/dayjs';
 
 function HomeContextMenu({select, selectAll}) {
   const navigation = useNavigation()

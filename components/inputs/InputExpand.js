@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { LayoutAnimation, View } from 'react-native'
 import { Button, IconButton, TextInput, useTheme } from 'react-native-paper'
-import { LayoutAnims } from '../util/Util'
+import { LayoutAnims } from '../../util/Util'
 
 export default function InputExpand({startOpen = false, onExpand, buttonStyle, ...props}) {
   const theme = useTheme()

@@ -2,14 +2,14 @@ import { useNavigation, useRoute, useScrollToTop, useTheme } from "@react-naviga
 import React from "react"
 import { StyleSheet, View, FlatList, VirtualizedList } from "react-native"
 import { List, IconButton, Text } from "react-native-paper"
-import { getMainCategory } from "../data/Categories"
-import Haptics from '../util/Haptics'
+import { getMainCategory } from "../../data/Categories"
+import Haptics from '../../util/Haptics'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { RectButton } from "react-native-gesture-handler"
-import UserData from "../store/UserData"
+import UserData from "../../store/UserData"
 import { LayoutAnimation } from "react-native"
-import { LayoutAnims } from "../util/Util"
-import SearchRanking from "../util/SearchRanking"
+import { LayoutAnims } from "../../util/Util"
+import SearchRanking from "../../util/SearchRanking"
 
 export function SubstanceListItem({item: s, priority: score = 0, swipeable, ...props}) {
 

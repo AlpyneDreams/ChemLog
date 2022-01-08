@@ -2,12 +2,12 @@ import { useTheme } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { View, ToastAndroid } from 'react-native'
 import { IconButton, Text, Snackbar, List, Chip, Card, Button } from 'react-native-paper'
-import ConfirmDialog from '../components/dialogs/ConfirmDialog'
-import { Row } from '../components/Util'
+import ConfirmDialog from '../../components/dialogs/ConfirmDialog'
+import { Row } from '../../components/Util'
 import dayjs from 'dayjs'
-import { CALENDAR_DATE_ONLY_COMPACT } from '../util/dayjs'
-import SubstanceChip from '../components/SubstanceChip'
-import { ICON_ADD_NOTE } from '../util/Util'
+import { CALENDAR_DATE_ONLY_COMPACT } from '../../util/dayjs'
+import SubstanceChip from '../../components/substance/SubstanceChip'
+import { ICON_ADD_NOTE } from '../../util/Util'
 
 function Stat({label, value, visible, children, style, ...props}) {
   return (((visible ?? value) ?? children) ? 

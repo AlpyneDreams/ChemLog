@@ -3,11 +3,11 @@ import { View, Text as RText, StyleSheet, ToastAndroid, Vibration } from 'react-
 import { useNavigation } from '@react-navigation/native'
 import { Text, List, Card, TouchableRipple, useTheme, Checkbox, IconButton, Divider } from 'react-native-paper'
 import dayjs from 'dayjs'
-import { Row } from './Util'
-import { LOCALE_COMPACT } from '../util/dayjs'
-import { getMainCategory } from '../data/Categories'
-import Substances from '../data/tripsit.drugs.json'
-import { DAY_MS } from '../util/Util'
+import { Row } from '../Util'
+import { LOCALE_COMPACT } from '../../util/dayjs'
+import { getMainCategory } from '../../data/Categories'
+import Substances from '../../data/tripsit.drugs.json'
+import { DAY_MS } from '../../util/Util'
 
 function NoteText({children}) {
   return (

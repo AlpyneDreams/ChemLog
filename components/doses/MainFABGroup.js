@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, StyleSheet, LayoutAnimation } from 'react-native'
 import { Card, FAB, Button, Text, Portal, Provider, useTheme, Colors, Surface, IconButton } from 'react-native-paper'
-import Haptics from '../util/Haptics'
-import CommonStyles from '../components/CommonStyles'
-import { Row } from './Util'
-import { LayoutAnims, usePrevious, ICON_ADD_NOTE } from '../util/Util'
+import Haptics from '../../util/Haptics'
+import CommonStyles from '../CommonStyles'
+import { Row } from '../Util'
+import { LayoutAnims, usePrevious, ICON_ADD_NOTE } from '../../util/Util'
 
 export default function MainFABGroup({visible, addDose, addNote}) {
   const theme = useTheme()

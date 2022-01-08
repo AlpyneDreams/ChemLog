@@ -2,16 +2,16 @@ import { useScrollToTop, useTheme, useRoute } from "@react-navigation/native"
 import React from "react"
 import { StyleSheet, View, FlatList, VirtualizedList, InteractionManager } from "react-native"
 import { Text, List, ActivityIndicator, IconButton, Searchbar, Chip } from "react-native-paper"
-import Substances from '../data/tripsit.drugs.json'
-import { categories as CATEGORIES } from "../data/Categories"
-import CategoryChip from "../components/CategoryChip"
-import { Row } from "../components/Util"
-import { useForcedUpdate } from "../util/Util"
-import UserData from '../store/UserData'
-import { SubstanceListItem, SwipeableSubstanceListItem } from '../components/SubstanceListItem'
+import Substances from '../../data/tripsit.drugs.json'
+import { categories as CATEGORIES } from "../../data/Categories"
+import CategoryChip from "../../components/substance/CategoryChip"
+import { Row } from "../../components/Util"
+import { useForcedUpdate } from "../../util/Util"
+import UserData from '../../store/UserData'
+import { SubstanceListItem, SwipeableSubstanceListItem } from '../../components/substance/SubstanceListItem'
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs"
-import SearchRanking from "../util/SearchRanking"
+import SearchRanking from "../../util/SearchRanking"
 
 // Add id property to substances
 const substances = Object.entries(Substances).map( ([id, s]) => ({id, ...s}) )

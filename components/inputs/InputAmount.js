@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { useTheme, Button, Menu, TextInput, TouchableRipple, Text, IconButton } from 'react-native-paper'
 import DropDown from 'react-native-paper-dropdown'
 import InputExpand from './InputExpand'
-import Units from '../store/Units'
+import Units from '../../store/Units'
 
 const units = Object.values(Units)
   .filter(u => !u.hidden)

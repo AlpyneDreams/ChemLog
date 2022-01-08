@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Card, Text, FAB, List, IconButton, TextInput, useTheme } from 'react-native-paper'
-import InputAmount from '../../components/InputAmount'
-import InputDate from '../../components/InputDate'
+import InputAmount from '../../components/inputs/InputAmount'
+import InputDate from '../../components/inputs/InputDate'
 import DropDown from 'react-native-paper-dropdown'
 
 export default function AddStash({navigation}) {

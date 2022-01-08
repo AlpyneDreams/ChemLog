@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 import { Chip, useTheme } from 'react-native-paper'
-import { categories as CATEGORIES } from '../data/Categories'
-import { Row } from './Util'
+import { categories as CATEGORIES } from '../../data/Categories'
+import { Row } from '../Util'
 
 export default function CategoryChip({category, selectable = false, onChange = (() => {})}) {
   const theme = useTheme()

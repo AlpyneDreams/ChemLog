@@ -3,16 +3,16 @@ import { StyleSheet } from 'react-native'
 import { View } from "react-native";
 import { Title, Button, FAB, List, TextInput, IconButton, withTheme } from 'react-native-paper';
 import DropDown from 'react-native-paper-dropdown'
-import InputAmount from '../components/InputAmount';
-import InputDate from '../components/InputDate';
-import InputExpand from '../components/InputExpand';
-import InputROA from '../components/InputROA';
-import { Row } from '../components/Util'
-import { Dose } from '../store/Dose';
-import Substances from '../data/tripsit.drugs.json'
-import UserData from '../store/UserData';
-import { categories, getMainCategory } from '../data/Categories';
-import GenericInput from '../components/GenericInput';
+import InputAmount from '../../components/inputs/InputAmount';
+import InputDate from '../../components/inputs/InputDate';
+import InputExpand from '../../components/inputs/InputExpand';
+import InputROA from '../../components/inputs/InputROA';
+import { Row } from '../../components/Util'
+import { Dose } from '../../store/Dose';
+import Substances from '../../data/tripsit.drugs.json'
+import UserData from '../../store/UserData';
+import { categories, getMainCategory } from '../../data/Categories';
+import GenericInput from '../../components/inputs/GenericInput';
 
 export class AddDose extends Component {
   static contextType = UserData.Context

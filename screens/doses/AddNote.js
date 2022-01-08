@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View } from "react-native"
 import { Button, FAB, TextInput, withTheme } from 'react-native-paper'
-import InputDate from '../components/InputDate'
-import { Dose } from '../store/Dose'
+import InputDate from '../../components/inputs/InputDate'
+import { Dose } from '../../store/Dose'
 
 class AddNote extends Component {
   state = {

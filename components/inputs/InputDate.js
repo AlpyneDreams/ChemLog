@@ -1,8 +1,8 @@
 import React from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import dayjs from 'dayjs';
-import { Row } from './Util'
-import GenericInput from '../components/GenericInput'
+import { Row } from '../Util'
+import GenericInput from './GenericInput'
 import { useTheme } from 'react-native-paper'
 import InputExpand from './InputExpand';
 
