@@ -1,13 +1,14 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { Linking, StyleSheet } from 'react-native'
 import { Chip } from 'react-native-paper'
 
-export default function EffectChip({name}) {
+export default function EffectChip({name, url}) {
   return (
     <Chip
       key={name}
       style={styles.effect}
       mode='outlined'
+      onPress={url ? () => {Linking.openURL(url)} : null}
     >
       {name}
     </Chip>
