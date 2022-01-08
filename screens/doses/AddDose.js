@@ -9,7 +9,7 @@ import InputExpand from '../../components/inputs/InputExpand';
 import InputROA from '../../components/inputs/InputROA';
 import { Row } from '../../components/Util'
 import { Dose } from '../../store/Dose';
-import Substances from '../../data/tripsit.drugs.json'
+import Substances from '../../data/Substances'
 import UserData from '../../store/UserData';
 import { categories, getMainCategory } from '../../data/Categories';
 import GenericInput from '../../components/inputs/GenericInput';
@@ -107,7 +107,8 @@ export class AddDose extends Component {
 
     let {substance} = this.state
 
-    const category = substance ? getMainCategory(Substances[substance?.id]) : {}
+    substance = substance ? Substances[substance.id] : substance
+
 
     const focusNotes = (focus === 'notes')
     const noteOpen = (edit && oldDose.notes) || focusNotes
@@ -117,8 +118,8 @@ export class AddDose extends Component {
         <GenericInput
           label='Substance'
           mode='outlined'
-          value={substance?.name}
-          left={substance ? <TextInput.Icon name='pill' color={category.color}/> : null}
+          value={substance?.pretty_name}
+          left={substance ? <TextInput.Icon name={substance.icon} color={substance.color}/> : null}
           right={<TextInput.Icon name='menu-down'/>}
           onPress={() => {
             this.navigation.navigate('SubstancePicker', {current: substance?.id, returnTo: !edit ? 'AddDose' : 'EditDose'})

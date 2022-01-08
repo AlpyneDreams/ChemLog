@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 import { Chip, useTheme } from 'react-native-paper'
 import { categories as CATEGORIES } from '../../data/Categories'
+import { Icon } from '../Icon'
 import { Row } from '../Util'
 
 export default function CategoryChip({category, selectable = false, onChange = (() => {})}) {
@@ -21,6 +22,7 @@ export default function CategoryChip({category, selectable = false, onChange = (
         setActive(!active)
         onChange(category, !active)
       } : null}
+      icon={c.icon ? ({size}) => (<Icon icon={c.icon} color={theme.colors.text} size={size} />) : null}
     >
       {c.pretty_name || category}
     </Chip>

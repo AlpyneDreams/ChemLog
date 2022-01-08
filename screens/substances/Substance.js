@@ -3,7 +3,7 @@ import React from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, Title, useTheme } from 'react-native-paper'
 import { Row } from '../../components/Util'
-import substances from '../../data/tripsit.drugs.json'
+import substances from '../../data/Substances'
 import { categories as CATEGORIES } from '../../data/Categories'
 import CategoryChip from '../../components/substance/CategoryChip'
 import SubstanceDose from '../../components/substance/SubstanceDose'
@@ -12,6 +12,8 @@ import SubstanceDuration from '../../components/substance/SubstanceDuration'
 import SubstanceMisc from '../../components/substance/SubstanceMisc'
 import SubstanceInteractions from '../../components/substance/SubstanceInteractions'
 import * as Linking from 'expo-linking'
+import { HeaderTitle } from '@react-navigation/elements'
+import { Icon } from '../../components/Icon'
 
 export default function SubstanceScreen({navigation, route}) {
 
@@ -29,6 +31,10 @@ export default function SubstanceScreen({navigation, route}) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: substance?.pretty_name || 'Substance',
+      headerTitle: (props) => <Row>
+        <Icon icon={substance.icon} size={20} color={substance.color} style={{marginTop: 4, marginRight: 4}} />
+        <HeaderTitle {...props} />
+      </Row>,
       headerRight: () => 
         <Button
           uppercase={false}

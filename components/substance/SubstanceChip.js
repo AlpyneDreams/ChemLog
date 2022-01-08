@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Chip, ThemeProvider, useTheme } from 'react-native-paper'
-import Substances from '../../data/tripsit.drugs.json'
+import Substances from '../../data/Substances'
 import { getMainCategory } from '../../data/Categories'
 
 export default function SubstanceChip({substance: id}) {
@@ -10,13 +10,12 @@ export default function SubstanceChip({substance: id}) {
   const navigation = useNavigation()
   
   const substance = Substances[id]
-  const category = getMainCategory(substance) ?? {}
-  const color = category.color
+  const color = substance.color
 
   return (
     <Chip
       mode='outlined'
-      icon='pill'
+      icon={substance.icon}
       onPress={() => navigation.navigate('Substance', {substance: id})}
       style={color ? {
         backgroundColor: color.slice(0, 7) + '40',

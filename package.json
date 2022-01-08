@@ -18,6 +18,7 @@
     "dayjs": "^1.10.6",
     "expo": "~42.0.1",
     "expo-constants": "~11.0.1",
+    "expo-linking": "~2.3.1",
     "expo-status-bar": "~1.0.4",
     "lodash": "^4.17.21",
     "react": "16.13.1",
@@ -28,8 +29,8 @@
     "react-native-paper-dropdown": "^1.0.7",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "~3.4.0",
-    "react-native-web": "~0.13.12",
-    "expo-linking": "~2.3.1"
+    "react-native-vector-icons": "^9.0.0",
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

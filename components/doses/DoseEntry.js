@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
 import { Row } from '../Util'
 import { LOCALE_COMPACT } from '../../util/dayjs'
 import { getMainCategory } from '../../data/Categories'
-import Substances from '../../data/tripsit.drugs.json'
+import Substances from '../../data/Substances'
 import { DAY_MS } from '../../util/Util'
 
 function NoteText({children}) {
@@ -49,7 +49,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
   }
   const onLongPress = () => list.onLongPress(selected, hooks)
 
-  const category = getMainCategory(Substances[dose.substance]) ?? {}
+  const substance = Substances[dose.substance]
 
   return (
     <Card
@@ -92,7 +92,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
           title={dose.substanceName}
           description={dose.amount ? `${dose.amount} ${dose.unit??''}` : null}
 
-          // Left: pill icon or checkbox
+          // Left: substance icon or checkbox
           left={() => selecting
             ? <View style={styles.left}>
                 <Checkbox
@@ -100,7 +100,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
                   color={theme.colors.primary}
                 />
               </View>
-            : <IconButton style={styles.left} color={category.color} icon='pill' />
+            : <IconButton style={styles.left} color={substance.color} icon={substance.icon} />
           }
 
           // Right: relative time

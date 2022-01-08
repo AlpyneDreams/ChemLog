@@ -25,8 +25,6 @@ export function SubstanceListItem({item: s, priority: score = 0, swipeable, ...p
     ? () => navigation.navigate({name: returnTo, params: {substance: {name: s.pretty_name, id: key}}, merge: true})
     : () => navigation.navigate('Substance', {substance: s})
     
-  const category = getMainCategory(s) ?? {}
-
   let icon = null
   if (pickerMode && key === params.current) {
     icon = 'check'
@@ -40,7 +38,7 @@ export function SubstanceListItem({item: s, priority: score = 0, swipeable, ...p
       key={key}
       title={s.pretty_name}
       description={aliases ? aliases.join(', ') : null}
-      left={() => <List.Icon icon='pill' color={category.color} />}
+      left={() => <List.Icon icon={s.icon} color={s.color ?? theme.colors.text} />}
       onPress={onPress}
       onLongPress={pickerMode ? () => {
         Haptics.longPress()
