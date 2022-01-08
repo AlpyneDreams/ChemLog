@@ -4,6 +4,8 @@ import { Platform, LayoutAnimation } from 'react-native'
 export const DAY_MS = 24*60*60*1000
 export const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'
 
+export const ICON_ADD_NOTE = require('../assets/icons/note-plus-outline.png')
+
 export function useForcedUpdate() {
   const [, setState] = useState()
   return setState

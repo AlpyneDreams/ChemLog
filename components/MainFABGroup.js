@@ -4,9 +4,7 @@ import { Card, FAB, Button, Text, Portal, Provider, useTheme, Colors, Surface, I
 import Haptics from '../util/Haptics'
 import CommonStyles from '../components/CommonStyles'
 import { Row } from './Util'
-import { LayoutAnims, usePrevious } from '../util/Util'
-
-const ICON_NOTE_PLUS = require('../assets/icons/note-plus-outline.png')
+import { LayoutAnims, usePrevious, ICON_ADD_NOTE } from '../util/Util'
 
 export default function MainFABGroup({visible, addDose, addNote}) {
   const theme = useTheme()
@@ -23,7 +21,7 @@ export default function MainFABGroup({visible, addDose, addNote}) {
     <View style={CommonStyles.fab}>
       <FAB
         visible={visible}
-        icon={ICON_NOTE_PLUS}
+        icon={ICON_ADD_NOTE}
         label='Note'
         uppercase={false}
         style={{marginBottom: 16, backgroundColor: theme.dark ? '#8D7EBF' : '#d8ccff'}}

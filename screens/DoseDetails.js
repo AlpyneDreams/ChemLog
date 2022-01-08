@@ -1,12 +1,13 @@
 import { useTheme } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { View, ToastAndroid } from 'react-native'
-import { IconButton, Text, Snackbar, List, Chip, Card } from 'react-native-paper'
+import { IconButton, Text, Snackbar, List, Chip, Card, Button } from 'react-native-paper'
 import ConfirmDialog from '../components/dialogs/ConfirmDialog'
 import { Row } from '../components/Util'
 import dayjs from 'dayjs'
 import { CALENDAR_DATE_ONLY_COMPACT } from '../util/dayjs'
 import SubstanceChip from '../components/SubstanceChip'
+import { ICON_ADD_NOTE } from '../util/Util'
 
 function Stat({label, value, visible, children, style, ...props}) {
   return (((visible ?? value) ?? children) ? 
@@ -30,17 +31,17 @@ export default function DoseDetails({navigation, route}) {
     navigation.navigate({name: 'DoseList', params: { id: dose.id, deleted: 1 }})
   }
 
+  function edit(params = {}) {
+    navigation.navigate(note ? 'EditNote' : 'EditDose', note ? {note: dose, ...params} : {dose, ...params})
+  }
+
   React.useLayoutEffect(() => {
 
     navigation.setOptions({
       title: note ? 'Note' : dose.name,
       headerRight: () => <Row>
-        <IconButton icon='pencil' onPress={() => {
-          navigation.navigate(note ? 'EditNote' : 'EditDose', note ? {note: dose} : {dose})
-        }} />
-        <IconButton icon='delete' onPress={() => {
-          setDialog(true)
-        }} />
+        <IconButton icon='pencil' onPress={() => edit()} />
+        <IconButton icon='delete' onPress={() => setDialog(true)} />
       </Row>
     })
 
@@ -67,13 +68,16 @@ export default function DoseDetails({navigation, route}) {
         <Stat label='Time' value={date.format('HH:mm')} visible={date.isValid()} />
       </Row>
       <Row>
-        {dose.notes ?
-          <Stat label={note ? 'Note' : 'Notes'}>
-            <Text style={{paddingLeft: 8, marginVertical: 6, fontSize: 15, lineHeight: 20}}>
-              {dose.notes}
-            </Text>
-          </Stat>
-        : null}
+        <Stat label={note ? 'Note' : 'Notes'}>
+          <Text style={{paddingLeft: 8, marginVertical: 6, fontSize: 15, lineHeight: 20}}>
+            {
+              dose.notes 
+              || <Button uppercase={false} icon={ICON_ADD_NOTE} onPress={() => edit({focus: 'notes'})}>
+                Add Notes
+              </Button>
+            }
+          </Text>
+        </Stat>
       </Row>
       {/*<Card style={{padding: 16, elevation: 4}}>
         <Text>Substance Info</Text>

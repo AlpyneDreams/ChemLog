@@ -27,6 +27,8 @@ export class AddDose extends Component {
 
     _lastParams: null
   }
+  
+  textInput = React.createRef()
 
   componentDidMount() {
 
@@ -101,13 +103,14 @@ export class AddDose extends Component {
   render() {
     this.navigation = this.props.navigation
     const theme = this.props.theme
-    const {edit, dose: oldDose} = this.props.route.params ?? {}
+    const {edit, dose: oldDose, focus} = this.props.route.params ?? {}
 
     let {substance} = this.state
 
     const category = substance ? getMainCategory(Substances[substance?.id]) : {}
 
-    const noteOpen = (edit && oldDose.notes)
+    const focusNotes = (focus === 'notes')
+    const noteOpen = (edit && oldDose.notes) || focusNotes
 
     return (
       <View style={{padding: 12, height: '100%'}}>
@@ -132,7 +135,9 @@ export class AddDose extends Component {
         <InputExpand title='Add notes' icon='note' style={{marginTop: 12}} startOpen={noteOpen}>
           <TextInput
             placeholder='Add notes'
-            autoFocus={!noteOpen}
+            autoFocus={focusNotes}
+            ref={this.textInput}
+            onLayout={(e) => {focusNotes && this.textInput.current.focus()}}
             mode='outlined'
             multiline={true}
             style={{flex: 1}}
