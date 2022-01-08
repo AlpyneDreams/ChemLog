@@ -1,13 +1,23 @@
 import React, { Component, useState } from 'react'
 import { View, Text as RText, StyleSheet, ToastAndroid, Vibration } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { Text, List, Card, TouchableRipple, useTheme, Checkbox, IconButton } from 'react-native-paper'
+import { Text, List, Card, TouchableRipple, useTheme, Checkbox, IconButton, Divider } from 'react-native-paper'
 import dayjs from 'dayjs'
 import { Row } from './Util'
 import { LOCALE_COMPACT } from '../util/dayjs'
 import { getMainCategory } from '../data/Categories'
 import Substances from '../data/tripsit.drugs.json'
 import { DAY_MS } from '../util/Util'
+
+function NoteText({children}) {
+  return (
+    <View style={{flex: 1}}>
+      <Text style={{fontSize: 15, lineHeight: 20}}>
+        {children}
+      </Text>
+    </View>
+  )
+}
 
 export default function DoseEntry({dose, index, selecting, list}) {
   const theme = useTheme() 
@@ -62,11 +72,9 @@ export default function DoseEntry({dose, index, selecting, list}) {
       >
       {note ? (
         <Row style={{padding: 16, justifyContent: 'space-between'}}>
-          <View style={{flex: 1}}>
-            <Text style={{fontSize: 15, lineHeight: 20}}>
-              {dose.notes}
-            </Text>
-          </View>
+          <NoteText>
+            {dose.notes}
+          </NoteText>
           {date.isValid() ?
             <Row style={{flexGrow: 0, alignItems: 'flex-start'}}>
               <Text style={{color: theme.colors.disabled, marginLeft: 2}}>
@@ -78,7 +86,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
             </Row>
           : null}
         </Row>
-      ) : (
+      ) : ( // Dose
         <View pointerEvents='none'>
         <List.Item
           title={dose.substanceName}
@@ -108,6 +116,14 @@ export default function DoseEntry({dose, index, selecting, list}) {
             </View>
           : null}
         />
+        {dose.notes ? <>
+          <Divider/>
+          <View style={{padding: 16}}>
+            <NoteText>
+              {dose.notes}
+            </NoteText>
+          </View>
+        </> : null}
         </View>
       )}
       </TouchableRipple>
