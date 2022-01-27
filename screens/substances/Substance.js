@@ -1,7 +1,7 @@
 import { setStatusBarStyle } from 'expo-status-bar'
 import React from 'react'
-import { ScrollView, View, Linking } from 'react-native'
-import { Button, Text, Title, useTheme } from 'react-native-paper'
+import { ScrollView, View, Linking, LayoutAnimation } from 'react-native'
+import { Button, Card, Subheading, Text, Title, useTheme } from 'react-native-paper'
 import { Row } from '../../components/Util'
 import substances from '../../store/Substances'
 import { categories as CATEGORIES } from '../../store/Categories'
@@ -13,6 +13,7 @@ import SubstanceMisc from '../../components/substance/SubstanceMisc'
 import SubstanceInteractions from '../../components/substance/SubstanceInteractions'
 import { HeaderTitle } from '@react-navigation/elements'
 import { Icon } from '../../components/Icon'
+import { LayoutAnims } from '../../util/Util'
 
 export default function SubstanceScreen({navigation, route}) {
 
@@ -70,6 +71,9 @@ export default function SubstanceScreen({navigation, route}) {
   let aliases = substance.properties?.aliases ?? substance.aliases
   let categories = substance.properties?.categories ?? substance.categories
 
+  const hrt    = substance.custom && categories.includes('hormonal')
+  const [showHRT, setShowHRT] = React.useState(false)
+
   categories = categories.map(c => CATEGORIES[c] ?? {}).sort((a, b) => a.priority - b.priority)
 
   return (
@@ -103,15 +107,27 @@ export default function SubstanceScreen({navigation, route}) {
             TripSit
           </Button>
         }
-        <Button
-          uppercase={false}
-          icon='magnify'
-          onPress={() => Linking.openURL(`https://psychonautwiki.org/w/index.php?search=${id}`)}
-        >
-          PsychonautWiki
-        </Button>
+        {!hrt &&
+          <Button
+            uppercase={false}
+            icon='magnify'
+            onPress={() => Linking.openURL(`https://psychonautwiki.org/w/index.php?search=${id}`)}
+          >
+            PsychonautWiki
+          </Button>
+        }
+        {hrt &&
+          <Button
+            uppercase={false}
+            icon='gender-transgender'
+            onPress={() => {setShowHRT(!showHRT); LayoutAnimation.configureNext(LayoutAnims.ease)}}
+          >
+            HRT Resources
+          </Button>
+        }
       </Row>
       
+      {showHRT && <HRTResources/>}
 
       <SubstanceEffects substance={substance} />
       <SubstanceDose substance={substance} />
@@ -122,5 +138,35 @@ export default function SubstanceScreen({navigation, route}) {
       <SubstanceInteractions substance={substance} />
       <View style={{height: 20}} />
     </ScrollView>
+  )
+}
+
+function HRTResources() {
+  const Link = ({url, ...props}) => (
+    <Button {...props} uppercase={false} contentStyle={{justifyContent: 'flex-start'}} onPress={() => Linking.openURL(url)}/>
+  )
+  return (
+    <Card style={{marginTop: 8}}>
+      <Card.Title title="HRT Resources"/>
+      <Card.Content style={{alignItems: 'stretch', flexGrow: 1}}>
+        <Subheading>Transfem</Subheading>
+        <Link icon="file-document" url="https://d31kydh6n6r5j5.cloudfront.net/uploads/sites/161/2019/08/hormones_MTF.pdf">
+          HRT Guide
+        </Link>
+        <Link icon="flask" url="https://transfemscience.org/">Transfeminine Science</Link>
+        <Link icon="coffee" url="https://hrt.cafe">HRT.Cafe (DIY)</Link>
+
+        <Subheading>Transmasc</Subheading>
+        <Link icon="file-document" url="https://d31kydh6n6r5j5.cloudfront.net/uploads/sites/161/2019/08/hormones_FTM.pdf">
+          HRT Guide
+        </Link>
+        <Link
+          icon={(props) => <Icon {...props} icon={require('../../assets/icons/reddit.png')}/>}
+          url="https://reddit.com/r/TransDIY/comments/95bvv1/ftm_hrt_diy_information/"
+        >
+          DIY Guide
+        </Link>
+      </Card.Content>
+    </Card>
   )
 }
