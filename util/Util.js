@@ -9,7 +9,7 @@ export const ICON_ADD_NOTE = require('../assets/icons/note-plus-outline.png')
 
 // Like lodash.merge, but merges unique values from arrays
 export function deepMerge(obj, ...args) {
-  return mergeWith(obj, ...args, (a, b) => {
+  return mergeWith({}, obj, ...args, (a, b) => {
     if (Array.isArray(a) && Array.isArray(b)) {
       return Array.from(new Set(a.concat(b)))
     }

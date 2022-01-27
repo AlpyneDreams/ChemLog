@@ -10,6 +10,9 @@ for (let [key, s] of Object.entries(Substances)) {
   if (!s.name) {
     s.name = key
   }
+  if (key in custom && !(key in base)) {
+    s.custom = true;
+  }
   if (s.icon === undefined) {
     s.icon = (getMainCategory(s) ?? {}).icon ?? DEFAULT_ICON
   }

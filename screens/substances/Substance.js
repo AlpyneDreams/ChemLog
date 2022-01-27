@@ -94,13 +94,15 @@ export default function SubstanceScreen({navigation, route}) {
       <SubstanceMisc substance={substance} details={false} />
 
       <Row style={{justifyContent: 'space-evenly', flexGrow: 1}}>
-        <Button
-          uppercase={false}
-          icon='link'
-          onPress={() => Linking.openURL(`https://drugs.tripsit.me/${id}`)}
-        >
-          TripSit
-        </Button>
+        {!substance.custom && 
+          <Button
+            uppercase={false}
+            icon='link'
+            onPress={() => Linking.openURL(`https://drugs.tripsit.me/${id}`)}
+          >
+            TripSit
+          </Button>
+        }
         <Button
           uppercase={false}
           icon='magnify'
