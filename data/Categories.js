@@ -34,6 +34,44 @@ export const _categories = {
   deliriant: {
     color: '#984c0c',
   },
+  hormonal: {
+    name: "hormonal",
+    icon: 'gender-transgender',
+  },
+  estrogen: {
+    name: "estrogen",
+    icon: 'gender-transgender',
+    color: '#F7A8B8',     // From trans flag
+    chipColor: '#e0607a', // Darker variant
+    unlisted: true
+  },
+  progestogen: {
+    name: "progestogen",
+    icon: 'gender-transgender',
+    color: '#F7A8B8',
+    chipColor: '#e0607a',
+    unlisted: true
+  },
+  serm: {
+    name: "serm",
+    pretty_name: "SERM",
+    icon: 'gender-transgender',
+    unlisted: true
+  },
+  antiandrogen: {
+    name: "antiandrogen",
+    icon: 'gender-transgender',
+    color: '#F7A8B8',
+    chipColor: '#e0607a',
+    unlisted: true
+  },
+  androgen: {
+    name: "androgen",
+    icon: 'gender-transgender',
+    color: "#55CDFC",       // From trans flag
+    chipColor: '#35acdb',   // Darker variant
+    unlisted: true
+  }
 }
 
 /** Order of importance of information of categories.
