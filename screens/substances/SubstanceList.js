@@ -2,8 +2,8 @@ import { useScrollToTop, useTheme, useRoute } from "@react-navigation/native"
 import React from "react"
 import { StyleSheet, View, FlatList, VirtualizedList, InteractionManager } from "react-native"
 import { Text, List, ActivityIndicator, IconButton, Searchbar, Chip } from "react-native-paper"
-import Substances from '../../data/Substances'
-import { categories as CATEGORIES } from "../../data/Categories"
+import Substances from '../../store/Substances'
+import { categories as CATEGORIES } from "../../store/Categories"
 import CategoryChip from "../../components/substance/CategoryChip"
 import { Row } from "../../components/Util"
 import { useForcedUpdate } from "../../util/Util"

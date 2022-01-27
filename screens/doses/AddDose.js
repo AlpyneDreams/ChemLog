@@ -9,9 +9,8 @@ import InputExpand from '../../components/inputs/InputExpand';
 import InputROA from '../../components/inputs/InputROA';
 import { Row } from '../../components/Util'
 import { Dose } from '../../store/Dose';
-import Substances from '../../data/Substances'
+import Substances from '../../store/Substances'
 import UserData from '../../store/UserData';
-import { categories, getMainCategory } from '../../data/Categories';
 import GenericInput from '../../components/inputs/GenericInput';
 
 export class AddDose extends Component {

@@ -1,8 +1,7 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Chip, ThemeProvider, useTheme } from 'react-native-paper'
-import Substances from '../../data/Substances'
-import { getMainCategory } from '../../data/Categories'
+import Substances from '../../store/Substances'
 
 export default function SubstanceChip({substance: id}) {
 

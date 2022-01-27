@@ -3,7 +3,7 @@ import { Caption, DataTable, Title, Text, useTheme, Card, Subheading } from 'rea
 import { styles } from './common'
 import { CardCollapse } from '../Util'
 import SubstanceChip from './SubstanceChip'
-import Substances from '../../data/Substances'
+import Substances from '../../store/Substances'
 import Groups from '../../data/tripsit.groups.json'
 import Interactions from '../../data/Interactions'
 import _ from 'lodash'

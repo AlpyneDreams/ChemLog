@@ -1,16 +1,12 @@
+import { categories } from '../store/Categories'
 
-import { deepMerge } from '../util/Util'
-import { getMainCategory, categories } from './Categories'
-import base from './tripsit.drugs.json'
-
-const DEFAULT_ICON = 'pill'
+export const DEFAULT_ICON = 'pill' 
 
 const icons = {
   lsd: require('../assets/icons/lsd.png')
 }
 
-export let Substances = deepMerge(base, {
-
+export const _substances = {
   cannabis: {
     icon: 'cannabis',
     categories: ['cannabinoid']
@@ -47,22 +43,4 @@ export let Substances = deepMerge(base, {
   nicotine: {
     icon: require('../assets/icons/cigarette.png')
   }
-
-})
-
-for (let [key, s] of Object.entries(Substances)) {
-  if (!s.name) {
-    s.name = key
-  }
-  if (s.icon === undefined) {
-    s.icon = (getMainCategory(s) ?? {}).icon ?? DEFAULT_ICON
-  }
-  if (s.color === undefined) {
-    s.color = (getMainCategory(s) ?? {}).color
-  }
-  if (s.properties?.categories && s.categories && s.categories.length !== s.properties.categories.length) {
-    s.properties.categories = deepMerge(s.categories, s.properties.categories)
-  }
 }
-
-export default Substances

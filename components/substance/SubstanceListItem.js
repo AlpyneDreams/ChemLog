@@ -2,7 +2,6 @@ import { useNavigation, useRoute, useScrollToTop, useTheme } from "@react-naviga
 import React from "react"
 import { StyleSheet, View, FlatList, VirtualizedList } from "react-native"
 import { List, IconButton, Text } from "react-native-paper"
-import { getMainCategory } from "../../data/Categories"
 import Haptics from '../../util/Haptics'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { RectButton } from "react-native-gesture-handler"

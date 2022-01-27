@@ -5,8 +5,7 @@ import { Text, List, Card, TouchableRipple, useTheme, Checkbox, IconButton, Divi
 import dayjs from 'dayjs'
 import { Row } from '../Util'
 import { LOCALE_COMPACT } from '../../util/dayjs'
-import { getMainCategory } from '../../data/Categories'
-import Substances from '../../data/Substances'
+import Substances from '../../store/Substances'
 import { DAY_MS } from '../../util/Util'
 
 function NoteText({children}) {

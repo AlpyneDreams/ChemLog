@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 import { Chip, useTheme } from 'react-native-paper'
-import { categories as CATEGORIES } from '../../data/Categories'
+import { categories as CATEGORIES } from '../../store/Categories'
 import { Icon } from '../Icon'
 import { Row } from '../Util'
 
