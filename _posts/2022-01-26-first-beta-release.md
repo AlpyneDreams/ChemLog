@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "First beta release! `v3.0.0`"
+title: "First beta release! v3.0.0"
 date: 2022-01-26
 categories: releases
 ---
