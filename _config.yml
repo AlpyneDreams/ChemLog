@@ -2,9 +2,12 @@ title: ChemLog
 author:
   name: Alpyne
 description: Track your drug, reaserach chemical, nootropic, and substance use.
+
 remote_theme: jekyll/minima
+header_pages:
+ - about.md
 show_excerpts: true
 minima:
-  skin: dark
+  skin: solarized-dark
   social_links:
     github: AlpyneDreams
