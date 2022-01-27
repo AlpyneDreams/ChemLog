@@ -2,7 +2,7 @@ title: ChemLog
 author:
   name: Alpyne
   email: alpyne.dreams@gmail.com
-theme: jekyll/minima
+remote_theme: jekyll/minima
 minima:
   social_links:
     github: AlpyneDreams
