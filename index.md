@@ -1,9 +1,7 @@
 ---
 layout: home
-title: null
+title: ChemLog
 ---
-
-# ChemLog
 
 Track your drug, reaserach chemical, nootropic, and substance use.
 
