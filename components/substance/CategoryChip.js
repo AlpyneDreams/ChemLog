@@ -9,15 +9,17 @@ export default function CategoryChip({category, selectable = false, onChange = (
   const theme = useTheme()
   const [active, setActive] = React.useState(!selectable)
   const c = category in CATEGORIES ? CATEGORIES[category] : {}
+
+  const color = c.chipColor ?? c.color
   
-  const style = active && c.color ? {backgroundColor: c.color} : {}
-  // Outlined: {borderColor: c.color, color: c.color, borderWidth: 1.5}
+  const style = active && color ? {backgroundColor: color} : {}
+  // Outlined: {borderColor: color, color: color, borderWidth: 1.5}
 
   return (
     <Chip
       mode={active ? 'flat' : 'outlined'}
       style={[styles.category, style]}
-      textStyle={[styles.categoryText, active && c.color ? {color: 'white'} : null]}
+      textStyle={[styles.categoryText, active && color ? {color: theme.colors.text} : null]}
       onPress={selectable ? () => {
         setActive(!active)
         onChange(category, !active)

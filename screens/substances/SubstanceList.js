@@ -21,7 +21,7 @@ const mainCategories = Object.values(CATEGORIES)
   .sort((c1, c2) => c1.order - c2.order)
 
 const extraCategories = Object.values(CATEGORIES)
-  .filter(c => c.order === Number.MAX_SAFE_INTEGER)
+  .filter(c => c.order === Number.MAX_SAFE_INTEGER && !c.unlisted)
 
 
 function ListHeader({showCats, setShowCats, forceUpdate, search, loading}) {

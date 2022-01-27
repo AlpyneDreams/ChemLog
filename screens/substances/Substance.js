@@ -88,7 +88,7 @@ export default function SubstanceScreen({navigation, route}) {
       : null}
 
       <View style={{paddingVertical: 15}}>
-        <Text>{substance.properties.summary}</Text>
+        <Text>{substance.properties?.summary ?? ''}</Text>
       </View>
 
       <SubstanceMisc substance={substance} details={false} />

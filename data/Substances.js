@@ -50,11 +50,14 @@ export let Substances = deepMerge(base, {
 
 })
 
-for (let s of Object.values(Substances)) {
-  if (!s.icon) {
+for (let [key, s] of Object.entries(Substances)) {
+  if (!s.name) {
+    s.name = key
+  }
+  if (s.icon === undefined) {
     s.icon = (getMainCategory(s) ?? {}).icon ?? DEFAULT_ICON
   }
-  if (!s.color) {
+  if (s.color === undefined) {
     s.color = (getMainCategory(s) ?? {}).color
   }
   if (s.properties?.categories && s.categories && s.categories.length !== s.properties.categories.length) {
