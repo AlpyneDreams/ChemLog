@@ -1,6 +1,7 @@
 title: ChemLog
 author:
   name: Alpyne
+  email: alpyne.dreams@gmail.com
 description: Track your drug, reaserach chemical, nootropic, and substance use.
 
 remote_theme: jekyll/minima
