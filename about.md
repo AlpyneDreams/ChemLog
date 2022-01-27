@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-{% include_relative index.html %}
+{% include blurb.md %}
