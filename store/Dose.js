@@ -44,11 +44,6 @@ export class DoseStorage extends DataStore {
     this.items = (data.items ?? data.doses).map(d => Object.assign(new this.type(), d))
     this.nextId = (data.nextId ?? data.nextDoseId)
     this.loaded = true
-
-    // Development build test doses
-    if (this.items.length === 0) {
-      Dose.create({ substance: 'phenibut', substanceName: 'Phenibut', amount: '300', unit: 'mg', roa: 'Oral', notes: 'First dose.', date: Date.now() })
-    }
   }
 }
 
