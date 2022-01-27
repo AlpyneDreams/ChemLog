@@ -7,6 +7,9 @@ const icons = {
 }
 
 export const _substances = {
+
+/// SUBSTANCE OVERRIDES ///
+
   cannabis: {
     icon: 'cannabis',
     categories: ['cannabinoid']
@@ -42,5 +45,14 @@ export const _substances = {
   },
   nicotine: {
     icon: require('../assets/icons/cigarette.png')
+  },
+
+/// CUSTOM SUBSTANCES ///
+
+  'l-tyrosine': {
+    pretty_name: "L-Tyrosine",
+    categories: ['supplement']
+  },
+
   }
 }
