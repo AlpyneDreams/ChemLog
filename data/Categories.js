@@ -121,3 +121,12 @@ export const categoryOrder = [
   'deliriant',
 ]
 
+/**
+ * Similar to categoryOrder, but 2-dimensional,
+ * used in the substance search menu.
+ */
+export const categoryRows = [
+  ['common', 'psychedelic', 'empathogen', 'deliriant'],
+  ['cannabinoid', 'stimulant', 'depressant', 'hormonal'],
+  ['dissociative', 'opioid', 'benzodiazepine', 'nootropic'],
+]

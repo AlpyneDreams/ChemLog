@@ -1,9 +1,9 @@
 import { useScrollToTop, useTheme, useRoute } from "@react-navigation/native"
 import React from "react"
-import { StyleSheet, View, FlatList, VirtualizedList, InteractionManager } from "react-native"
+import { StyleSheet, View, FlatList, VirtualizedList, InteractionManager, ScrollView } from "react-native"
 import { Text, List, ActivityIndicator, IconButton, Searchbar, Chip } from "react-native-paper"
 import Substances from '../../store/Substances'
-import { categories as CATEGORIES } from "../../store/Categories"
+import { categories, categories as CATEGORIES } from "../../store/Categories"
 import CategoryChip from "../../components/substance/CategoryChip"
 import { Row } from "../../components/Util"
 import { useForcedUpdate } from "../../util/Util"
@@ -12,21 +12,40 @@ import { SubstanceListItem, SwipeableSubstanceListItem } from '../../components/
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs"
 import SearchRanking from "../../util/SearchRanking"
+import { categoryRows } from "../../data/Categories"
+import _ from "lodash"
 
 // Add id property to substances
 const substances = Object.entries(Substances).map( ([id, s]) => ({id, ...s}) )
 
-const mainCategories = Object.values(CATEGORIES)
-  .filter(c => c.order !== Number.MAX_SAFE_INTEGER)
-  .sort((c1, c2) => c1.order - c2.order)
+// Pre-sort category rows
+let catRows
+{
+  catRows = _.cloneDeep(categoryRows)
 
-const extraCategories = Object.values(CATEGORIES)
-  .filter(c => c.order === Number.MAX_SAFE_INTEGER && !c.unlisted)
-
+  const allCategories = Object.values(CATEGORIES)
+    .filter(c => !c.unlisted)
+    .map(c => c.name)
+  
+  // Build a set of categories not listed in catRows
+  let cats = new Set(allCategories)
+  for (let row of categoryRows) {
+    for (let c of row)
+      cats.delete(c)
+  }
+  cats = Array.from(cats)
+  
+  // Append remaining chips to rows, vertically
+  while (cats.length > 0) {
+    let col = cats.splice(0, catRows.length)
+    for (let row of catRows)
+      row.push(col.shift())
+  }
+  
+}
 
 function ListHeader({showCats, setShowCats, forceUpdate, search, loading}) {
 
-  const [catsExpanded, setCatsExpanded] = React.useState(false)
 
   const catChip = (name) => (
     <CategoryChip 
@@ -41,29 +60,21 @@ function ListHeader({showCats, setShowCats, forceUpdate, search, loading}) {
         setShowCats(new Set(showCats))
         forceUpdate()
       }}/>
-  )  
+  )
 
   return (
     <>
-      <Row style={{marginTop: 8, marginLeft: 16, flexWrap: 'wrap'}}>
-        {mainCategories.map(category => 
-          catChip(category.name)
-        )}
-        <Chip
-          onPress={() => setCatsExpanded(!catsExpanded)}
-          mode='outlined'
-          style={{margin: 4, backgroundColor: 'transparent'}}
-        >
-          {!catsExpanded ? 'More...' : 'Less...'}
-        </Chip>
-        {catsExpanded ? (
-          <Row style={{flexWrap: 'wrap', maxWidth: '100%'}}>
-            {extraCategories.map(category =>
-              catChip(category.name)
-            )}
-          </Row>
-        ) : null}
-      </Row>
+      <List.Subheader>Categories</List.Subheader>
+      <ScrollView horizontal={true} style={{marginTop: 8}} showsHorizontalScrollIndicator={false}>
+        <View style={{marginLeft: 16}}>
+          {catRows.map((r, i) => (
+            <Row key={i}>
+              {r.map(catChip)}
+            </Row>
+          ))}
+        </View>
+      </ScrollView>
+
       {!search ? <RecentSubstanceList categories={showCats} /> : null}
       <List.Subheader style={{marginTop: 8}}>{search ? 'Search Results' : 'All Substances'}</List.Subheader>
     </>

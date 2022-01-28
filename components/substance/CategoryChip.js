@@ -20,12 +20,12 @@ export default function CategoryChip({category, selectable = false, onChange = (
     <Chip
       mode={active ? 'flat' : 'outlined'}
       style={[styles.category, style]}
-      textStyle={[styles.categoryText, active && color ? {color: theme.colors.text} : null]}
+      textStyle={[styles.categoryText, active && color ? {color: 'white'} : null]}
       onPress={selectable ? () => {
         setActive(!active)
         onChange(category, !active)
       } : null}
-      icon={icon ? ({size}) => (<Icon icon={icon} color={theme.colors.text} size={size} />) : null}
+      icon={icon ? ({size, color: iconColor}) => (<Icon icon={icon} color={active && color ? 'white' : iconColor} size={size} />) : null}
     >
       {c.pretty_name || category}
     </Chip>
@@ -34,8 +34,8 @@ export default function CategoryChip({category, selectable = false, onChange = (
 
 const styles = StyleSheet.create({
   category: {
-    marginEnd: 4,
-    marginTop: 4
+    marginEnd: 6,
+    marginVertical: 4
   },
   categoryText: {
     textTransform: 'capitalize'

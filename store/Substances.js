@@ -21,6 +21,7 @@ for (let [key, s] of Object.entries(Substances)) {
   }
   if (s.properties?.categories && s.categories && s.categories.length !== s.properties.categories.length) {
     s.properties.categories = deepMerge(s.categories, s.properties.categories)
+    s.categories = s.properties.categories
   }
 }
 
