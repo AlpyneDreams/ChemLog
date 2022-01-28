@@ -11,6 +11,7 @@ export default function CategoryChip({category, selectable = false, onChange = (
   const c = category in CATEGORIES ? CATEGORIES[category] : {}
 
   const color = c.chipColor ?? c.color
+  const icon = c.chipIcon ?? c.icon
   
   const style = active && color ? {backgroundColor: color} : {}
   // Outlined: {borderColor: color, color: color, borderWidth: 1.5}
@@ -24,7 +25,7 @@ export default function CategoryChip({category, selectable = false, onChange = (
         setActive(!active)
         onChange(category, !active)
       } : null}
-      icon={c.icon ? ({size}) => (<Icon icon={c.icon} color={theme.colors.text} size={size} />) : null}
+      icon={icon ? ({size}) => (<Icon icon={icon} color={theme.colors.text} size={size} />) : null}
     >
       {c.pretty_name || category}
     </Chip>

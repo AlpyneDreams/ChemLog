@@ -5,17 +5,20 @@ export const _categories = {
     description: "",
     wiki: "",
     tips: [],
-    icon: 'cannabis',
+    icon: require('../assets/icons/cannabis.png'),
     color: '#32a852'
   },
   stimulant: {
     color: '#0aa2c0',
+    chipIcon: 'arrow-up-bold'
   },
   depressant: {
     color: '#dc3545',
+    chipIcon: 'arrow-down-bold'
   },
   dissociative: {
     color: '#6610f2',
+    icon: 'head-snowflake'
   },
   psychedelic: {
     color: '#d63384',
@@ -27,12 +30,18 @@ export const _categories = {
   },
   opioid: {
     color: '#052c65',
+    icon: require('../assets/icons/opioid.png')
   },
   benzodiazepine: {
     color: '#59359a',
+    icon: require('../assets/icons/benzo.png')
   },
   deliriant: {
     color: '#984c0c',
+  },
+  nootropic: {
+    color: '#2eab63',
+    icon: 'head-cog'
   },
   hormonal: {
     name: "hormonal",

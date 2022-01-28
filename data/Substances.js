@@ -11,7 +11,6 @@ export const _substances = {
 /// SUBSTANCE OVERRIDES ///
 
   cannabis: {
-    icon: 'cannabis',
     categories: ['cannabinoid']
   },
   marinol: {
