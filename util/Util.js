@@ -1,6 +1,7 @@
-import { mergeWith } from 'lodash'
+import { mergeWith, sortBy } from 'lodash'
 import { useState } from 'react'
 import { Platform, LayoutAnimation } from 'react-native'
+import dayjs from 'dayjs'
 
 export const DAY_MS = 24*60*60*1000
 export const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'
@@ -14,6 +15,21 @@ export function deepMerge(obj, ...args) {
       return Array.from(new Set(a.concat(b)))
     }
   })
+}
+
+export function separateByDate(items) {
+  let list = items.slice()
+
+  // Build a set of all calendar dates
+  const dates = [...new Set(
+    list.map(item => dayjs(item.date).endOf('day').valueOf())
+  )]
+
+  // Add those dates as objects to the dose list
+  list.push(...(dates.map(date => ({type: 'date', date}))))
+
+  // Sort by newest first
+  return sortBy(list, item => -item.date)
 }
 
 export function useForcedUpdate() {

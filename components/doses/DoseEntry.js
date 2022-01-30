@@ -18,7 +18,7 @@ function NoteText({children}) {
   )
 }
 
-export default function DoseEntry({dose, index, selecting, list}) {
+export default function DoseEntry({dose, index, selecting, list, elevated}) {
   const theme = useTheme() 
   const navigation = useNavigation()
   const [selected, setSelected] = useState(false)
@@ -32,6 +32,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
   const hooks = {id: index, setSelected, delete: dose.delete.bind(dose)}
 
   React.useEffect(() => {
+    if (!list) return
     list.state.selectableItems.add(hooks)
     return () => {
       list.state.selectableItems.delete(hooks)
@@ -41,24 +42,30 @@ export default function DoseEntry({dose, index, selecting, list}) {
   const onPress = () => {
     if (!selecting) {
       navigation.navigate('DoseDetails', {dose})
-    } else {
+    } else if (list) {
       // Toggle selection
       list.setItemSelected(!selected, hooks)
     }
   }
-  const onLongPress = () => list.onLongPress(selected, hooks)
+  const onLongPress = list ? () => list.onLongPress(selected, hooks) : null
 
   const substance = Substances[dose.substance]
 
   return (
     <Card
-      style={{
-        margin: 8,
-        marginTop: 0,
-        borderRadius: theme.roundness,
-        backgroundColor: theme.colors.surface,
-        overflow: 'hidden',
-      }}
+      elevation={elevated ? 2 : 1}
+      style={[
+        {
+          margin: 8,
+          marginTop: 0,
+          borderRadius: theme.roundness,
+          overflow: 'hidden',
+          elevation: elevated ? 2 : 1
+        },
+        elevated
+          ? null
+          : (theme.dark ? {backgroundColor: theme.colors.surface} : null)
+      ]}
     >
       <TouchableRipple
         style={{
@@ -99,7 +106,7 @@ export default function DoseEntry({dose, index, selecting, list}) {
                   color={theme.colors.primary}
                 />
               </View>
-            : <IconButton style={styles.left} color={substance.color} icon={substance.icon} />
+            : <IconButton style={styles.left} color={substance?.color} icon={substance?.icon} />
           }
 
           // Right: relative time

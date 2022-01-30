@@ -14,7 +14,7 @@ import SubstanceList from './screens/substances/SubstanceList'
 import SubstanceView from './screens/substances/Substance'
 import AddDose from './screens/doses/AddDose'
 import AddNote from './screens/doses/AddNote'
-import DoseDetails from './screens/doses/DoseDetails'
+import ItemDetails from './screens/ItemDetails'
 import { DarkTheme, DefaultTheme } from './util/Theme'
 import UserData from './store/UserData'
 import { CloseBackButton } from './components/Util'
@@ -121,6 +121,17 @@ function AppLayout() {
   const userData = UserData.useContext()
   const theme = getTheme(userData.prefs?.darkTheme, useColorScheme())
 
+  const itemDetailsOptions = {
+    headerStyle: {backgroundColor: theme.dark ? theme.colors.surface : theme.colors.background, elevation: 0},
+    cardStyle: theme.dark ? {backgroundColor: theme.colors.surface} : null,
+    ...merge(TransitionPresets.DefaultTransition, {
+      transitionSpec: {
+        open: {config: {duration: 125}},
+        close: {config: {duration: 125}}
+      }
+    })
+
+  }
 
   return (
     /*<View>
@@ -184,18 +195,13 @@ function AppLayout() {
                 />
                 <Stack.Screen
                   name='DoseDetails'
-                  component={DoseDetails}
-                  options={{
-                    headerStyle: {backgroundColor: theme.colors.surface, elevation: 0},
-                    cardStyle: {backgroundColor: theme.colors.surface},
-                    ...merge(TransitionPresets.DefaultTransition, {
-                      transitionSpec: {
-                        open: {config: {duration: 125}},
-                        close: {config: {duration: 125}}
-                      }
-                    })
-
-                  }}
+                  component={ItemDetails}
+                  options={itemDetailsOptions}
+                />
+                <Stack.Screen
+                  name='ItemDetails'
+                  component={ItemDetails}
+                  options={itemDetailsOptions}
                 />
                 <Stack.Screen
                   name='AddStash'

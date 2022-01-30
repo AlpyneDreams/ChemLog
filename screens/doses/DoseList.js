@@ -5,7 +5,7 @@ import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator } from
 import { Dose, DoseStorage } from '../../store/Dose'
 import { useNavigation } from '@react-navigation/native'
 import Haptics from '../../util/Haptics'
-import { DAY_MS, MORE_ICON } from '../../util/Util';
+import { DAY_MS, MORE_ICON, separateByDate } from '../../util/Util';
 import ConfirmDialog from '../../components/dialogs/ConfirmDialog';
 import DoseEntry from '../../components/doses/DoseEntry'
 import MainFABGroup from '../../components/doses/MainFABGroup'
@@ -193,18 +193,7 @@ export default class DoseList extends Component {
   }
 
   getDoses() {
-    let doses = DoseStorage.items.slice()
-
-    // Build a set of all calendar dates
-    const dates = [...new Set(
-      doses.map(d => dayjs(d.date).endOf('day').valueOf())
-    )]
-
-    // Add those dates as objects to the dose list
-    doses.push(...(dates.map(date => ({type: 'date', date}))))
-
-    // Sort by newest first
-    return sortBy(doses, d => -d.date)
+    return separateByDate(DoseStorage.items)
   }
 
   render() {

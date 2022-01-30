@@ -4,16 +4,21 @@ import { View, StyleSheet } from 'react-native'
 import { Card, Text, FAB, List, IconButton, useTheme, ActivityIndicator } from 'react-native-paper'
 import CommonStyles from '../../components/CommonStyles'
 import { StashStorage } from '../../store/Stash'
+import Substances from '../../store/Substances'
 
 export default function StashList() {
   const theme = useTheme()
   const navigation = useNavigation()
 
-  function StashEntry({stash={}}) {
+  function StashEntry({stash}) {
+
+    const substance = Substances[stash.substance]
+    const icon = substance?.icon ?? 'archive'
+
     return (
-      <Card style={{margin: 8}}>
+      <Card style={{margin: 8, marginTop: 0}} onPress={() => navigation.navigate('ItemDetails', {stash})}>
         <List.Item
-          left={() => <IconButton style={{margin: 8, marginLeft: 0, height: 40, width: 40}} icon='archive'/>}
+          left={() => <List.Icon style={{margin: 8, marginLeft: 0, height: 40, width: 40}} color={substance?.color} icon={icon} />}
           title={stash.name}
           right={() => 
             <View style={{alignItems: 'flex-end', justifyContent: 'center'}}>
@@ -23,7 +28,7 @@ export default function StashList() {
                 textAlign: 'right',
                 marginEnd: 24,
               }}>
-                20 g
+                {stash.amount != null ? `${stash.amount} ${stash.unit}` : null}
               </Text>
             </View>
           }
@@ -49,7 +54,6 @@ export default function StashList() {
       {loaded && stashes.map(stash =>
         <StashEntry key={stash.id} stash={stash} />
       )}
-      {/*<StashEntry/>*/}
       <FAB
         icon='plus'
         style={[CommonStyles.fab, {backgroundColor: theme.colors.primary}]}

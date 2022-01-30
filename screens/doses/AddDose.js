@@ -12,6 +12,7 @@ import { Dose } from '../../store/Dose';
 import Substances from '../../store/Substances'
 import UserData from '../../store/UserData';
 import GenericInput from '../../components/inputs/GenericInput';
+import InputSubstance from '../../components/inputs/InputSubstance';
 
 export class AddDose extends Component {
   static contextType = UserData.Context
@@ -23,8 +24,6 @@ export class AddDose extends Component {
     roa: null,
     notes: '',
     date: null,
-
-    _lastParams: null
   }
   
   textInput = React.createRef()
@@ -53,33 +52,15 @@ export class AddDose extends Component {
         >{!edit ? 'Add' : 'Save'}</Button>
       )
     })
-
-    // When focused, update state from params
-    this.unsubscribe = this.navigation.addListener('focus', (e) => {
-      const {params} = this.props.route
-      if (params && params !== this.state._lastParams) {
-
-        this.setState({_lastParams: params})
-
-        // New substance picked
-        if (params.substance)
-          this.setState({substance: params?.substance})
-      }
-    })
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe()
   }
 
   submit(edit, dose) {
     let data = Object.assign({}, this.state)
 
+    // data.substance is an {id, name} pair, not full object
     data.substanceName = data.substance.name
     data.substance = data.substance.id
     data.date = (data.date ?? new Date()).getTime()
-
-    delete data._lastParams
     
     if (!edit) {
       let dose = Dose.create(data)
@@ -114,15 +95,10 @@ export class AddDose extends Component {
 
     return (
       <View style={{padding: 12, height: '100%'}}>
-        <GenericInput
-          label='Substance'
-          mode='outlined'
-          value={substance?.pretty_name}
-          left={substance ? <TextInput.Icon name={substance.icon} color={substance.color}/> : null}
-          right={<TextInput.Icon name='menu-down'/>}
-          onPress={() => {
-            this.navigation.navigate('SubstancePicker', {current: substance?.id, returnTo: !edit ? 'AddDose' : 'EditDose'})
-          }}
+        <InputSubstance
+          value={substance}
+          onChange={substance => this.setState({substance})}
+          returnTo={!edit ? 'AddDose' : 'EditDose'}
         />
         <InputAmount
           amount={this.state.amount}
