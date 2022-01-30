@@ -7,6 +7,9 @@ export default function ShowMoreList({ children=[], peekSize=8, ...props }) {
   const short = children.length <= peekSize
   const [more, showMore] = React.useState(false)
 
+  if (!Array.isArray(children))
+    children = [children]
+
   const items = more ? children : children.slice(0, peekSize)
 
   return <>
