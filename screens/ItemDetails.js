@@ -1,21 +1,21 @@
 import { useTheme } from '@react-navigation/native'
 import React, { useState } from 'react'
-import { View, ToastAndroid } from 'react-native'
-import { IconButton, Text, Snackbar, List, Chip, Card, Button, Subheading, Headline, Title, Divider, ActivityIndicator } from 'react-native-paper'
+import { View } from 'react-native'
+import { IconButton, Text, Button, Subheading, Headline, Title, Divider, ActivityIndicator } from 'react-native-paper'
 import ConfirmDialog from '../components/dialogs/ConfirmDialog'
 import { Row } from '../components/Util'
 import dayjs from 'dayjs'
-import { CALENDAR_DATE_ONLY_COMPACT, CALENDAR_DATE_ONLY_MEDIUM } from '../util/dayjs'
+import { CALENDAR_DATE_ONLY_COMPACT } from '../util/dayjs'
 import SubstanceChip from '../components/substance/SubstanceChip'
-import { ICON_ADD_NOTE, separateByDate } from '../util/Util'
+import { ICON_ADD_NOTE } from '../util/Util'
 import { Icon } from '../components/Icon'
 import { HeaderTitle } from '@react-navigation/elements'
 import Stat from '../components/Stat'
-import Substances from '../store/Substances'
-import { Dose, DoseStorage } from '../store/Dose'
+import { Dose } from '../store/Dose'
 import DoseEntry from '../components/doses/DoseEntry'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useEffect } from 'react/cjs/react.development'
+import DateGroupedList from '../components/DateGroupedList'
 
 export default function ItemDetails({navigation, route}) {
   let item = route.params.dose ?? route.params.stash
@@ -111,8 +111,7 @@ function StashDoses({stash}) {
   const [doses, setDoses] = useState(null)
 
   useEffect(() => {
-    const list = DoseStorage.items.filter(d => d.substance === stash.substance) // stash.doses
-    setDoses(separateByDate(list))
+    setDoses(Dose.store.items.filter(d => d.substance === stash.substance)) // setDoses(stash.doses)
   }, [])
 
   if (doses && doses.length === 0) { // if (!stash.doses || stash.doses.length === 0)
@@ -127,13 +126,12 @@ function StashDoses({stash}) {
     <Divider/>
     <View style={{padding: 8, paddingBottom: 64}}>
       <Title style={{marginLeft: 8, marginBottom: 8}}>Doses</Title>
-      {!doses && <ActivityIndicator/>}
-      {doses && doses.map(dose => 
-        dose.type === 'date' ?
-          <List.Subheader key={dose.date}>{dayjs(dose.date).calendar(null, CALENDAR_DATE_ONLY_MEDIUM)}</List.Subheader>
-        :
-          <DoseEntry key={dose.id} dose={dose} elevated={true} />
-      )}
+      <DateGroupedList
+        items={doses}
+        entry={(dose, index) =>
+          <DoseEntry key={dose.id} dose={dose} index={index} elevated={true} />
+        }
+      />
     </View>
   </View>
   )
