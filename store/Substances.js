@@ -19,8 +19,16 @@ for (let [key, s] of Object.entries(Substances)) {
   if (s.color === undefined) {
     s.color = (getMainCategory(s) ?? {}).color
   }
-  if (s.properties?.categories && s.categories && s.categories.length !== s.properties.categories.length) {
-    s.properties.categories = deepMerge(s.categories, s.properties.categories)
+  if (s.properties?.categories && s.categories) {
+    let cats = s.categories
+
+    // Merge categories
+    if (s.categories.length !== s.properties.categories.length) {
+      cats = s.categories.concat(s.properties.categories)
+    }
+
+    // Remove dupliacte categories
+    s.properties.categories = Array.from(new Set(cats))
     s.categories = s.properties.categories
   }
 }
