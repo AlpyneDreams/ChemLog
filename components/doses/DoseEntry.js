@@ -41,7 +41,7 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
 
   const onPress = () => {
     if (!selecting) {
-      navigation.navigate('DoseDetails', {dose})
+      navigation.push('DoseDetails', {dose})
     } else if (list) {
       // Toggle selection
       list.setItemSelected(!selected, hooks)

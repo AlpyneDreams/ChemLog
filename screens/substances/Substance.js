@@ -1,9 +1,9 @@
 import { setStatusBarStyle } from 'expo-status-bar'
 import React from 'react'
 import { ScrollView, View, Linking, LayoutAnimation } from 'react-native'
-import { Button, Card, Subheading, Text, Title, useTheme } from 'react-native-paper'
+import { Button, Card, Divider, Subheading, Text, Title, useTheme } from 'react-native-paper'
 import { Row } from '../../components/Util'
-import substances from '../../store/Substances'
+import substances, { Substances } from '../../store/Substances'
 import { categories as CATEGORIES } from '../../store/Categories'
 import CategoryChip from '../../components/substance/CategoryChip'
 import SubstanceDose from '../../components/substance/SubstanceDose'
@@ -14,6 +14,7 @@ import SubstanceInteractions from '../../components/substance/SubstanceInteracti
 import { HeaderTitle } from '@react-navigation/elements'
 import { Icon } from '../../components/Icon'
 import { LayoutAnims } from '../../util/Util'
+import SubstanceHistory from '../../components/substance/SubstanceHistory'
 
 export default function SubstanceScreen({navigation, route}) {
 
@@ -38,7 +39,8 @@ export default function SubstanceScreen({navigation, route}) {
       headerRight: () => 
         <Button
           uppercase={false}
-          style={pickerMode ? {marginEnd: 8, borderRadius: 20} : {}}
+          icon='beaker-plus-outline'
+          style={pickerMode ? {marginEnd: 8, borderRadius: 20} : {marginEnd: 8}}
           disabled={!substance}
           onPress={() => {
             navigation.navigate({
@@ -77,7 +79,8 @@ export default function SubstanceScreen({navigation, route}) {
   categories = categories.map(c => CATEGORIES[c] ?? {}).sort((a, b) => a.priority - b.priority)
 
   return (
-    <ScrollView style={{paddingHorizontal: 20}}>
+  <ScrollView>
+    <View style={{paddingHorizontal: 20, marginBottom: 12}}>
 
       {aliases ? 
         <Text style={{
@@ -129,7 +132,17 @@ export default function SubstanceScreen({navigation, route}) {
       
       {showHRT && <HRTResources/>}
 
+    </View><Divider/>
+      
+      <SubstanceHistory substance={substance} />
+
+    <View style={{paddingHorizontal: 20}}>
+
       <SubstanceEffects substance={substance} />
+
+    </View><Divider/>
+    <View style={{paddingHorizontal: 20}}>
+
       <SubstanceDose substance={substance} />
       <SubstanceDuration substance={substance} />
 
@@ -137,7 +150,8 @@ export default function SubstanceScreen({navigation, route}) {
 
       <SubstanceInteractions substance={substance} />
       <View style={{height: 20}} />
-    </ScrollView>
+  </View>
+  </ScrollView>
   )
 }
 

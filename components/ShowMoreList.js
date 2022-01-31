@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { Button, Title, useTheme, Chip } from 'react-native-paper'
 
-export default function ShowMoreList({ children=[], peekSize=8, ...props }) {
+export default function ShowMoreList({ children=[], labelShowMore='Show More', labelShowLess='Show Less', peekSize=8, ...props }) {
 
   const short = children.length <= peekSize
   const [more, showMore] = React.useState(false)
@@ -22,7 +22,7 @@ export default function ShowMoreList({ children=[], peekSize=8, ...props }) {
         icon={more ? 'chevron-up' : 'chevron-down'}
         onPress={() => showMore(!more)}
       >
-        {more ? 'Show Less' : 'Show More'}
+        {more ? labelShowLess : labelShowMore}
       </Button>
     : null}
   </>
