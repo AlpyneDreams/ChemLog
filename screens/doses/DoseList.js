@@ -12,8 +12,12 @@ import MainFABGroup from '../../components/doses/MainFABGroup'
 import dayjs from 'dayjs'
 import { sortBy } from 'lodash';
 import { CALENDAR_DATE_ONLY, CALENDAR_DATE_ONLY_MEDIUM } from '../../util/dayjs';
+import UserData from '../../store/UserData';
+import { lockScreen } from '../LockScreen';
+import { Row } from '../../components/Util';
 
 function HomeContextMenu({select, selectAll}) {
+  const userData = UserData.useContext()
   const navigation = useNavigation()
   const [menu, setMenu] = useState(false)
 
@@ -26,7 +30,10 @@ function HomeContextMenu({select, selectAll}) {
       onDismiss={() => setMenu(false)}
       style={{minWidth: 150}}
       anchor={
-        <IconButton icon={MORE_ICON} onPress={() => setMenu(true)} />
+        <Row>
+          {userData.prefs.screenLock && <IconButton icon='lock-open' onPress={() => lockScreen(navigation)} />}
+          <IconButton icon={MORE_ICON} onPress={() => setMenu(true)} />
+        </Row>
       }
     >
       <Menu.Item title="Settings" onPress={doAndClose(() => navigation.navigate('Settings'))} />

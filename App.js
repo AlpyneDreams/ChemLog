@@ -7,9 +7,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import DoseList from './screens/doses/DoseList'
+import LockScreen from './screens/LockScreen'
 import StashList from './screens/stashes/StashList'
 import AddStash from './screens/stashes/AddStash'
-import Settings from './screens/Settings'
+import { Settings } from './screens/Settings'
+import { ScreenLockSettings } from "./screens/ScreenLockSettings"
 import SubstanceList from './screens/substances/SubstanceList'
 import SubstanceView from './screens/substances/Substance'
 import AddDose from './screens/doses/AddDose'
@@ -52,7 +54,8 @@ function HeaderLeft() {
 function Home({ navigation, route }) {
   const theme = useTheme()
 
-  return (
+  return (<>
+    <StatusBar style={theme.dark ? 'light' : 'dark'} />
     <Tab.Navigator>
       <Tab.Screen
         name='DoseList'
@@ -86,7 +89,7 @@ function Home({ navigation, route }) {
         }}
       />
     </Tab.Navigator>
-  )
+  </>)
 }
 
 export default function App() {
@@ -121,6 +124,8 @@ function AppLayout() {
   const userData = UserData.useContext()
   const theme = getTheme(userData.prefs?.darkTheme, useColorScheme())
 
+  const initialRoute = userData.prefs.screenLock ? 'LockScreen' : 'Home'
+  
   const itemDetailsOptions = {
     headerStyle: {backgroundColor: theme.dark ? theme.colors.surface : theme.colors.background, elevation: 0},
     cardStyle: theme.dark ? {backgroundColor: theme.colors.surface} : null,
@@ -134,22 +139,14 @@ function AppLayout() {
   }
 
   return (
-    /*<View>
-      <StatusBar style="light" />
-      {/*<Appbar.Header>
-        <Appbar.Action icon="menu"></Appbar.Action>
-        <Appbar.Content title="Title" subtitle="Subtitle"/>
-        <Appbar.Action icon="magnify"></Appbar.Action>
-        <Appbar.Action icon={MORE_ICON}></Appbar.Action>
-      </Appbar.Header>}*/
-      <SafeAreaProvider>
+    <SafeAreaProvider>
       <PaperProvider theme={theme}>
         <View style={{height: '100%', alignItems: 'center', backgroundColor: theme.colors.background}}>
           <View style={{maxWidth: 600, width: '100%', height: '100%'}}>
             <StatusBar style={theme.dark ? 'light' : 'dark'} />
             <NavigationContainer theme={theme}>
               <Stack.Navigator
-                initialRouteName='Home'
+                initialRouteName={initialRoute}
                 screenOptions={{
                   //headerLeft: HeaderLeft
                   //headerShown: false,
@@ -158,7 +155,9 @@ function AppLayout() {
                 }}
               >
                 <Stack.Screen name='Home' component={Home} options={{headerShown: false}} />
+                <Stack.Screen name='LockScreen' component={LockScreen} options={{headerShown: false}} />
                 <Stack.Screen name='Settings' component={Settings} options={{headerStyle: {backgroundColor: theme.colors.background, elevation: 0}}} />
+                <Stack.Screen name='ScreenLockSettings' component={ScreenLockSettings} options={{title: 'Passcode Lock', headerStyle: {backgroundColor: theme.colors.background, elevation: 0}}} />
                 <Stack.Screen
                   name='AddDose'
                   component={AddDose}
@@ -232,6 +231,6 @@ function AppLayout() {
           </View>
         </View>
       </PaperProvider>
-      </SafeAreaProvider>
+    </SafeAreaProvider>
   )
 }

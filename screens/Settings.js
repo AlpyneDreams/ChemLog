@@ -1,13 +1,17 @@
-import React from 'react'
-import { ScrollView } from 'react-native'
-import { RadioButton, Dialog, List, Portal, Divider } from 'react-native-paper'
+import React, { useEffect } from 'react'
+import { ScrollView, Platform } from 'react-native'
+import { RadioButton, List, Divider, Text, useTheme, TextInput, FAB } from 'react-native-paper'
 import ChooseDialog from '../components/dialogs/ChooseDialog'
 import UserData from '../store/UserData'
 import Constants from 'expo-constants'
 import { DevMenu } from './DevMenu'
+import { useNavigation } from '@react-navigation/native'
+import { Row } from '../components/Util'
 
-export default function Settings() {
-  const {prefs: {darkTheme}, setDarkTheme} = UserData.useContext()
+export function Settings() {
+  const navigation = useNavigation()
+  const theme = useTheme()
+  const {prefs: {darkTheme, screenLock}, setDarkTheme} = UserData.useContext()
 
   const [themePicker, showThemePicker] = React.useState(false)
   const [devMenu, setDevMenu] = React.useState(false)
@@ -27,9 +31,24 @@ export default function Settings() {
       />
     )
   }
-
+  
   return (
     <ScrollView>
+      <List.Section>
+        <List.Subheader>Security</List.Subheader>
+        <List.Item
+          title='Screen lock'
+          description={`Lock app with passcode`}
+          onPress={() => {
+            if (screenLock) {
+              navigation.navigate('LockScreen', {destination: 'ScreenLockSettings', prompt: true, returnTo: 'Settings', icon: 'cog'})
+            } else {
+              navigation.navigate('ScreenLockSettings')
+            }
+          }}
+        />
+      </List.Section>
+      
       <List.Section>
         <List.Subheader>General</List.Subheader>
         <List.Item

@@ -9,18 +9,20 @@ const MAX_RECENT_SUBSTANCES = 20
 
 const defaultUserData = {
   prefs: {
-    darkTheme: null
+    darkTheme: null,
+    screenLock: false
   },
   recentSubstances: [],
 
   setDarkTheme: () => {},
+  setScreenLock: () => {}
 }
 
 async function load() {
   return await Storage.get('userdata', defaultUserData)
 }
 
-async function save(data) {
+async function save(data) {  
   return await Storage.set('userdata', data ?? defaultUserData)
 }
 
@@ -44,6 +46,7 @@ function UserDataProvider({children}) {
   // UserData functions that use update()
   const stateFunctions = {
     setDarkTheme: (darkTheme) => update({prefs: {darkTheme}}),
+    setScreenLock: (screenLock) => update({prefs: {screenLock}}),
     addRecentSubstance: (id) => {
       let idx = state.recentSubstances.indexOf(id)
       if (idx >= 0) {
