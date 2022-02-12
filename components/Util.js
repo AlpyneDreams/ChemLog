@@ -1,6 +1,6 @@
 import React from 'react'
 import { LayoutAnimation, View, ViewProps } from 'react-native'
-import { Card, IconButton, TouchableRipple, Text } from 'react-native-paper'
+import { Card, IconButton, TouchableRipple, Text, List, useTheme } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import { LayoutAnims } from '../util/Util'
 
@@ -15,6 +15,15 @@ export function Row(props) {
       alignItems: 'flex-start'
     }, props.style]}
   />
+}
+
+export function ListItem({disabled, ...params}) {
+  const theme = useTheme()
+  return (
+    <List.Item
+      {...params} disabled={disabled} titleStyle={disabled && {color: theme.colors.disabled}}
+    />
+  )
 }
 
 export function Bold(props) {

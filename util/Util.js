@@ -1,6 +1,6 @@
 import { mergeWith, sortBy } from 'lodash'
-import { useState } from 'react'
-import { Platform, LayoutAnimation } from 'react-native'
+import { useState, useRef, useEffect } from 'react'
+import { Platform, LayoutAnimation, AppState } from 'react-native'
 import dayjs from 'dayjs'
 
 export const DAY_MS = 24*60*60*1000
@@ -32,6 +32,7 @@ export function separateByDate(items) {
   return sortBy(list, item => -item.date)
 }
 
+/** React Hook: Forces a component to update */
 export function useForcedUpdate() {
   const [, setState] = useState()
   return setState
@@ -46,6 +47,35 @@ export function usePrevious(prop) {
     setCurrent(prop)
   }
   return prev
+}
+
+/**
+ * Calls an effect when the AppState changes. Use sparingly
+ * as this registers a state and a global listener.
+ * @param {(state: AppStateStatus, old: AppStateStatus) => void} listener
+ * @returns {AppStateStatus} The current state.
+ */
+export function useAppStateEffect(listener) {
+  const listenerRef             = useRef(listener)
+  const appStateRef             = useRef(AppState.currentState)
+  const [appState, setAppState] = useState(appStateRef.current)
+
+  listenerRef.current = listener
+
+  function appStateChanged(state) {
+    listenerRef.current && listenerRef.current(state, appStateRef.current)
+    setAppState(appStateRef.current = state)
+  }
+
+  useEffect(() => {
+    AppState.addEventListener('change', appStateChanged)
+    // Can't use listener.remove because addEventListener is returning undefined
+    return () => {
+      AppState.removeEventListener('change', appStateChanged)
+    }
+  }, [])
+
+  return appState
 }
 
 export const LayoutAnims = {

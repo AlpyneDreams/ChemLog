@@ -5,12 +5,15 @@ import UserData from '../store/UserData'
 import { useNavigation } from '@react-navigation/native'
 import KeyStore from '../store/KeyStore'
 import InputPasscode from '../components/inputs/InputPasscode'
+import { ListItem } from '../components/Util'
+import dayjs from 'dayjs'
+import ChooseDialog from '../components/dialogs/ChooseDialog'
 
 
 export function ScreenLockSettings() {
   const theme = useTheme()
   const navigation = useNavigation()
-  const {prefs: {screenLock}, setScreenLock} = UserData.useContext()
+  const {prefs: {screenLock, autoLock}, setScreenLock, setAutoLock} = UserData.useContext()
 
   const [error, setError] = React.useState(null)
   const [prompt, setPrompt] = React.useState(0)
@@ -74,11 +77,12 @@ export function ScreenLockSettings() {
           }
           onPress={() => {setEnabled(!screenLock)}}
         />
-        {screenLock && <List.Item
-          title='Change passcode'
+        <ListItem
+          title='Change passcode' disabled={!screenLock}
           onPress={() => setEnabled(true)}
           right={() => loading && <ActivityIndicator />}
-        />}
+        />
+        <AutoLockSettings enabled={screenLock} value={autoLock} onChange={setAutoLock} />
       </List.Section>
       <Portal key='passcode-prompt'>
         <Dialog
@@ -101,4 +105,37 @@ export function ScreenLockSettings() {
       
     </ScrollView>
   )
+}
+
+function AutoLockSettings({enabled, value, onChange}) {
+  const [picker, showPicker] = React.useState(false)
+
+  let description = 'Lock screen after a period of inactivity'
+  if (value > 0) {
+    description = `Lock screen after ${dayjs.duration(value).humanize()} of inactivity`
+  } else if (value === 0) {
+    description = 'Lock screen immediately when inactive'
+  } else if (value < 0) {
+    description = `Off`
+  }
+
+  return (<>
+    <ListItem
+      title='Auto-lock' disabled={!enabled}
+      description={description}
+      onPress={() => showPicker(true)}
+    />
+    <ChooseDialog
+      title='Auto-lock'
+      state={[picker, showPicker]}
+      options={{
+        'Immediately':  0,
+        '1 minute':     1 * 1000 * 60,
+        '5 minutes':    5 * 1000 * 60,
+        '1 hour':      60 * 1000 * 60,
+        'Off':         -1,
+      }}
+      value={value} onChange={onChange}
+    />
+  </>)
 }

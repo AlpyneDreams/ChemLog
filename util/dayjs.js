@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import calendar from 'dayjs/plugin/calendar'
+import duration from 'dayjs/plugin/duration'
 import en from 'dayjs/locale/en'
 
 dayjs.extend(relativeTime, {
@@ -23,6 +24,7 @@ dayjs.extend(relativeTime, {
 })
 
 dayjs.extend(calendar)
+dayjs.extend(duration)
 
 export const LOCALE_COMPACT = 'en-compact'
 dayjs.locale(LOCALE_COMPACT, {

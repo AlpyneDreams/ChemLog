@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useColorScheme, Platform, StyleSheet, Text, View } from 'react-native'
 import { Button, Appbar, IconButton, Provider as PaperProvider, useTheme } from 'react-native-paper'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import DoseList from './screens/doses/DoseList'
-import LockScreen from './screens/LockScreen'
+import LockScreen, { lockScreen } from './screens/LockScreen'
 import StashList from './screens/stashes/StashList'
 import AddStash from './screens/stashes/AddStash'
 import { Settings } from './screens/Settings'
@@ -21,6 +21,7 @@ import { DarkTheme, DefaultTheme } from './util/Theme'
 import UserData from './store/UserData'
 import { CloseBackButton } from './components/Util'
 import { UIManager } from 'react-native'
+import { useAppStateEffect } from './util/Util'
 import { merge } from 'lodash'
 
 // Configure day.js
@@ -121,10 +122,43 @@ function getTheme(themePref, systemPref) {
 }
 
 function AppLayout() {
-  const userData = UserData.useContext()
-  const theme = getTheme(userData.prefs?.darkTheme, useColorScheme())
+  const navRef = useRef(null)
 
-  const initialRoute = userData.prefs.screenLock ? 'LockScreen' : 'Home'
+  const userData = UserData.useContext()
+  const {darkTheme, screenLock, autoLock} = userData.prefs ?? {}
+
+  const theme = getTheme(darkTheme, useColorScheme())
+  
+  const isFirstDraw = useRef(true)
+  const initialRoute = (screenLock && isFirstDraw) ? 'LockScreen' : 'Home'
+  isFirstDraw.current = false
+  
+  const [inactiveTime, setInactiveTime] = useState(Number.MAX_SAFE_INTEGER)
+  //const screenLockTimeout = useRef(null)
+  
+  useAppStateEffect((state, old) => {
+    if (!screenLock || autoLock < 0 || navRef.current == null || old === state)
+      return
+
+    if (state === 'active' && old.match(/inactive|background/)) { // App became inactive
+      //clearTimeout(screenLockTimeout.current)
+
+      const now = Date.now()
+      // Check how long we've been inactive for in case screenLockTimeout
+      // didn't fire while the app was running in the background.
+      // If inactiveTime is in the future, then lock as well.
+      if (now > inactiveTime + autoLock || (now < inactiveTime && inactiveTime !== Number.MAX_SAFE_INTEGER)) {
+        lockScreen(navRef.current)
+      }
+    } else if (state.match(/inactive|background/) && old === 'active') {  // App became active
+      setInactiveTime(Date.now())
+
+      // Set a timeout to lock the screen. Disabled because it's too long a period.
+      /*screenLockTimeout.current = setTimeout(() => {
+        lockScreen(navRef.current)
+      }, autoLock)*/
+    }
+  })
   
   const itemDetailsOptions = {
     headerStyle: {backgroundColor: theme.dark ? theme.colors.surface : theme.colors.background, elevation: 0},
@@ -144,7 +178,7 @@ function AppLayout() {
         <View style={{height: '100%', alignItems: 'center', backgroundColor: theme.colors.background}}>
           <View style={{maxWidth: 600, width: '100%', height: '100%'}}>
             <StatusBar style={theme.dark ? 'light' : 'dark'} />
-            <NavigationContainer theme={theme}>
+            <NavigationContainer theme={theme} ref={navRef}>
               <Stack.Navigator
                 initialRouteName={initialRoute}
                 screenOptions={{
