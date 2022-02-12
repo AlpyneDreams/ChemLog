@@ -43,6 +43,10 @@ export default class KeyStore {
 
   static async checkHash(key, value, progressCallback = () => {}) {
     const hash = await this.get(key)
+    
+    if (hash === null) {
+      return true
+    }
     return new Promise(
       (resolve, reject) => bcrypt.compare(value, hash, (err, match) => {
         if (err)

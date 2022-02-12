@@ -18,6 +18,7 @@ export function ScreenLockSettings() {
 
   const [error, setError] = React.useState(null)
   const [prompt, setPrompt] = React.useState(0)
+  const [changing, setChanging] = React.useState(false)
   const [match, setMatch] = React.useState('')
   const [pin, setPin] = React.useState('')
 
@@ -52,6 +53,7 @@ export function ScreenLockSettings() {
 
     setPin(''); setMatch('')
     setPrompt(0)
+    setChanging(false)
     setLoading(true)
 
     InteractionManager.setDeadline(100)
@@ -60,6 +62,14 @@ export function ScreenLockSettings() {
         setLoading(false)
       })
     })
+  }
+
+  function cancel() {
+    if (!changing) {
+      setScreenLock(false)
+    }
+    setChanging(false)
+    setPrompt(0)
   }
 
   return (
@@ -76,7 +86,7 @@ export function ScreenLockSettings() {
         />
         <ListItem
           title='Change passcode' disabled={!screenLock}
-          onPress={() => setEnabled(true)}
+          onPress={() => {setChanging(true); setEnabled(true)}}
           right={() => loading && <ActivityIndicator />}
         />
         <AutoLockSettings enabled={screenLock} value={autoLock} onChange={setAutoLock} />
@@ -84,10 +94,7 @@ export function ScreenLockSettings() {
       <Portal key='passcode-prompt'>
         <Dialog
           visible={prompt > 0}
-          onDismiss={() => {
-            setScreenLock(false)
-            setPrompt(false)
-          }}
+          onDismiss={cancel}
         >
             <Dialog.Title>{prompt >= 2 ? 'Confirm' : 'Enter New'} Passcode</Dialog.Title> 
             <Dialog.Content>
@@ -95,7 +102,7 @@ export function ScreenLockSettings() {
               {error && <HelperText type='error' style={{marginBottom: -24}}>{error}</HelperText>}
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={() => setPrompt(0)}>Cancel</Button>
+              <Button onPress={cancel}>Cancel</Button>
             </Dialog.Actions>
         </Dialog> 
       </Portal> 
