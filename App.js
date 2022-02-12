@@ -160,8 +160,9 @@ function AppLayout() {
     }
   })
   
+  const surfaceColor = theme.dark ? theme.colors.surface : theme.colors.background
   const itemDetailsOptions = {
-    headerStyle: {backgroundColor: theme.dark ? theme.colors.surface : theme.colors.background, elevation: 0},
+    headerStyle: {backgroundColor: surfaceColor, elevation: 0},
     cardStyle: theme.dark ? {backgroundColor: theme.colors.surface} : null,
     ...merge(TransitionPresets.DefaultTransition, {
       transitionSpec: {
@@ -169,7 +170,6 @@ function AppLayout() {
         close: {config: {duration: 125}}
       }
     })
-
   }
 
   return (
@@ -182,6 +182,7 @@ function AppLayout() {
               <Stack.Navigator
                 initialRouteName={initialRoute}
                 screenOptions={{
+                  headerStyle: {elevation: 0}
                   //headerLeft: HeaderLeft
                   //headerShown: false,
                   //gestureEnabled: true,
@@ -190,8 +191,8 @@ function AppLayout() {
               >
                 <Stack.Screen name='Home' component={Home} options={{headerShown: false}} />
                 <Stack.Screen name='LockScreen' component={LockScreen} options={{headerShown: false}} />
-                <Stack.Screen name='Settings' component={Settings} options={{headerStyle: {backgroundColor: theme.colors.background, elevation: 0}}} />
-                <Stack.Screen name='ScreenLockSettings' component={ScreenLockSettings} options={{title: 'Passcode Lock', headerStyle: {backgroundColor: theme.colors.background, elevation: 0}}} />
+                <Stack.Screen name='Settings' component={Settings} options={{cardStyle: {backgroundColor: surfaceColor}, headerStyle: {backgroundColor: surfaceColor, elevation: 0}}} />
+                <Stack.Screen name='ScreenLockSettings' component={ScreenLockSettings} options={{title: 'Passcode Lock', cardStyle: {backgroundColor: surfaceColor}, headerStyle: {backgroundColor: surfaceColor, elevation: 0}}} />
                 <Stack.Screen
                   name='AddDose'
                   component={AddDose}
@@ -248,8 +249,8 @@ function AppLayout() {
                   component={SubstanceView}
                   options={{
                     headerLeft: CloseBackButton,
-                    headerStyle: {backgroundColor: theme.dark ? theme.colors.surface : theme.colors.background, elevation: 0},
-                    cardStyle: {backgroundColor: theme.dark ? theme.colors.surface : theme.colors.background},
+                    headerStyle: {backgroundColor: surfaceColor, elevation: 0},
+                    cardStyle: {backgroundColor: surfaceColor},
                     gestureEnabled: true,
                     ...TransitionPresets.ModalPresentationIOS,
                   }}
