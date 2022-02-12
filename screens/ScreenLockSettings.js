@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Switch, InteractionManager } from 'react-native'
+import { ScrollView, InteractionManager } from 'react-native'
 import { Dialog, List, Portal, useTheme, ActivityIndicator, HelperText, Button } from 'react-native-paper'
 import UserData from '../store/UserData'
 import { useNavigation } from '@react-navigation/native'
@@ -8,6 +8,7 @@ import InputPasscode from '../components/inputs/InputPasscode'
 import { ListItem } from '../components/Util'
 import dayjs from 'dayjs'
 import ChooseDialog from '../components/dialogs/ChooseDialog'
+import Switch from '../components/Switch'
 
 
 export function ScreenLockSettings() {
@@ -69,11 +70,7 @@ export function ScreenLockSettings() {
           description={error ?? 'Lock app with passcode'}
           descriptionStyle={error !== null ? {color: theme.colors.error} : null}
           right={() => 
-            <Switch
-              value={screenLock}
-              onValueChange={setEnabled}
-              trackColor={{false: theme.colors.disabled, true: theme.colors.accent+'55'}}
-            />
+            <Switch value={screenLock} onValueChange={setEnabled} />
           }
           onPress={() => {setEnabled(!screenLock)}}
         />
