@@ -28,8 +28,8 @@ export default function SubstanceHistory({ substance }) {
       doses,
       numDoses,
       numStashes: 0,
-      amountUsed: `${sum} ${sumUnit}`,
-      averageDose: `${avg} ${avgUnit}`
+      amountUsed: `${parseFloat(sum.toFixed(2))} ${sumUnit}`, // parseFloat removes trailing zeroes
+      averageDose: `${parseFloat(avg.toFixed(2))} ${avgUnit}`
 
     })
     setLoaded(true)
