@@ -144,8 +144,10 @@ export default function SubstanceScreen({navigation, route}) {
     <View style={{paddingHorizontal: 20}}>
 
       <SubstanceDose substance={substance} />
+    </View><Divider/>  
+    <View style={{paddingHorizontal: 20}}>
       <SubstanceDuration substance={substance} />
-
+    
       <SubstanceMisc substance={substance} details={true} />
 
       <SubstanceInteractions substance={substance} />
