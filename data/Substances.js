@@ -46,6 +46,14 @@ export const _substances = {
     icon: require('../assets/icons/cigarette.png')
   },
 
+
+  adderall: {
+    psychonaut: 'Amphetamine'
+  },
+  peyote: {
+    psychonaut: 'Lophophora_williamsii' // Golly
+  },
+
 /// CUSTOM SUBSTANCES ///
 
   'l-tyrosine': {
