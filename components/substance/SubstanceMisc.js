@@ -6,6 +6,7 @@ import { styles } from './common'
 import Table from './Table'
 import SubstanceProperties from '../../data/SubstanceProperties'
 import _ from 'lodash'
+import { SubstanceDivider } from './SubstanceDivider'
 
 function MultilineRow({children}) {
   return (
@@ -45,6 +46,7 @@ export default function SubstanceMisc({substance, details}) {
           </MultilineRow>
         )}
       </DataTable>
+      <SubstanceDivider/>
     </>)
   } else {
 

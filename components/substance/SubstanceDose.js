@@ -6,6 +6,7 @@ import { Row } from '../Util'
 import Table from './Table'
 import ROA from '../../data/ROA'
 import { TabButton } from '../Tabs'
+import { Source } from './Source'
 
 const psychonautRoas = Object.fromEntries(
   ROA.roas.map(r => [r.psychonaut ?? r.name.toLowerCase(), r])
@@ -118,9 +119,7 @@ export default function SubstanceDose({substance}) {
 
       <DoseChart substance={substance} theme={theme} tripsit={tripsit} />
 
-      <Caption style={{textAlign: 'right', fontSize: 12}}>
-        Source: {tripsit ? 'TripSit' : 'PsychonautWiki'}
-      </Caption>
+      <Source>{tripsit ? 'TripSit' : 'PsychonautWiki'}</Source>
     </View>
   </View>
 }

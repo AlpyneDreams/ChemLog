@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, DataTable, Caption, Title, Text, useTheme } from 'react-native-paper'
 import { styles } from './common'
+import { Source } from './Source'
 import Table from './Table'
 
 function addDurationStage(roas, name, obj) {
@@ -56,5 +57,7 @@ export default function SubstanceDuration({substance}) {
     <Title style={styles.header}>Duration</Title>
 
     {tables}
+
+    <Source style={{marginBottom: 16}}>TripSit</Source>
   </>)
 }

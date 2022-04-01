@@ -11,6 +11,7 @@ import SubstanceEffects from '../../components/substance/SubstanceEffects'
 import SubstanceDuration from '../../components/substance/SubstanceDuration'
 import SubstanceMisc from '../../components/substance/SubstanceMisc'
 import SubstanceInteractions from '../../components/substance/SubstanceInteractions'
+import { SubstanceDivider } from '../../components/substance/SubstanceDivider'
 import { HeaderTitle } from '@react-navigation/elements'
 import { Icon } from '../../components/Icon'
 import { LayoutAnims } from '../../util/Util'
@@ -151,6 +152,7 @@ export default function SubstanceScreen({navigation, route}) {
     <Divider/>  
     <View style={{paddingHorizontal: 20}}>
       <SubstanceDuration substance={substance} />
+      <SubstanceDivider/>
     
       <SubstanceMisc substance={substance} details={true} />
 
