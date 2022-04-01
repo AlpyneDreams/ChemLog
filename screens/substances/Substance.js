@@ -80,6 +80,7 @@ export default function SubstanceScreen({navigation, route}) {
 
   return (
   <ScrollView>
+  <View>
     <View style={{paddingHorizontal: 20, marginBottom: 12}}>
 
       {aliases ? 
@@ -140,11 +141,12 @@ export default function SubstanceScreen({navigation, route}) {
 
       <SubstanceEffects substance={substance} />
 
-    </View><Divider/>
-    <View style={{paddingHorizontal: 20}}>
+    </View>
+    <Divider/>
 
-      <SubstanceDose substance={substance} />
-    </View><Divider/>  
+    <SubstanceDose substance={substance} />
+    
+    <Divider/>  
     <View style={{paddingHorizontal: 20}}>
       <SubstanceDuration substance={substance} />
     
@@ -152,6 +154,7 @@ export default function SubstanceScreen({navigation, route}) {
 
       <SubstanceInteractions substance={substance} />
       <View style={{height: 20}} />
+    </View>
   </View>
   </ScrollView>
   )

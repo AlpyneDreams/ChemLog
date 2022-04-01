@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import { View } from 'react-native'
-import { Caption, Title, Subheading, Text, Colors, useTheme, ActivityIndicator } from 'react-native-paper'
+import { View, StyleSheet } from 'react-native'
+import { Caption, ToggleButton, Title, Subheading, Text, Colors, useTheme, ActivityIndicator, ProgressBar, overlay, RadioButton } from 'react-native-paper'
 import { styles } from './common'
 import { Row } from '../Util'
 import Table from './Table'
 import ROA from '../../data/ROA'
+import { TabButton } from '../Tabs'
 
 const psychonautRoas = Object.fromEntries(
   ROA.roas.map(r => [r.psychonaut ?? r.name.toLowerCase(), r])
@@ -88,37 +89,47 @@ function DoseBars({ranges=[], unit}) {
 
 export default function SubstanceDose({substance}) {
   const theme = useTheme()
-  
-  // TODO: Ensure this is being done asynchronously right
 
-  // Placeholder for while the chart renders
-  let [chart, setChart] = useState(
-    <View>
-      <Title style={styles.header}>Dose</Title>
-      <ActivityIndicator />
+  const hasPsychonautDose = !!substance.psychonaut
+  const hasTripsitDose = !!(substance.formatted_dose || substance.dose_note)
+  const hasBoth = hasPsychonautDose && hasTripsitDose
+
+  const [tripsit, setTripsit] = useState(!hasPsychonautDose)
+
+  // TODO: Perhaps render the DoseChart asynchronously somehow?
+
+  return <View style={{paddingHorizontal: 20}}>
+    <Title style={styles.header}>Dose</Title>
+
+    {hasBoth && (<>
+      <Row style={{justifyContent: 'space-evenly'}}>
+        <TabButton active={tripsit} setActive={v => setTripsit(v)}>TripSit</TabButton>
+        <TabButton active={!tripsit} setActive={v => setTripsit(!v)}>Psychonaut</TabButton>
+      </Row>
+      <Row>
+        <View style={[
+          {width: '50%', height: 2, backgroundColor: theme.colors.primary},
+          !tripsit && {marginLeft: '50%'}
+        ]}/>
+      </Row>
+    </>)}
+
+    <View style={{backgroundColor: hasBoth && (theme.dark ? '#00000055' : '#0000000A'), marginHorizontal: -20, paddingHorizontal: 20, paddingVertical: 16}}>
+
+      <DoseChart substance={substance} theme={theme} tripsit={tripsit} />
+
+      <Caption style={{textAlign: 'right', fontSize: 12}}>
+        Source: {tripsit ? 'TripSit' : 'PsychonautWiki'}
+      </Caption>
     </View>
-  )
-
-  useEffect(() => {
-    // HACK: In case we get unmounted.
-    // Can't cancel the promise? 
-    let active = true
-    Render(substance, theme)
-      .then(x => {active && setChart(x)})
-    
-    return () => {
-      active = false
-    }
-  })
-
-  return chart
+  </View>
 }
 
 /** Render the chart or table for dose */
-async function Render(substance, theme) { 
-  
+function DoseChart({substance, theme, tripsit}) { 
+
   let tables = []
-  if (substance.psychonaut) { // Psychonaut: Charts!
+  if (substance.psychonaut && !tripsit) { // Psychonaut: Charts!
 
     for (const roa of substance.psychonaut.roas) {
       let {dose} = roa
@@ -145,14 +156,16 @@ async function Render(substance, theme) {
         </View>
       )
     }
-
-    tables.push(
-      <Caption key='source' style={{textAlign: 'right', fontSize: 12, marginBottom: 16}}>Source: PsychonautWiki</Caption>
-    )
   } else {  // TripSit: Tables
 
     if (!substance.formatted_dose && !substance.dose_note) {
       return null
+    }
+
+    if (substance.dose_note) {
+      tables.push(
+        <Caption key='dose-note' style={{marginBottom: 16, color: theme.colors.error}}>{substance.dose_note.trim()}</Caption>
+      )
     }
 
     if (substance.formatted_dose) {
@@ -162,20 +175,7 @@ async function Render(substance, theme) {
         )
       }
     }
-    tables.push(
-      <Caption key='source' style={{textAlign: 'right', fontSize: 12, marginBottom: 16}}>Source: TripSit</Caption>
-    )
   }
 
-  return <>
-    <Title style={styles.header}>Dose</Title>
-
-    {substance.dose_note && 
-      <Caption style={{marginBottom: 16, color: theme.colors.error}}>{substance.dose_note.trim()}</Caption>
-    }
-
-    {tables}
-  </>
+  return tables
 }
-
-
