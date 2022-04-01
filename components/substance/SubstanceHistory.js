@@ -65,13 +65,15 @@ export default function SubstanceHistory({ substance }) {
     <View style={{paddingHorizontal: 20}}>
       <Title style={styles.header}>History</Title>
       {!loaded && <ActivityIndicator/>}
-      {loaded && <>
+      {loaded && (data.numDoses === 0 ? <>
+        <Caption>You have never recorded any doses for {substance.pretty_name}.</Caption>
+      </> : <>
         <Row>
           <Stat label='Total Doses' value={data.numDoses} />
           <Stat label='Total Used' value={data.amountUsed} />
           <Stat label='Average Dose' value={data.averageDose} style={{flex: 1.25}} />
         </Row>
-      </>}
+      </>)}
     </View>
     {loaded && data.numDoses > 0 ? <>
       <Divider/>
@@ -87,7 +89,6 @@ export default function SubstanceHistory({ substance }) {
         </View>
       </ShowMoreList>
     </> : <>
-      {loaded && <AddButtons addDose={addDose} addStash={addStash} />}
       <View style={{height: 20}}/>
     </>}
     <Divider/>
