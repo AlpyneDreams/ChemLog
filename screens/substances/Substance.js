@@ -78,6 +78,8 @@ export default function SubstanceScreen({navigation, route}) {
 
   categories = categories.map(c => CATEGORIES[c] ?? {}).sort((a, b) => a.priority - b.priority)
 
+  const psy = substance.psychonaut
+
   return (
   <ScrollView>
   <View>
@@ -114,8 +116,8 @@ export default function SubstanceScreen({navigation, route}) {
         {!hrt &&
           <Button
             uppercase={false}
-            icon='magnify'
-            onPress={() => Linking.openURL(`https://psychonautwiki.org/w/index.php?search=${id}`)}
+            icon={psy ? 'link' : 'magnify'}
+            onPress={() => Linking.openURL(psy && psy.url ? psy.url : `https://psychonautwiki.org/w/index.php?search=${id}`)}
           >
             PsychonautWiki
           </Button>
