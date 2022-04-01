@@ -1,0 +1,45 @@
+# https://api.psychonautwiki.org/
+{
+  substances(limit: 10000000) {
+    name
+    url
+    featured
+    effects {
+      name url
+    }
+    
+    # experiences {...}
+    class { chemical psychoactive }
+    tolerance { full half zero }
+    # roa { oral sublingual buccal insufflated rectal transdermal subcutaneous intramuscular intravenous smoked }
+    roas {
+      name
+      dose {
+        units
+        threshold
+        heavy
+        common { min max }
+        light { min max }
+        strong { min max }
+      }
+      duration {
+        afterglow { min max units }
+        comeup { min max units }
+        duration { min max units }
+        offset { min max units }
+        onset { min max units }
+        peak { min max units }
+        total { min max units }
+      }
+      bioavailability {min max}
+    }
+    summary
+    images {thumb image}
+    addictionPotential
+    toxicity
+    crossTolerances
+    uncertainInteractions {name}
+    unsafeInteractions {name}
+    dangerousInteractions {name}
+  }    
+}
