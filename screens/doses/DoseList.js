@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react'
 import { useEffect } from 'react';
 import { View, StyleSheet, ToastAndroid, Vibration, ScrollView } from 'react-native'
-import { FAB, IconButton, List, Snackbar, Menu, Portal, ActivityIndicator } from 'react-native-paper';
+import { FAB, IconButton, List, Text, Snackbar, Menu, Portal, ActivityIndicator, Headline, Subheading, useTheme, Button } from 'react-native-paper';
 import { Dose, DoseStorage } from '../../store/Dose'
 import { useNavigation } from '@react-navigation/native'
 import Haptics from '../../util/Haptics'
@@ -15,6 +15,7 @@ import { CALENDAR_DATE_ONLY, CALENDAR_DATE_ONLY_MEDIUM } from '../../util/dayjs'
 import UserData from '../../store/UserData';
 import { lockScreen } from '../LockScreen';
 import { Row } from '../../components/Util';
+import { Icon } from '../../components/Icon';
 
 function HomeContextMenu({select, selectAll}) {
   const userData = UserData.useContext()
@@ -200,6 +201,7 @@ export default class DoseList extends Component {
   }
 
   getDoses() {
+    // TODO: Cache this!!
     return separateByDate(DoseStorage.items)
   }
 
@@ -212,11 +214,33 @@ export default class DoseList extends Component {
     const setConfirmDelete = (value) => this.setState({confirmDelete: value})
 
     const doses = this.state.loaded ? this.getDoses() : []
+    const empty = this.state.loaded && doses.length === 0
+
+    function NoDoses() {
+      const theme = useTheme()
+      return (
+        <View style={{alignItems: 'center'}}>
+          <Icon icon='beaker-outline' color={theme.colors.placeholder} size={48} style={{marginVertical: 12}}/>
+          <Headline>No doses.</Headline>
+          <Subheading style={{marginBottom: 24}}>You can record doses here.</Subheading>
+          <Button
+            uppercase={false}
+            mode='outlined'
+            style={{borderRadius: 20, borderWidth: 1, borderColor: theme.colors.primary}}
+            icon='pill'
+            onPress={() => navigation.navigate('SubstanceList')}
+          >
+            Browse Substances
+          </Button>
+        </View>
+      )
+    }
 
     return (
       <View style={{height: '100%'}}>
         {/* TODO: Use FlatList */}
         <ScrollView>
+          {empty && <NoDoses/>}
           <List.Section style={{paddingBottom: 64}}>
             {this.state.loaded ? doses.map((dose, index) => 
                 dose.type === 'date' ?
@@ -230,7 +254,7 @@ export default class DoseList extends Component {
           </List.Section>
         </ScrollView>
         <MainFABGroup
-          visible={!selecting}
+          visible={!selecting} empty={empty}
           addDose={() => navigation.navigate('AddDose')}
           addNote={() => navigation.navigate('AddNote')}
         />

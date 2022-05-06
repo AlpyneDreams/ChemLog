@@ -5,8 +5,9 @@ import Haptics from '../../util/Haptics'
 import CommonStyles from '../CommonStyles'
 import { Row } from '../Util'
 import { LayoutAnims, usePrevious, ICON_ADD_NOTE } from '../../util/Util'
+import { Icon } from '../Icon'
 
-export default function MainFABGroup({visible, addDose, addNote}) {
+export default function MainFABGroup({visible, empty=false, addDose, addNote}) {
   const theme = useTheme()
 
   const wasVisible = usePrevious(visible)
@@ -17,7 +18,17 @@ export default function MainFABGroup({visible, addDose, addNote}) {
     }
   })
 
-  return (
+  return (<>
+    {empty &&
+      <View style={{alignItems: 'flex-end', position: 'absolute', margin: 16, marginBottom: 24, right: 125, bottom: 75}}>
+        <View style={{transform: [
+          {rotateZ: '-8deg'}
+        ]}}>
+          <Text style={{color: theme.colors.placeholder}}>Add Doses or Notes</Text>
+        </View>
+        <Icon icon={require('../../assets/icons/arrow-right-bottom.png')} size={24} color={theme.colors.disabled}/>
+      </View>
+    }
     <View style={CommonStyles.fab}>
       <FAB
         visible={visible}
@@ -37,5 +48,5 @@ export default function MainFABGroup({visible, addDose, addNote}) {
         onPress={addDose}
       />
     </View>
-  )
+  </>)
 }
