@@ -10,12 +10,14 @@ const MAX_RECENT_SUBSTANCES = 20
 const defaultUserData = {
   prefs: {
     darkTheme: null,
+    dataSource: 'psychonaut', // 'tripsit' or 'psychonaut'
     screenLock: false,
     autoLock: 5000
   },
   recentSubstances: [],
 
   setDarkTheme: () => {},
+  setDataSource: () => {},
   setScreenLock: () => {},
   setAutoLock: () => {}
 }
@@ -48,6 +50,7 @@ function UserDataProvider({children}) {
   // UserData functions that use update()
   const stateFunctions = {
     setDarkTheme: (darkTheme) => update({prefs: {darkTheme}}),
+    setDataSource: (dataSource) => update({prefs: {dataSource}}),
     setScreenLock: (screenLock) => update({prefs: {screenLock}}),
     setAutoLock: (autoLock) => update({prefs: {autoLock}}),
     addRecentSubstance: (id) => {

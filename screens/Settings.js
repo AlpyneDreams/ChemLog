@@ -1,17 +1,25 @@
 import React, { useEffect } from 'react'
-import { ScrollView, Platform } from 'react-native'
-import { RadioButton, List, Divider, Text, useTheme, TextInput, FAB } from 'react-native-paper'
+import { ScrollView, View, StyleSheet } from 'react-native'
+import { RadioButton, List, Divider, Text, useTheme, TextInput, ToggleButton } from 'react-native-paper'
 import ChooseDialog from '../components/dialogs/ChooseDialog'
 import UserData from '../store/UserData'
 import Constants from 'expo-constants'
 import { DevMenu } from './DevMenu'
 import { useNavigation } from '@react-navigation/native'
 import { Row } from '../components/Util'
+import { Icon } from '../components/Icon'
+
+function IconText({icon, children}) {
+  return <Row>
+    <Icon icon={icon} size={16} style={{marginTop: 2, marginRight: 4}} />
+    <Text>{children}</Text>
+  </Row>
+}
 
 export function Settings() {
   const navigation = useNavigation()
   const theme = useTheme()
-  const {prefs: {darkTheme, screenLock}, setDarkTheme} = UserData.useContext()
+  const {prefs: {darkTheme, screenLock, dataSource}, setDarkTheme, setDataSource} = UserData.useContext()
 
   const [themePicker, showThemePicker] = React.useState(false)
   const [devMenu, setDevMenu] = React.useState(false)
@@ -53,9 +61,13 @@ export function Settings() {
         <List.Subheader>General</List.Subheader>
         <List.Item
           title='Theme'
-          description={darkTheme ? 'Dark' : (darkTheme == null ? 'System default' : 'Light')}
           onPress={() => showThemePicker(true)}
         />
+        <ToggleButton.Row value={darkTheme} onValueChange={setDarkTheme} style={styles.btnRow}>
+          <ToggleButton icon={() => <Text>Default</Text>} value={null} style={{minWidth: 80}} />
+          <ToggleButton icon={() => <IconText icon='brightness-4'>Dark</IconText>} value={true} style={{minWidth: 80}} />
+          <ToggleButton icon={() => <IconText icon='brightness-7'>Light</IconText>} value={false} style={{minWidth: 80}} />
+        </ToggleButton.Row>
         <ChooseDialog
           title='Choose theme'
           state={[themePicker, showThemePicker]}
@@ -65,6 +77,14 @@ export function Settings() {
           value={darkTheme}
           onChange={setDarkTheme}
         />
+        <List.Item
+          title='Preferred Source'
+          description='Default tab for substance dose and duration data'
+        />
+        <ToggleButton.Row value={dataSource} onValueChange={setDataSource} style={styles.btnRow}>
+          <ToggleButton icon={() => <Text>TripSit</Text>} value='tripsit' style={{minWidth: 80}} />
+          <ToggleButton icon={() => <Text>Psychonaut</Text>} value='psychonaut' style={{minWidth: 100}} />
+        </ToggleButton.Row>
         <Divider/>
         <Version/>
         {devMenu && <DevMenu/>}
@@ -74,3 +94,8 @@ export function Settings() {
   )
 }
 
+const styles = StyleSheet.create({
+  btnRow: {
+    marginLeft: 16, marginBottom: 24, marginTop: 2
+  }
+})

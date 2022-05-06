@@ -7,6 +7,7 @@ import Table from './Table'
 import ROA from '../../data/ROA'
 import { TabBar, TabButton } from '../Tabs'
 import { Source } from './Source'
+import UserData from '../../store/UserData'
 
 export const psychonautRoas = Object.fromEntries(
   ROA.roas.map(r => [r.psychonaut ?? r.name.toLowerCase(), r])
@@ -89,13 +90,14 @@ function DoseBars({ranges=[], unit}) {
 }
 
 export default function SubstanceDose({substance}) {
+  const userData = UserData.useContext()
   const theme = useTheme()
 
   const hasPsychonautDose = !!substance.psychonaut
   const hasTripsitDose = !!(substance.formatted_dose || substance.dose_note)
   const hasBoth = hasPsychonautDose && hasTripsitDose
 
-  const [tab, setTab] = useState(hasPsychonautDose ? 1 : 0)
+  const [tab, setTab] = useState(hasPsychonautDose && userData.prefs.dataSource == 'psychonaut' ? 1 : 0)
   const tripsit = (tab == 0)
 
   // TODO: Perhaps render the DoseChart asynchronously somehow?

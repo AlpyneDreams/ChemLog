@@ -6,6 +6,7 @@ import { styles } from './common'
 import { Source } from './Source'
 import Table from './Table'
 import { psychonautRoas } from './SubstanceDose'
+import UserData from '../../store/UserData'
 
 function addDurationStage(roas, name, obj) {
   if (!obj) return
@@ -51,21 +52,22 @@ function addPsychonautDurationStage(roas, roa, name, v) {
 }
 
 export default function SubstanceDuration({substance}) {
+  const userData = UserData.useContext()
   const theme = useTheme()
 
   const hasPsychonautDose = !!(substance.psychonaut && substance.psychonaut?.roas)
   const hasTripsitDose = !!(substance.formatted_onset || substance.formatted_duration || substance.formatted_aftereffects)
   const hasBoth = hasPsychonautDose && hasTripsitDose
-  const [tab, setTab] = React.useState(1)
+  const [tab, setTab] = React.useState(userData.prefs.dataSource == 'psychonaut' ? 1 : 0)
   const tripsit = (tab === 0)
 
   let roas = {}
-  if (tripsit) {
+  if (hasTripsitDose && (!hasPsychonautDose || tripsit)) {
     addDurationStage(roas, 'Onset', substance.formatted_onset)
     addDurationStage(roas, 'Duration', substance.formatted_duration)
     addDurationStage(roas, 'After-effects', substance.formatted_aftereffects)
-  } else {
-    for (const {name, duration} of substance.psychonaut.roas) {
+  } else if (hasPsychonautDose) {
+    for (const {name, duration} of substance.psychonaut?.roas) {
       addPsychonautDurationStage(roas, name, 'Total', duration?.total)
       addPsychonautDurationStage(roas, name, 'Duration', duration?.duration)
       addPsychonautDurationStage(roas, name, 'Onset', duration?.onset)
@@ -90,7 +92,7 @@ export default function SubstanceDuration({substance}) {
   return (<View style={{paddingBottom: 20}}>
     <Title style={styles.header}>Duration</Title>
 
-    <TabBar names={['TripSit', 'Psychonaut']} tab={tab} setTab={setTab}/>
+    {hasBoth && <TabBar names={['TripSit', 'Psychonaut']} tab={tab} setTab={setTab}/>}
     <View style={{backgroundColor: hasBoth && (theme.dark ? '#00000055' : '#0000000A'), marginHorizontal: -20, paddingHorizontal: 20, paddingVertical: 16}}>
       {tables}
 
