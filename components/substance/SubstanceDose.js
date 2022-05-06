@@ -8,7 +8,7 @@ import ROA from '../../data/ROA'
 import { TabBar, TabButton } from '../Tabs'
 import { Source } from './Source'
 
-const psychonautRoas = Object.fromEntries(
+export const psychonautRoas = Object.fromEntries(
   ROA.roas.map(r => [r.psychonaut ?? r.name.toLowerCase(), r])
 )
 

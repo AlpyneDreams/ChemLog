@@ -1,8 +1,11 @@
 import React from 'react'
+import { View } from 'react-native'
 import { Card, DataTable, Caption, Title, Text, useTheme } from 'react-native-paper'
+import { TabBar } from '../Tabs'
 import { styles } from './common'
 import { Source } from './Source'
 import Table from './Table'
+import { psychonautRoas } from './SubstanceDose'
 
 function addDurationStage(roas, name, obj) {
   if (!obj) return
@@ -34,30 +37,65 @@ function addDurationStage(roas, name, obj) {
 
 }
 
+function addPsychonautDurationStage(roas, roa, name, v) {
+  if (!v) return
+
+  // Look up pretty name for this ROA
+  let roaData = psychonautRoas[roa]
+  if (roaData) {
+    roa = roaData.name
+  }
+
+  roas[roa] = roas[roa] ?? {}
+  roas[roa][name] = `${v.min}-${v.max} ${v.units}`
+}
+
 export default function SubstanceDuration({substance}) {
   const theme = useTheme()
 
+  const hasPsychonautDose = !!(substance.psychonaut && substance.psychonaut?.roas)
+  const hasTripsitDose = !!(substance.formatted_onset || substance.formatted_duration || substance.formatted_aftereffects)
+  const hasBoth = hasPsychonautDose && hasTripsitDose
+  const [tab, setTab] = React.useState(1)
+  const tripsit = (tab === 0)
+
   let roas = {}
-  addDurationStage(roas, 'Onset', substance.formatted_onset)
-  addDurationStage(roas, 'Duration', substance.formatted_duration)
-  addDurationStage(roas, 'After-effects', substance.formatted_aftereffects)
+  if (tripsit) {
+    addDurationStage(roas, 'Onset', substance.formatted_onset)
+    addDurationStage(roas, 'Duration', substance.formatted_duration)
+    addDurationStage(roas, 'After-effects', substance.formatted_aftereffects)
+  } else {
+    for (const {name, duration} of substance.psychonaut.roas) {
+      addPsychonautDurationStage(roas, name, 'Total', duration?.total)
+      addPsychonautDurationStage(roas, name, 'Duration', duration?.duration)
+      addPsychonautDurationStage(roas, name, 'Onset', duration?.onset)
+      addPsychonautDurationStage(roas, name, 'Come-up', duration?.comeup)
+      addPsychonautDurationStage(roas, name, 'Peak', duration?.peak)
+      addPsychonautDurationStage(roas, name, 'Offset', duration?.offset)
+      addPsychonautDurationStage(roas, name, 'After-effects', duration?.afterglow)
+    }
+  }
 
   let tables = []
   for (const roa in roas) {
     let title = roa.replace(/_/g, ' ')
 
     tables.push(
-      <Table key={roa} title={title} data={roas[roa]} />
+      <Table key={(tripsit ? 'ts-' : 'pn-') + roa} title={title} data={roas[roa]} />
     )
   }
 
   if (tables.length === 0) return null
 
-  return (<>
+  return (<View style={{paddingBottom: 20}}>
     <Title style={styles.header}>Duration</Title>
 
-    {tables}
+    <TabBar names={['TripSit', 'Psychonaut']} tab={tab} setTab={setTab}/>
+    <View style={{backgroundColor: hasBoth && (theme.dark ? '#00000055' : '#0000000A'), marginHorizontal: -20, paddingHorizontal: 20, paddingVertical: 16}}>
+      {tables}
 
-    <Source style={{marginBottom: 16}}>TripSit</Source>
-  </>)
+      <Source>{tripsit ? 'TripSit' : 'PsychonautWiki'}</Source>
+    </View>
+
+  </View>)
 }
