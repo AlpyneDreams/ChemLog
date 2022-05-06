@@ -81,7 +81,7 @@ export function Settings() {
           title='Preferred Source'
           description='Default tab for substance dose and duration data'
         />
-        <ToggleButton.Row value={dataSource} onValueChange={setDataSource} style={styles.btnRow}>
+        <ToggleButton.Row value={dataSource} onValueChange={v => {if (!!v) setDataSource(v);}} style={styles.btnRow}>
           <ToggleButton icon={() => <Text>TripSit</Text>} value='tripsit' style={{minWidth: 80}} />
           <ToggleButton icon={() => <Text>Psychonaut</Text>} value='psychonaut' style={{minWidth: 100}} />
         </ToggleButton.Row>
