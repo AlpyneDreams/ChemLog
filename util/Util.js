@@ -17,6 +17,10 @@ export function deepMerge(obj, ...args) {
   })
 }
 
+export function range(n) {
+  return [...Array(n).keys()]
+}
+
 export function separateByDate(items) {
   let list = items.slice()
 

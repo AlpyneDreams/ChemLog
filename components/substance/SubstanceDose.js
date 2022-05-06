@@ -5,7 +5,7 @@ import { styles } from './common'
 import { Row } from '../Util'
 import Table from './Table'
 import ROA from '../../data/ROA'
-import { TabButton } from '../Tabs'
+import { TabBar, TabButton } from '../Tabs'
 import { Source } from './Source'
 
 const psychonautRoas = Object.fromEntries(
@@ -95,7 +95,8 @@ export default function SubstanceDose({substance}) {
   const hasTripsitDose = !!(substance.formatted_dose || substance.dose_note)
   const hasBoth = hasPsychonautDose && hasTripsitDose
 
-  const [tripsit, setTripsit] = useState(!hasPsychonautDose)
+  const [tab, setTab] = useState(hasPsychonautDose ? 1 : 0)
+  const tripsit = (tab == 0)
 
   // TODO: Perhaps render the DoseChart asynchronously somehow?
 
@@ -103,16 +104,7 @@ export default function SubstanceDose({substance}) {
     <Title style={styles.header}>Dose</Title>
 
     {hasBoth && (<>
-      <Row style={{justifyContent: 'space-evenly'}}>
-        <TabButton active={tripsit} setActive={v => setTripsit(v)}>TripSit</TabButton>
-        <TabButton active={!tripsit} setActive={v => setTripsit(!v)}>Psychonaut</TabButton>
-      </Row>
-      <Row>
-        <View style={[
-          {width: '50%', height: 2, backgroundColor: theme.colors.primary},
-          !tripsit && {marginLeft: '50%'}
-        ]}/>
-      </Row>
+      <TabBar n={2} names={['TripSit', 'Psychonaut']} tab={tab} setTab={setTab}/>
     </>)}
 
     <View style={{backgroundColor: hasBoth && (theme.dark ? '#00000055' : '#0000000A'), marginHorizontal: -20, paddingHorizontal: 20, paddingVertical: 16}}>
