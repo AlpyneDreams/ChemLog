@@ -93,7 +93,7 @@ export default function SubstanceScreen({navigation, route}) {
       : null}
 
       {categories ?
-        <Row style={{marginTop: 8, flexWrap: 'wrap'}}>
+        <Row style={{marginTop: 8, alignItems: 'stretch', flexWrap: 'wrap'}}>
           {categories.map(c => <CategoryChip key={c.name} category={c.name} />)}
         </Row>
       : null}
