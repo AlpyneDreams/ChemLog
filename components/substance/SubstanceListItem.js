@@ -1,5 +1,5 @@
 import { useNavigation, useRoute, useScrollToTop, useTheme } from "@react-navigation/native"
-import React from "react"
+import React, { useRef } from "react"
 import { StyleSheet, View, FlatList, VirtualizedList } from "react-native"
 import { List, IconButton, Text } from "react-native-paper"
 import Haptics from '../../util/Haptics'
@@ -10,7 +10,7 @@ import { LayoutAnimation } from "react-native"
 import { LayoutAnims } from "../../util/Util"
 import SearchRanking from "../../util/SearchRanking"
 
-export function SubstanceListItem({item: s, priority: score = 0, swipeable, ...props}) {
+export function SubstanceListItem({item: s, priority: score = 0, swipeable, onLongPress, ...props}) {
 
   const theme = useTheme()
   const navigation = useNavigation()
@@ -42,7 +42,7 @@ export function SubstanceListItem({item: s, priority: score = 0, swipeable, ...p
       onLongPress={pickerMode ? () => {
         Haptics.longPress()
         navigation.navigate('Substance', {substance: s, pickerMode: true, returnTo})
-      } : null}
+      } : onLongPress}
       right={props =>  icon && <IconButton icon={icon} />}
       style={[
         {backgroundColor: theme.colors.background},
@@ -71,38 +71,57 @@ export function SwipeableSubstanceListItem(props) {
           icon='delete-forever'
           size={30}
           color='#fff'
-          style={[styles.actionIcon]}
+          style={right ? styles.rightIcon : styles.leftIcon}
+          onPress={() => {
+            removeRecentSubstance(props.item.name)
+            LayoutAnimation.configureNext(LayoutAnims.ease)
+            setRemoved(true)
+          }}
         />
       </RectButton>
     )
   }
 
+  const ref = useRef()
+
   return (
     <Swipeable
+      ref={ref}
       renderLeftActions={(progress, dragX) => renderSideActions(false, progress, dragX)}
       renderRightActions={(progress, dragX) => renderSideActions(true, progress, dragX)}
-      onSwipeableWillOpen={() => {
-        removeRecentSubstance(props.item.name)
-        LayoutAnimation.configureNext(LayoutAnims.ease)
-        setRemoved(true)
-      }}
+      overshootLeft={false}
+      overshootRight={false}
     >
       <View style={{maxHeight: removed ? 0 : 'auto'}}>
-        <SubstanceListItem swipeable={true} {...props} />
+        <SubstanceListItem
+          swipeable={true}
+          onLongPress={() => {
+            // Open side items if long pressed
+            Haptics.longPress()
+            ref.current.openLeft()
+          }}
+          {...props}
+        />
       </View>
     </Swipeable>
   )
 }
 
 const styles = StyleSheet.create({
+  red: {
+    backgroundColor: '#dd2c00',
+  },
   action: {
-    flex: 1,
+    //flex: 1,
+    paddingHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'flex-end',
     backgroundColor: '#dd2c00',
   },
-  actionIcon: {
-    width: 30,
-    marginHorizontal: 10
+  leftIcon: {
+    marginLeft: 4
   },
+  rightIcon: {
+    marginRight: 4
+  }
 });

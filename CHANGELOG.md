@@ -8,6 +8,8 @@
 - Improved the look and feel of settings
 - Improved new user experience
 - Adding a new dose will now go straight to the substance picker
+- Changed how you remove recent substances (Apple style instead of Gmail style - feedback appreciated)
+
 
 ## Beta 3.1.0
 
