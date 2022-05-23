@@ -57,7 +57,7 @@ export default function InputDate({value, onChange}) {
   return (<InputExpand title='Add time &amp; date' startOpen={true} icon='clock' style={{marginTop: 12}}>
     <GenericInput 
       label='Date'
-      mode='outlined'
+      mode='flat'
       value={date.format('MMM D, YYYY')}
       focused={datePicker}
       style={{flex: 1}}
@@ -74,7 +74,7 @@ export default function InputDate({value, onChange}) {
     )}
     <GenericInput 
       label='Time'
-      mode='outlined'
+      mode='flat'
       value={date.format('HH:mm')}
       focused={timePicker}
       style={{marginStart: 8, flex: 1}}

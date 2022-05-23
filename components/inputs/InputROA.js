@@ -33,7 +33,7 @@ export default function InputROA({value, onChange, startOpen = false}) {
       <View style={{flex: 1}}>
         <DropDown
           label='Route'
-          mode='outlined'
+          mode='flat'
           dropDownContainerMaxHeight={300}
           visible={open}
           showDropDown={() => setOpen(true)}

@@ -57,12 +57,12 @@ export default function AddStash({route}) {
       />
       <TextInput
         label='Nickname'
-        mode='outlined'
+        mode='flat'
         style={{marginTop: 12}}
       />
       <TextInput
         label='Label'
-        mode='outlined'
+        mode='flat'
         style={{marginTop: 12}}
       />
       <InputAmount

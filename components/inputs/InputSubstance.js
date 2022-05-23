@@ -26,7 +26,7 @@ export default function InputSubstance({value: substance, onChange, returnTo}) {
   return (
     <GenericInput
       label='Substance'
-      mode='outlined'
+      mode='flat'
       value={substance?.pretty_name}
       left={substance ? <TextInput.Icon name={substance.icon} color={substance.color}/> : null}
       right={<TextInput.Icon name='menu-down'/>}

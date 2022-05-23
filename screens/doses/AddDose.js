@@ -125,7 +125,7 @@ export class AddDose extends Component {
             autoFocus={focusNotes}
             ref={this.textInput}
             onLayout={(e) => {focusNotes && this.textInput.current.focus()}}
-            mode='outlined'
+            mode='flat'
             multiline={true}
             style={{flex: 1}}
             value={this.state.notes}
