@@ -1,7 +1,7 @@
-import { useScrollToTop, useTheme, useRoute } from "@react-navigation/native"
+import { useScrollToTop, useTheme, useRoute, useNavigation } from "@react-navigation/native"
 import React from "react"
 import { StyleSheet, View, FlatList, VirtualizedList, InteractionManager, ScrollView } from "react-native"
-import { Text, List, ActivityIndicator, IconButton, Searchbar, Chip } from "react-native-paper"
+import { Text, List, ActivityIndicator, IconButton, Searchbar, Chip, Button } from "react-native-paper"
 import Substances from '../../store/Substances'
 import { categories, categories as CATEGORIES } from "../../store/Categories"
 import CategoryChip from "../../components/substance/CategoryChip"
@@ -180,6 +180,10 @@ const substanceEntries = substances.map((value, i) => [i, value])
 export default function SubstanceList() {
 
   const theme = useTheme()
+  const route = useRoute()
+  const navigation = useNavigation()
+  
+  const {pickerMode, skipButton, returnTo} = route?.params ?? {}
 
   const scrollRef = React.useRef(null)
   useScrollToTop(scrollRef)
@@ -192,6 +196,21 @@ export default function SubstanceList() {
 
   const [loading, setLoading] = React.useState(false)
   const [list, setList] = React.useState(substanceEntries)
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: skipButton ? () => 
+        <Button
+          mode='flat'
+          style={{marginEnd: 8, borderRadius: 20}}
+          uppercase={false}
+          onPress={() => 
+            navigation.navigate({name: returnTo, params: {substance: null}, merge: true})
+          }
+        >Skip</Button>
+      : null
+    })
+  }, [navigation, route])
 
   function updateList(query, cats) {
     setLoading(true)
@@ -229,7 +248,6 @@ export default function SubstanceList() {
   // TODO: Is it better to update FlatList.data or conditionally hide items in renderItem?
   
   // In pickerMode we have a top bar
-  const pickerMode = useRoute()?.params?.pickerMode
   const Wrapper = pickerMode ? View : SafeAreaView
 
   const tabBarHeight = pickerMode ? 0 : useBottomTabBarHeight()

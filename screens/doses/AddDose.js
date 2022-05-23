@@ -52,6 +52,13 @@ export class AddDose extends Component {
         >{!edit ? 'Add' : 'Save'}</Button>
       )
     })
+
+    // For new doses, go straight to substance picker
+    if (!edit && !this.state.substance && !this.props.route.params?.substance) {
+      this.navigation.navigate('SubstancePicker', {
+        current: null, returnTo: 'AddDose', skipButton: true
+      })
+    }
   }
 
   submit(edit, dose) {
