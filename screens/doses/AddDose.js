@@ -107,6 +107,10 @@ export class AddDose extends Component {
           onChange={substance => this.setState({substance})}
           returnTo={!edit ? 'AddDose' : 'EditDose'}
         />
+        <InputDate 
+          value={this.state.date}
+          onChange={date => this.setState({date})}
+        />
         <InputAmount
           amount={this.state.amount}
           onChangeAmount={amount => this.setState({amount})}
@@ -128,10 +132,6 @@ export class AddDose extends Component {
             onChangeText={notes => this.setState({notes})}
           />
         </InputExpand>
-        <InputDate 
-          value={this.state.date}
-          onChange={date => this.setState({date})}
-        />
         <FAB
           icon={edit ? 'pencil' : 'plus'}
           uppercase={false}

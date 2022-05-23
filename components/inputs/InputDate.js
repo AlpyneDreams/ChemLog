@@ -54,7 +54,7 @@ export default function InputDate({value, onChange}) {
     onChange(val)
   }
 
-  return (<InputExpand title='Change time & date' startOpen={!dimText} icon='clock' style={{marginTop: 12}}>
+  return (<InputExpand title='Add time &amp; date' startOpen={true} icon='clock' style={{marginTop: 12}}>
     <GenericInput 
       label='Date'
       mode='outlined'
