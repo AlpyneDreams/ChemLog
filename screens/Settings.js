@@ -21,7 +21,6 @@ export function Settings() {
   const theme = useTheme()
   const {prefs: {darkTheme, screenLock, dataSource}, setDarkTheme, setDataSource} = UserData.useContext()
 
-  const [themePicker, showThemePicker] = React.useState(false)
   const [devMenu, setDevMenu] = React.useState(false)
 
   function Version() {
@@ -61,22 +60,12 @@ export function Settings() {
         <List.Subheader>General</List.Subheader>
         <List.Item
           title='Theme'
-          onPress={() => showThemePicker(true)}
         />
         <ToggleButton.Row value={darkTheme} onValueChange={setDarkTheme} style={styles.btnRow}>
           <ToggleButton icon={() => <Text>Default</Text>} value={null} style={{minWidth: 80}} />
           <ToggleButton icon={() => <IconText icon='brightness-4'>Dark</IconText>} value={true} style={{minWidth: 80}} />
           <ToggleButton icon={() => <IconText icon='brightness-7'>Light</IconText>} value={false} style={{minWidth: 80}} />
         </ToggleButton.Row>
-        <ChooseDialog
-          title='Choose theme'
-          state={[themePicker, showThemePicker]}
-          options={{
-            Light: false, Dark: true, 'System default': null
-          }}
-          value={darkTheme}
-          onChange={setDarkTheme}
-        />
         <List.Item
           title='Preferred Source'
           description='Default tab for substance dose and duration data'
