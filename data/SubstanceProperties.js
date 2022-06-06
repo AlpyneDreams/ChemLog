@@ -7,6 +7,7 @@ export default {
     'obtain': 'Obtain',
     'risks': 'Risks',
     'mdma': 'MDMA',
+    'warning': 'Warning'
   },
 
   // Colors must be in #rrggbb format only.
