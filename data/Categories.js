@@ -34,7 +34,7 @@ export const _categories = {
   },
   benzodiazepine: {
     color: '#59359a',
-    icon: require('../assets/icons/benzo.png')
+    icon: require('../assets/icons/tablet.png')
   },
   deliriant: {
     color: '#984c0c',
