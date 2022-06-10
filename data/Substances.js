@@ -53,6 +53,9 @@ export const _substances = {
   peyote: {
     psychonaut: 'Lophophora_williamsii' // Golly
   },
+  dxm: {
+    psychonaut: 'Dextromethorphan'
+  },
 
 /// CUSTOM SUBSTANCES ///
 
