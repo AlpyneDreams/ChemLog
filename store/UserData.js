@@ -12,7 +12,7 @@ const defaultUserData = {
     darkTheme: null,
     dataSource: 'psychonaut', // 'tripsit' or 'psychonaut'
     screenLock: false,
-    autoLock: 5000,
+    autoLock: 60000,
     compactDoseCards: false,
   },
   recentSubstances: [],

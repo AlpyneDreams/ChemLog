@@ -116,11 +116,11 @@ function AutoLockSettings({enabled, value, onChange}) {
 
   let description = 'Lock screen after a period of inactivity'
   if (value > 0) {
-    description = `Lock screen after ${dayjs.duration(value).humanize()} of inactivity`
+    description = `Lock screen after ${value < 60000 ? `${value / 1000} seconds` : dayjs.duration(value).humanize()} of inactivity`
   } else if (value === 0) {
     description = 'Lock screen immediately when inactive'
   } else if (value < 0) {
-    description = `Off`
+    description = `Screen will not be locked automatically`
   }
 
   return (<>
@@ -130,13 +130,18 @@ function AutoLockSettings({enabled, value, onChange}) {
       onPress={() => showPicker(true)}
     />
     <ChooseDialog
-      title='Auto-lock'
+      title='Auto-lock timeout'
       state={[picker, showPicker]}
       options={{
         'Immediately':  0,
+        '5 seconds':    5 * 1000,
+        '15 seconds':  15 * 1000,
+        '30 seconds':  30 * 1000,
         '1 minute':     1 * 1000 * 60,
+        '2 minutes':    2 * 1000 * 60,
         '5 minutes':    5 * 1000 * 60,
-        '1 hour':      60 * 1000 * 60,
+        '10 minutes':  10 * 1000 * 60,
+        '30 minutes':  30 * 1000 * 60,
         'Off':         -1,
       }}
       value={value} onChange={onChange}
