@@ -128,7 +128,7 @@ function getScore(name, query, queryLength, index, extra = 0) {
 }
 
 function performSearch(substances, query) {
-  query = query.toLowerCase()
+  query = query.toLowerCase().trim()
   const queryLen = query.length
 
   const queue = []
