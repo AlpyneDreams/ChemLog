@@ -1,7 +1,7 @@
 import { useTheme } from '@react-navigation/native'
 import React, { useState } from 'react'
-import { View } from 'react-native'
-import { IconButton, Text, Button, Subheading, Headline, Title, Divider, ActivityIndicator } from 'react-native-paper'
+import { Pressable, View } from 'react-native'
+import { IconButton, Text, Button, Subheading, Headline, Title, Divider, ActivityIndicator, Snackbar } from 'react-native-paper'
 import ConfirmDialog from '../components/dialogs/ConfirmDialog'
 import { Row } from '../components/Util'
 import dayjs from 'dayjs'
@@ -16,6 +16,8 @@ import DoseEntry from '../components/doses/DoseEntry'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useEffect } from 'react/cjs/react.development'
 import DateGroupedList from '../components/DateGroupedList'
+import * as Clipboard from 'expo-clipboard'
+import Haptics from '../util/Haptics'
 
 export default function ItemDetails({navigation, route}) {
   let item = route.params.dose ?? route.params.stash
@@ -62,9 +64,18 @@ export default function ItemDetails({navigation, route}) {
   const dateDate = date.calendar(null, CALENDAR_DATE_ONLY_COMPACT)
   const dateTime = date.format('HH:mm')
 
+  const [copied, setCopied] = useState(false)
+
+  // Long press notes to copy to clipboard
+  let longPressNote = !!item.notes ? (() => {
+    Haptics.longPress()
+    Clipboard.setString(item.notes)
+    setCopied(true)
+  }) : (() => {})
+
   return (
-  <ScrollView>
-    <View style={{padding: 16}}>
+  <ScrollView contentContainerStyle={{minHeight: '100%'}}>
+    <View style={{padding: 16, height: '100%', paddingBottom: 60}}>
       {!note ? <>
         <Row>
           <Stat label='Substance'>
@@ -81,17 +92,19 @@ export default function ItemDetails({navigation, route}) {
         <Stat label='Date' value={dateDate} visible={date.isValid()} />
         <Stat label='Time' value={dateTime} visible={date.isValid()} />
       </Row>
-      <Row>
-        <Stat label={note ? 'Note' : 'Notes'}>
-          <Text style={{paddingLeft: 8, marginVertical: 6, fontSize: 15, lineHeight: 20}}>
-            {
-              item.notes 
-              || <Button uppercase={false} icon={ICON_ADD_NOTE} onPress={() => edit({focus: 'notes'})}>
-                Add Notes
-              </Button>
-            }
-          </Text>
-        </Stat>
+      <Row style={{flex: 1}}>
+        <Pressable style={{flex: 1}} onLongPress={longPressNote}>
+          <Stat label={note ? 'Note' : 'Notes'}>
+            <Text style={{paddingLeft: 8, marginVertical: 6, fontSize: 15, lineHeight: 20}}>
+              {
+                item.notes 
+                || <Button uppercase={false} icon={ICON_ADD_NOTE} onPress={() => edit({focus: 'notes'})}>
+                  Add Notes
+                </Button>
+              }
+            </Text>
+          </Stat>
+        </Pressable>
       </Row>
     </View>
     {!entry &&
@@ -102,6 +115,7 @@ export default function ItemDetails({navigation, route}) {
       </Card>*/}
     {/*<Text style={{fontFamily: 'monospace', color: useTheme().colors.text}}>{JSON.stringify(dose, null, 4)}</Text>*/}
     <ConfirmDialog title={`Delete this ${type}?`} acceptLabel='Delete' state={[dialog, setDialog]} onAccept={deleteItem} />
+    <Snackbar visible={copied} duration={1000} onDismiss={() => setCopied(false)}>Copied note to clipboard.</Snackbar>
   </ScrollView>
   )
 }
