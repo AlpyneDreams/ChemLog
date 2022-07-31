@@ -7,13 +7,13 @@ export default function Table({title, data}) {
   return (
     <Card style={{ marginBottom: 12 }} mode='elevated' key={title}>
       <DataTable>
-        {title &&
+        {title ?
           <DataTable.Header>
             <DataTable.Title>
               <Text style={{ fontSize: 15, color: theme.colors.placeholder }}>{title}</Text>
             </DataTable.Title>
           </DataTable.Header>
-        }
+        : null}
         {Object.entries(data).map(
           ([key, value]) =>
           <DataTable.Row key={key}>

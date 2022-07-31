@@ -124,8 +124,15 @@ function DoseChart({substance, theme, tripsit}) {
   let tables = []
   if (substance.psychonaut && !tripsit) { // Psychonaut: Charts!
 
+    if (!substance.psychonaut.roas)
+      return <></>
+
     for (const roa of substance.psychonaut.roas) {
       let {dose} = roa
+
+      if (!dose)
+        continue
+      
       let ranges = [
         [dose.threshold, dose.light.min],
         [dose.light.min,  dose.light.max],
