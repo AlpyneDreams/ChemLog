@@ -53,7 +53,7 @@ function UserDataProvider({children}) {
     setDataSource: (dataSource) => update({prefs: {dataSource}}),
     setScreenLock: (screenLock) => update({prefs: {screenLock}}),
     setAutoLock: (autoLock) => update({prefs: {autoLock}}),
-    addRecentSubstance: (id) => {
+    addRecentSubstance: async (id) => {
       let idx = state.recentSubstances.indexOf(id)
       if (idx >= 0) {
         state.recentSubstances.splice(idx, 1)
