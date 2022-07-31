@@ -49,9 +49,9 @@ export default function Switch({
             style={[
               styles.thumb,
               hasColor ? {
-                backgroundColor: thumbColor ?? theme.colors.accent
+                backgroundColor: thumbColor ?? Colors.teal400
               } : {
-                backgroundColor: theme.dark ? theme.colors.disabled : Colors.grey400
+                backgroundColor: theme.dark ? Colors.grey500 : Colors.grey400
               }
             ]}
           />
