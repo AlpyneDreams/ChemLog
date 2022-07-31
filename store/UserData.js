@@ -12,14 +12,16 @@ const defaultUserData = {
     darkTheme: null,
     dataSource: 'psychonaut', // 'tripsit' or 'psychonaut'
     screenLock: false,
-    autoLock: 5000
+    autoLock: 5000,
+    compactDoseCards: false,
   },
   recentSubstances: [],
 
   setDarkTheme: () => {},
   setDataSource: () => {},
   setScreenLock: () => {},
-  setAutoLock: () => {}
+  setAutoLock: () => {},
+  setCompactDoseCards: () => {}
 }
 
 async function load() {
@@ -53,6 +55,7 @@ function UserDataProvider({children}) {
     setDataSource: (dataSource) => update({prefs: {dataSource}}),
     setScreenLock: (screenLock) => update({prefs: {screenLock}}),
     setAutoLock: (autoLock) => update({prefs: {autoLock}}),
+    setCompactDoseCards: (compactDoseCards) => update({prefs: {compactDoseCards}}),
     addRecentSubstance: async (id) => {
       let idx = state.recentSubstances.indexOf(id)
       if (idx >= 0) {

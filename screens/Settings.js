@@ -8,6 +8,7 @@ import { DevMenu } from './DevMenu'
 import { useNavigation } from '@react-navigation/native'
 import { Row } from '../components/Util'
 import { Icon } from '../components/Icon'
+import Switch from '../components/Switch'
 
 function IconText({icon, children}) {
   return <Row>
@@ -19,7 +20,7 @@ function IconText({icon, children}) {
 export function Settings() {
   const navigation = useNavigation()
   const theme = useTheme()
-  const {prefs: {darkTheme, screenLock, dataSource}, setDarkTheme, setDataSource} = UserData.useContext()
+  const {prefs: {darkTheme, screenLock, dataSource, compactDoseCards}, setDarkTheme, setDataSource, setCompactDoseCards} = UserData.useContext()
 
   const [devMenu, setDevMenu] = React.useState(false)
 
@@ -74,6 +75,14 @@ export function Settings() {
           <ToggleButton icon={() => <Text>TripSit</Text>} value='tripsit' style={{minWidth: 80}} />
           <ToggleButton icon={() => <Text>Psychonaut</Text>} value='psychonaut' style={{minWidth: 100}} />
         </ToggleButton.Row>
+        <List.Item
+          title='Compact dose cards'
+          description="Use compact layout in the dose list"
+          right={() => 
+            <Switch value={compactDoseCards} onValueChange={setCompactDoseCards} />
+          }
+          onPress={() => {setCompactDoseCards(!compactDoseCards)}}
+        />
         <Divider/>
         <Version/>
         {devMenu && <DevMenu/>}

@@ -10,6 +10,7 @@
 - Adding a new dose will now go straight to the substance picker
 - Changed how you remove recent substances (Apple style instead of Gmail style - feedback appreciated)
 - Long press notes to copy to clipboard
+- Add compact dose cards option
 
 ## Beta 3.1.0
 

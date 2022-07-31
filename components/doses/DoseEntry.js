@@ -7,6 +7,7 @@ import { Row } from '../Util'
 import { LOCALE_COMPACT } from '../../util/dayjs'
 import Substances from '../../store/Substances'
 import { DAY_MS } from '../../util/Util'
+import UserData from '../../store/UserData'
 
 function NoteText({children}) {
   return (
@@ -48,6 +49,7 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
     }
   }
   const onLongPress = list ? () => list.onLongPress(selected, hooks) : null
+  const {prefs: {compactDoseCards}} = UserData.useContext()
 
   const substance = Substances[dose.substance]
 
@@ -95,8 +97,14 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
       ) : ( // Dose
         <View pointerEvents='none'>
         <List.Item
-          title={dose.substanceName}
-          description={dose.amount ? `${dose.amount} ${dose.unit??''}` : null}
+          title={compactDoseCards && dose.amount
+            ? <Text>{dose.substanceName} <Text style={{color: theme.colors.disabled}}>{dose.amount} {dose.unit??''}</Text></Text>
+            : dose.substanceName}
+          description={compactDoseCards
+            ? (dose.notes ?? null)
+            : (dose.amount ? `${dose.amount} ${dose.unit??''}` : null)
+          }
+          descriptionNumberOfLines={10}
 
           // Left: substance icon or checkbox
           left={() => selecting
@@ -122,7 +130,7 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
             </View>
           : null}
         />
-        {dose.notes ? <>
+        {!compactDoseCards && dose.notes ? <>
           <Divider/>
           <View style={{padding: 16}}>
             <NoteText>
