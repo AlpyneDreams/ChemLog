@@ -30,12 +30,16 @@ export function Bold(props) {
   return <Text {...props} style={[props?.style, {fontWeight: 'bold'}]} />
 }
 
+export function Underline(props) {
+  return <Text {...props} style={[props?.style, {textDecorationLine: 'underline'}]} />
+}
+
 export function CloseBackButton({navigation}) {
   navigation = navigation ?? useNavigation()
   return <IconButton icon='close' onPress={() => navigation.goBack()}/>
 }
 
-export function CardCollapse({ titleProps, children, ...props }) {
+export function CardCollapse({ titleProps, startOpen=true, children, ...props }) {
   const [collapsed, setCollapsed] = React.useState(false)
   const toggle = () => {
     LayoutAnimation.configureNext(LayoutAnims.ease)
@@ -52,7 +56,10 @@ export function CardCollapse({ titleProps, children, ...props }) {
           <IconButton icon={collapsed ? 'chevron-down' : 'chevron-up'} color={titleProps?.titleStyle?.color} />
         </Row>
       </TouchableRipple>
-      {!collapsed ? children : null}
+      {/* Cannot use display: 'none' or null components as LayoutAnimation breaks TextInput label rendering */}
+      <View style={collapsed ? { height: 0, opacity: 0 } : {}}>
+        {children}
+      </View>
     </Card>
   )
 }

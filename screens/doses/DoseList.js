@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react'
 import { useEffect } from 'react';
 import { View, StyleSheet, ToastAndroid, Vibration, ScrollView } from 'react-native'
-import { FAB, IconButton, List, Text, Snackbar, Menu, Portal, ActivityIndicator, Headline, Subheading, useTheme, Button } from 'react-native-paper';
+import { FAB, IconButton, List, Text, Snackbar, Menu, Portal, ActivityIndicator, Headline, Subheading, useTheme, Button, Divider } from 'react-native-paper';
 import { Dose, DoseStorage } from '../../store/Dose'
 import { useNavigation } from '@react-navigation/native'
 import Haptics from '../../util/Haptics'
@@ -40,6 +40,8 @@ function HomeContextMenu({select, selectAll}) {
       <Menu.Item title="Settings" onPress={doAndClose(() => navigation.navigate('Settings'))} />
       <Menu.Item onPress={doAndClose(select)} title="Select" />
       <Menu.Item onPress={doAndClose(selectAll)} title="Select all" />
+      <Divider/>
+      <Menu.Item onPress={() => {}} title="DXM Calculator" />
     </Menu>
   )
 }

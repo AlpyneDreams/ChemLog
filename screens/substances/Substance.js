@@ -16,6 +16,7 @@ import { HeaderTitle } from '@react-navigation/elements'
 import { Icon } from '../../components/Icon'
 import { LayoutAnims } from '../../util/Util'
 import SubstanceHistory from '../../components/substance/SubstanceHistory'
+import DXMCalc from '../../components/DXMCalc'
 
 export default function SubstanceScreen({navigation, route}) {
 
@@ -136,9 +137,14 @@ export default function SubstanceScreen({navigation, route}) {
       
       {showHRT && <HRTResources/>}
 
+      {substance.name == 'dxm' && <>
+        <DXMCalc startOpen={false} />
+        <Divider/>
+      </>}
+
     </View><Divider/>
       
-      <SubstanceHistory substance={substance} />
+    <SubstanceHistory substance={substance} />
 
     <View style={{paddingHorizontal: 20}}>
 

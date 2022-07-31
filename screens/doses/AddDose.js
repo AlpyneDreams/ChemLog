@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import { View } from "react-native";
 import { Title, Button, FAB, List, TextInput, IconButton, withTheme } from 'react-native-paper';
 import DropDown from 'react-native-paper-dropdown'
@@ -13,6 +13,7 @@ import Substances from '../../store/Substances'
 import UserData from '../../store/UserData';
 import GenericInput from '../../components/inputs/GenericInput';
 import InputSubstance from '../../components/inputs/InputSubstance';
+import DXMCalc from '../../components/DXMCalc';
 
 export class AddDose extends Component {
   static contextType = UserData.Context
@@ -100,8 +101,8 @@ export class AddDose extends Component {
     const focusNotes = (focus === 'notes')
     const noteOpen = (edit && oldDose.notes) || focusNotes
 
-    return (
-      <View style={{padding: 12, height: '100%'}}>
+    return (<View>
+      <ScrollView style={{padding: 12, height: '100%'}}>
         <InputSubstance
           value={substance}
           onChange={substance => this.setState({substance})}
@@ -118,8 +119,11 @@ export class AddDose extends Component {
           onChangeUnit={unit => this.setState({unit})}
           startOpen={edit && oldDose.amount}
         />
+        {substance && substance.name == 'dxm' &&
+          <DXMCalc/>
+        }
         <InputROA value={this.state.roa} onChange={roa => this.setState({roa})} startOpen={edit && oldDose.roa} />
-        <InputExpand title='Add notes' icon='note' style={{marginTop: 12}} startOpen={noteOpen}>
+        <InputExpand title='Add notes' icon='note' style={{marginVertical: 12}} startOpen={noteOpen}>
           <TextInput
             placeholder='Add notes'
             autoFocus={focusNotes}
@@ -132,19 +136,20 @@ export class AddDose extends Component {
             onChangeText={notes => this.setState({notes})}
           />
         </InputExpand>
-        <FAB
-          icon={edit ? 'pencil' : 'plus'}
-          uppercase={false}
-          label={edit ? 'Save' : 'Add'}
-          disabled={!this.state.substance}
-          style={[{
-            position: 'absolute', bottom: 8, right: 0,
-            margin: 16,
-          }, !this.state.substance ? null : {backgroundColor: theme.colors.primary} ]}
-          onPress={() => this.submit(edit, oldDose)}
-        />
-      </View>
-    )  
+        <View style={{height: 200}}/>
+      </ScrollView>
+      <FAB
+        icon={edit ? 'pencil' : 'plus'}
+        uppercase={false}
+        label={edit ? 'Save' : 'Add'}
+        disabled={!this.state.substance}
+        style={[{
+          position: 'absolute', bottom: 8, right: 0,
+          margin: 16,
+        }, !this.state.substance ? null : {backgroundColor: theme.colors.primary} ]}
+        onPress={() => this.submit(edit, oldDose)}
+      />
+    </View>)  
   }
 }
 

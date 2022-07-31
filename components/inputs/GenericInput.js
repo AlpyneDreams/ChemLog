@@ -12,6 +12,7 @@ export default function GenericInput({
   onPress,
   style,
   dimText,
+  icon,
   ...props
 }) {
   const theme = useTheme()
@@ -26,6 +27,8 @@ export default function GenericInput({
         <TextInput
           label={label}
           value={value}
+          right={icon && <TextInput.Icon name={icon} />}
+          spellCheck={false}
           {...props}
           outlineColor={focused ? colors.primary : null}
           underlineColor={focused ? colors.primary : null}
