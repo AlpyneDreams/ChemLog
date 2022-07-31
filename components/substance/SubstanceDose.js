@@ -15,22 +15,13 @@ export const psychonautRoas = Object.fromEntries(
 
 // TODO: Standardize dose ranges (e.g. Light, Common, Strong, Heavy, Threshold, ...)
 
-// Colors for each dose range
-const doseBarColors = [
-  Colors.cyan400,   // Threshold
-  Colors.green700,  // Light
-  Colors.orange700, // Common
-  Colors.red700     // Stron
-]
-
-// Names for each dose range
-const doseRangeNames = [
-  'Threshold',
-  'Light',
-  'Common',
-  'Strong',
-  'Heavy'
-]
+const DOSE_RANGES = {
+  Threshold: {name: 'Threshold', color: Colors.cyan400},
+  Light:     {name: 'Light', color: Colors.green700},
+  Common:    {name: 'Common', color: Colors.orange700},
+  Strong:    {name: 'Strong', color: Colors.red700},
+  Heavy:     {name: 'Heavy'}
+}
 
 /** One range on the number line of possible doses.
  *  Bar + bottom label + left label [+ right label] */
@@ -54,30 +45,26 @@ function DoseBar({size=1, name='', color, left='', right=''}) {
 }
 
 /** Number line showing different ranges of doses  */
-function DoseBars({ranges=[], unit}) {
-  let min = ranges[0][0]
-  let max = ranges[ranges.length-1][1]
+function DoseBars({ranges=[], unit, min, max}) {
   let range = max - min
   let bars = []
-  for (let i = 0; i < ranges.length; i++) {
-    let [value, next] = ranges[i]
 
-    // Skip ranges of length zero
-    if (value === next)
-      continue
-    
-      bars.push(
+  // Skip ranges of length zero
+  ranges = ranges.filter(r => (r.min !== r.max) && (r.min != null && r.max != null))
+
+  for (let i = 0; i < ranges.length; i++) {
+    let {type, min: left, max: right} = ranges[i]
+
+    bars.push(
       <DoseBar
-        key={i}
-        name={doseRangeNames[i % doseRangeNames.length]}
-        color={doseBarColors[i % doseBarColors.length]}
+        key={i} name={type.name} color={type.color}
         // Dose label
-        left={`${value}\u200A${unit}`}  // U+200A HAIR SPACE
+        left={`${left}\u200A${unit}`}  // U+200A HAIR SPACE
         // Last bar shows the "heavy" dose on the right
-        right={i === ranges.length - 2 && `${next}\u200A${unit}`} 
+        right={i === ranges.length - 1 && `${right}\u200A${unit}`} 
         
         // Enforce a minimum size of 20% so small ranges are still visible 
-        size={Math.max(0.2 * range, next - value)}
+        size={Math.max(0.2 * range, right - left)}
       />
     )
   }
@@ -134,12 +121,21 @@ function DoseChart({substance, theme, tripsit}) {
         continue
       
       let ranges = [
-        [dose.threshold, dose.light.min],
-        [dose.light.min,  dose.light.max],
-        [dose.common.min, dose.common.max],
-        [dose.strong.min, dose.strong.max],
-        [dose.strong.max, dose.heavy],
+        {type: DOSE_RANGES.Threshold, min: dose.threshold, max: dose.light?.min},
+        {type: DOSE_RANGES.Light, min: dose.light?.min, max: dose.light?.max},
+        {type: DOSE_RANGES.Common, min: dose.common?.min, max: dose.common?.max},
+        {type: DOSE_RANGES.Strong, min: dose.strong?.min, max: dose.strong?.max},
+        {type: DOSE_RANGES.Heavy, min: dose.strong?.max, max: dose.heavy ?? dose.strong?.max},
       ]
+
+      let min = Number.POSITIVE_INFINITY, max = Number.NEGATIVE_INFINITY
+      for (const {min: a, max: b} of ranges) {
+        for (const value of [a, b]) {
+          if (value < min) min = value
+          if (value > max) max = value
+        }
+      }
+
       let unit = roa.dose.units
       let name = roa.name
 
@@ -152,7 +148,7 @@ function DoseChart({substance, theme, tripsit}) {
       tables.push(
         <View key={roa.name} style={{marginVertical: 12}}>
           <Subheading style={{marginBottom: 0, textAlign: 'center'}}>{name}</Subheading>
-          <DoseBars ranges={ranges} unit={unit} />
+          <DoseBars ranges={ranges} unit={unit} min={min} max={max} />
         </View>
       )
     }
