@@ -65,7 +65,7 @@ function Home({ navigation, route }) {
           title: 'Doses', tabBarLabel: 'Doses',
           headerStyle: {backgroundColor: theme.colors.background, elevation: 0},
           tabBarIcon: ({focused, color, size}) => 
-            <IconButton icon={focused ? 'beaker' : 'beaker-outline'} color={color} size={size} />
+            <IconButton icon={focused ? 'beaker' : 'beaker-outline'} iconColor={color} size={size} />
         }}
       />
       {/*<Tab.Screen
@@ -75,7 +75,7 @@ function Home({ navigation, route }) {
           title: 'Stashes', tabBarLabel: 'Stashes',
           headerStyle: {backgroundColor: theme.colors.background, elevation: 0},
           tabBarIcon: ({focused, color, size}) => 
-            <IconButton icon={focused ? 'archive' : 'archive-outline'} color={color} size={size} />
+            <IconButton icon={focused ? 'archive' : 'archive-outline'} iconColor={color} size={size} />
         }}
       />*/}
       <Tab.Screen
@@ -86,7 +86,7 @@ function Home({ navigation, route }) {
           unmountOnBlur: true,
           headerShown: false,
           tabBarIcon: ({focused, color, size}) => 
-            <IconButton icon='pill' color={color} size={size} />
+            <IconButton icon='pill' iconColor={color} size={size} />
         }}
       />
     </Tab.Navigator>

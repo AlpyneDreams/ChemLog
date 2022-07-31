@@ -114,7 +114,7 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
                   color={theme.colors.primary}
                 />
               </View>
-            : <IconButton style={styles.left} color={substance?.color} icon={substance?.icon} />
+            : <IconButton style={styles.left} iconColor={substance?.color} icon={substance?.icon} />
           }
 
           // Right: relative time
