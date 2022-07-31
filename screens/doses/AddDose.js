@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import { View } from "react-native";
 import { Title, Button, FAB, List, TextInput, IconButton, withTheme } from 'react-native-paper';
 import DropDown from 'react-native-paper-dropdown'
@@ -101,6 +101,7 @@ export class AddDose extends Component {
     const noteOpen = (edit && oldDose.notes) || focusNotes
 
     return (
+    <ScrollView>
       <View style={{padding: 12, height: '100%'}}>
         <InputSubstance
           value={substance}
@@ -144,6 +145,7 @@ export class AddDose extends Component {
           onPress={() => this.submit(edit, oldDose)}
         />
       </View>
+    </ScrollView>
     )  
   }
 }
