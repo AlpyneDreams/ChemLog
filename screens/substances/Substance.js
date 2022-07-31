@@ -71,8 +71,8 @@ export default function SubstanceScreen({navigation, route}) {
   if (!substance)
     return <Title style={{paddingHorizontal: 20}}>Error: Unknown substance '{id}'</Title>
 
-  let aliases = substance.properties?.aliases ?? substance.aliases
-  let categories = substance.properties?.categories ?? substance.categories
+  let aliases = substance.properties?.aliases ?? substance.aliases ?? []
+  let categories = substance.properties?.categories ?? substance.categories ?? []
 
   const hrt    = substance.custom && categories.includes('hormonal')
   const [showHRT, setShowHRT] = React.useState(false)

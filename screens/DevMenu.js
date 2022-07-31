@@ -2,6 +2,8 @@ import React from 'react'
 import { Alert, DevSettings, Share, View } from 'react-native'
 import { RadioButton, Dialog, List, Portal, Divider, Text, TextInput, useTheme } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Substances from '../store/Substances'
+import { useNavigation } from '@react-navigation/native'
 
 // TODO: There was already a dev menu implemented in a git stash on
 // another computer somewhere. There was also a version with import/export.
@@ -9,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export function DevMenu() {
   const theme = useTheme()
+  const navigation = useNavigation()
   
   // Dump the entire data store
   const [keys, setKeys] = React.useState([])
@@ -39,6 +42,22 @@ export function DevMenu() {
       </View>)}
 
       <Divider style={{backgroundColor: theme.colors.text, marginTop: 8}}/>
+
+      <List.Item
+        title="Run Through Substances"
+        description="This will rapid-fire render every substance's page. Restart app to cancel."
+        onPress={() => {
+          let i = 0
+          let list = Object.values(Substances)
+          setInterval(() => {
+            if (i >= list.length)
+              return clearInterval(this)
+            const substance = list[i++]
+            console.log(substance.name)
+            navigation.navigate('Substance', {substance})
+          }, 300)
+        }}
+      />
       
       <List.Item
         title="Export Data"
