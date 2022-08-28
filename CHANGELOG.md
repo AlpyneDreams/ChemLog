@@ -1,16 +1,26 @@
 ## Beta 3.2.0
 
-- Add data from PsychonautWiki with fancy graphics and various new details
+An update has been released that adds data from PsychonautWiki, a basic screen lock, and many new tweaks and features.
+
+[Download for Android](https://github.com/AlpyneDreams/ChemLog/releases/download/v3.2.0-beta/ChemLog-v3.2.0-beta-android.apk)
+
+If you find any bugs, please [report them on GitHub](https://github.com/AlpyneDreams/ChemLog/issues/new).
+
+Features
+- Added gorgeous new logo designed by Margot Amore
+- Added data from PsychonautWiki with fancy graphics and various new details
   - Switch between PsychonautWiki & TripSit data with a tab
-  - Set your default tab in settings
-- Add a basic screen lock feature to deter snooping
+  - Set your preferred information source in settings
+- Added a basic screen lock feature to deter snooping
   - Can auto-lock after a period of inactivity
 - Improved the look and feel of settings
 - Improved new user experience
-- Adding a new dose will now go straight to the substance picker
-- Changed how you remove recent substances (Apple style instead of Gmail style - feedback appreciated)
 - Long press notes to copy to clipboard
 - Add compact dose cards option
+
+Tweaks
+- Adding a new dose will now go straight to the substance picker
+- Changed how you remove recent substances (Apple style instead of Gmail style - feedback appreciated)
 
 ## Beta 3.1.0
 
