@@ -72,10 +72,9 @@ export function useAppStateEffect(listener) {
   }
 
   useEffect(() => {
-    AppState.addEventListener('change', appStateChanged)
-    // Can't use listener.remove because addEventListener is returning undefined
+    let listener = AppState.addEventListener('change', appStateChanged)
     return () => {
-      AppState.removeEventListener('change', appStateChanged)
+      listener.remove()
     }
   }, [])
 
