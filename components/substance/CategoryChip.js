@@ -10,22 +10,29 @@ export default function CategoryChip({category, selectable = false, onChange = (
   const [active, setActive] = React.useState(!selectable)
   const c = category in CATEGORIES ? CATEGORIES[category] : {}
 
-  const color = c.chipColor ?? c.color
+  const hasColor = !!(c.chipColor ?? c.color)
+  const color = c.chipColor ?? c.color ?? theme.colors.secondaryContainer
   const icon = c.chipIcon ?? c.icon
   
-  const style = active && color ? {backgroundColor: color} : {}
-  // Outlined: {borderColor: color, color: color, borderWidth: 1.5}
+  let style = active && hasColor
+    ? {backgroundColor: color}
+    : {borderColor: theme.colors.surfaceVariant}
+
+  // Invisible border to keep size consistent
+  if (selectable && active)
+    style = {...style, borderColor: 'transparent', borderWidth: 1}
 
   return (
     <Chip
       mode={active ? 'flat' : 'outlined'}
       style={[styles.category, style]}
-      textStyle={[styles.categoryText, active && color ? {color: 'white'} : null]}
+      textStyle={[styles.categoryText, active && hasColor ? {color: 'white'} : null]}
+      compact={true}
       onPress={selectable ? () => {
         setActive(!active)
         onChange(category, !active)
       } : null}
-      icon={icon ? ({size, color: iconColor}) => (<Icon icon={icon} color={active && color ? 'white' : iconColor} size={size} />) : null}
+      icon={icon ? ({size, color: iconColor}) => (<Icon icon={icon} color={active && hasColor ? 'white' : theme.colors.outline} size={size} />) : null}
     >
       {c.pretty_name || category}
     </Chip>
