@@ -32,9 +32,9 @@ export default function Switch({
           styles.track,
           disabled ? {opacity: .5} : {},
           hasColor ? {
-            backgroundColor: trackColor.true ?? Colors.teal900,
+            backgroundColor: trackColor.true ?? theme.colors.primary,
           } : {
-            backgroundColor: trackColor.false ?? (theme.dark ? Colors.grey800 : Colors.grey600),
+            backgroundColor: trackColor.false ?? (theme.dark ? theme.colors.secondaryContainer : theme.colors.secondary),
           }
         ]}
 
@@ -49,9 +49,9 @@ export default function Switch({
             style={[
               styles.thumb,
               hasColor ? {
-                backgroundColor: thumbColor ?? Colors.teal400
+                backgroundColor: thumbColor ?? (theme.dark ? theme.colors.onPrimaryContainer : theme.colors.primaryContainer),
               } : {
-                backgroundColor: theme.dark ? Colors.grey500 : Colors.grey400
+                backgroundColor: theme.dark ? theme.colors.secondary : theme.colors.secondaryContainer
               }
             ]}
           />
