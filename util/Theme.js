@@ -14,12 +14,14 @@ import {
 
 export const DefaultTheme = merge(PaperLight, NavLight, {
   colors: {
+    disabled: PaperLight.colors.onSurfaceDisabled,
     primary: PaperLight.colors.primary
   }
 })
 
 export const DarkTheme = merge(PaperDark, NavDark, {
-  colors: {    
+  colors: {
+    disabled: PaperDark.colors.onSurfaceDisabled,
     primary: '#7855ed' //PaperLight.colors.primary
   }
 })
