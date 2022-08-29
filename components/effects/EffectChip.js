@@ -1,12 +1,14 @@
 import React from 'react'
 import { Linking, StyleSheet } from 'react-native'
-import { Chip } from 'react-native-paper'
+import { Chip, useTheme } from 'react-native-paper'
 
 export default function EffectChip({name, url}) {
+  const theme = useTheme()
   return (
     <Chip
       key={name}
-      style={styles.effect}
+      compact={true}
+      style={[styles.effect, {borderColor: theme.colors.surfaceVariant}]}
       mode='outlined'
       onPress={url ? () => {Linking.openURL(url)} : null}
     >

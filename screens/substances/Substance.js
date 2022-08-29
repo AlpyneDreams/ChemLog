@@ -88,7 +88,7 @@ export default function SubstanceScreen({navigation, route}) {
 
       {aliases ? 
         <Text style={{
-          fontSize: 14, color: theme.colors.placeholder
+          fontSize: 14, color: theme.colors.onSurfaceVariant
         }}>{aliases.join(', ')}</Text>
       : null}
 

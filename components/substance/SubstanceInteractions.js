@@ -48,9 +48,9 @@ export default function SubstanceInteractions({substance}) {
             key={status}
             style={[
               {marginBottom: 12},
-              data ? { borderColor: data.color, backgroundColor: data.color + '11' } : null
+              data ? { borderColor: data.color, borderWidth: 1, backgroundColor: data.color + '11' } : null
             ]}
-            mode='outlined'
+            mode='contained'
             titleProps={{
               title: data.name ?? status,
               titleStyle: {color: data.color},

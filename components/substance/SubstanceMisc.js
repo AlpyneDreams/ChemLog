@@ -107,7 +107,7 @@ export default function SubstanceMisc({substance, details}) {
         const color = SubstanceProperties.noteColors[key] ?? SubstanceProperties.noteColors._default
         
         return (
-          <Card key={key} mode='outlined' style={{marginBottom: 12, borderColor: color, backgroundColor: color + '11'}}>
+          <Card key={key} mode='contained' style={{marginBottom: 12, borderColor: color, borderWidth: 1, backgroundColor: color + '11'}}>
             <Card.Content>
               <Text>{name && <Bold style={{color: color}}>{name} </Bold>}{value}</Text>
             </Card.Content>
