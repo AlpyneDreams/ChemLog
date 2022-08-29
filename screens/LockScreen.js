@@ -88,7 +88,13 @@ export default function LockScreen({route}) {
       {returnTo &&
         <IconButton icon='arrow-left' style={{top: 8, left: 8}} onPress={() => navigation.navigate(returnTo)}/>
       }
-      <Card style={{marginHorizontal: 32, marginTop: returnTo ? 96 : 128}} mode='outlined'>
+      <Card 
+        style={{
+          marginHorizontal: 32, marginTop: returnTo ? 96 : 128,
+          backgroundColor: theme.colors.backdrop,
+        }}
+        mode='contained'
+      >
         <Card.Content>
           <Row style={{justifyContent: 'center', alignItems: 'center', marginBottom: 32}}>
             {icon !== 'lock' && <Icon icon='lock' size={22} style={{left: -8}} />}

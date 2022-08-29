@@ -20,7 +20,7 @@ export default function MainFABGroup({visible, empty=false, addDose, addNote}) {
 
   return (<>
     {empty &&
-      <View style={{alignItems: 'flex-end', position: 'absolute', margin: 16, marginBottom: 24, right: 125, bottom: 75}}>
+      <View style={{alignItems: 'flex-end', position: 'absolute', margin: 16, marginBottom: 24, right: 125, bottom: 20}}>
         <View style={{transform: [
           {rotateZ: '-8deg'}
         ]}}>

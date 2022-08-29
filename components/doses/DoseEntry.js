@@ -105,6 +105,7 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
             : (dose.amount ? `${dose.amount} ${dose.unit??''}` : null)
           }
           descriptionNumberOfLines={10}
+          descriptionStyle={{color: theme.colors.outline}}
 
           // Left: substance icon or checkbox
           left={() => selecting

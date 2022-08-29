@@ -275,7 +275,7 @@ export default class DoseList extends Component {
           visible={showSnackbar}
           duration={1000}
           onDismiss={() => this.setState({snackbar: false})}
-          style={{marginBottom: 96}}
+          style={{marginBottom: 16}}
         >{route.params?.deleted === 1 ? 'Entry deleted.' : `Deleted ${route.params?.deleted} entries.`}</Snackbar>
       </View>
     )
