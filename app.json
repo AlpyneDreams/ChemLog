@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "ChemLog",
-    "slug": "ChemLog",
+    "slug": "chemlog",
+    "owner": "alpyne",
     "version": "3.2.1",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
