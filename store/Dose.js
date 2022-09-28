@@ -1,4 +1,5 @@
 
+import { cloneDeep } from 'lodash'
 import { BaseItem } from './BaseItem'
 import Storage, { DataStore } from './Storage'
 
@@ -9,6 +10,16 @@ export class Dose extends BaseItem {
   id = DoseStorage.nextId++
   
   roa
+
+  createCopy(navigation) {
+    const copy = cloneDeep(this)
+    delete copy.id
+    copy.date = null
+    if (this.type === 'note')
+      navigation.navigate('AddNote', {note: copy})
+    else
+      navigation.navigate('AddDose', {dose: copy})
+  }
 
   static configure(dose) {
     

@@ -10,7 +10,6 @@ import ConfirmDialog from '../../components/dialogs/ConfirmDialog';
 import DoseEntry from '../../components/doses/DoseEntry'
 import MainFABGroup from '../../components/doses/MainFABGroup'
 import dayjs from 'dayjs'
-import { sortBy } from 'lodash';
 import { CALENDAR_DATE_ONLY, CALENDAR_DATE_ONLY_MEDIUM } from '../../util/dayjs';
 import UserData from '../../store/UserData';
 import { lockScreen } from '../LockScreen';
@@ -183,12 +182,16 @@ export default class DoseList extends Component {
     navigation.setOptions({
       headerRight: () => !this.state.selecting
         ? <HomeContextMenu select={() => this.setSelecting(true)} selectAll={() => this.selectAll()} />
-        : <>
+        : <Row>
+          <IconButton icon='content-copy' disabled={this.state.selectedItems.size != 1} onPress={() => {
+            const dose = this.state.selectedItems.values().next().value.dose
+            dose.createCopy(navigation)
+          }}/>
           <IconButton icon='delete' onPress={() => 
             this.state.selectedItems.size > 0 ?
               this.setState({confirmDelete: true}) : null
           }/>
-        </>
+        </Row>
     })
   }
 

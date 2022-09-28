@@ -30,7 +30,7 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
   const isRecent = dayjs().diff(date) <= (DAY_MS * 2)
   const timestamp = isRecent ? date.fromNow() : date.format('H:mm')
 
-  const hooks = {id: index, setSelected, delete: dose.delete.bind(dose)}
+  const hooks = {id: index, setSelected, delete: dose.delete.bind(dose), dose}
 
   React.useEffect(() => {
     if (!list) return

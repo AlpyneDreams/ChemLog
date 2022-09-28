@@ -16,8 +16,8 @@ class AddNote extends Component {
   componentDidMount() {
     const {edit, note} = this.props.route.params ?? {}
     
-    if (edit) {
-      this.setState({...note, date: new Date(note.date)})
+    if (note) {
+      this.setState({...note, date: note.date ? new Date(note.date) : null})
     } else {
       this.forceUpdate()
     }
@@ -27,6 +27,7 @@ class AddNote extends Component {
     const {edit, note} = this.props.route.params ?? {}
 
     this.navigation.setOptions({
+      title: (!edit ? (note ? 'Copy' : 'Add') : 'Edit') + ' Note',
       headerRight: () => {
         return (
           <Button

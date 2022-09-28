@@ -53,6 +53,7 @@ export default function ItemDetails({navigation, route}) {
         <HeaderTitle {...props} />
       </Row>,
       headerRight: () => <Row>
+        <IconButton icon='content-copy' onPress={() => item.createCopy(navigation)} />
         <IconButton icon='pencil' onPress={() => edit()} />
         <IconButton icon='delete' onPress={() => setDialog(true)} />
       </Row>

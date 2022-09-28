@@ -32,16 +32,17 @@ export class AddDose extends Component {
 
     const {edit, dose} = this.props.route.params ?? {}
     
-    if (edit) {
+    if (dose) {
       const substance = Substances[dose.substance]
       this.setState({
         ...dose,
         substance: {id: dose.substance, name: substance.pretty_name},
-        date: new Date(dose.date)
+        date: dose.date ? new Date(dose.date) : null
       })
     }
 
     this.navigation.setOptions({
+      title: (!edit ? (dose ? 'Copy' : 'Add') : 'Edit') + ' Dose',
       headerRight: () => (
         <Button
           mode='contained'
@@ -54,7 +55,7 @@ export class AddDose extends Component {
     })
 
     // For new doses, go straight to substance picker
-    if (!edit && !this.state.substance && !this.props.route.params?.substance) {
+    if (!edit && !dose && !this.state.substance && !this.props.route.params?.substance) {
       this.navigation.navigate('SubstancePicker', {
         current: null, returnTo: 'AddDose', skipButton: true
       })
@@ -98,7 +99,7 @@ export class AddDose extends Component {
 
 
     const focusNotes = (focus === 'notes')
-    const noteOpen = (edit && oldDose.notes) || focusNotes
+    const noteOpen = (oldDose && oldDose.notes) || focusNotes
 
     return (
     <ScrollView contentContainerStyle={{flex: 1}}>
@@ -117,9 +118,9 @@ export class AddDose extends Component {
           onChangeAmount={amount => this.setState({amount})}
           unit={this.state.unit}
           onChangeUnit={unit => this.setState({unit})}
-          startOpen={edit && oldDose.amount}
+          startOpen={oldDose && oldDose.amount}
         />
-        <InputROA value={this.state.roa} onChange={roa => this.setState({roa})} startOpen={edit && oldDose.roa} />
+        <InputROA value={this.state.roa} onChange={roa => this.setState({roa})} startOpen={oldDose && oldDose.roa} />
         <InputExpand title='Add notes' icon='note' style={{marginTop: 12}} startOpen={noteOpen}>
           <TextInput
             placeholder='Add notes'
