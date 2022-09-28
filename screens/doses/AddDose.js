@@ -101,8 +101,8 @@ export class AddDose extends Component {
     const noteOpen = (edit && oldDose.notes) || focusNotes
 
     return (
-    <ScrollView>
-      <View style={{padding: 12, height: '100%'}}>
+    <ScrollView contentContainerStyle={{flex: 1}}>
+      <View style={{padding: 12, flex: 1}}>
         <InputSubstance
           value={substance}
           onChange={substance => this.setState({substance})}
