@@ -1,3 +1,15 @@
+### Beta Update 3.2.1
+
+A minor update.
+
+Features
+- Tweaked settings page layout
+- Added credits and external links
+
+Fixes
+- Fix the position of the floating action button on the Add Dose screen
+
+
 ## Beta 3.2.0
 
 An update has been released that adds data from PsychonautWiki, a basic screen lock, and many new tweaks and features.

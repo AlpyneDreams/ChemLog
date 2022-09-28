@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { ScrollView, View, StyleSheet } from 'react-native'
+import { ScrollView, View, StyleSheet, Linking, Image } from 'react-native'
 import { RadioButton, List, Divider, Text, useTheme, TextInput, ToggleButton } from 'react-native-paper'
 import ChooseDialog from '../components/dialogs/ChooseDialog'
 import UserData from '../store/UserData'
@@ -44,6 +44,7 @@ export function Settings() {
     <ScrollView>
       <List.Section>
         <List.Subheader>Security</List.Subheader>
+        <Divider/>
         <List.Item
           title='Screen lock'
           description={`Lock app with passcode`}
@@ -59,6 +60,7 @@ export function Settings() {
       
       <List.Section>
         <List.Subheader>General</List.Subheader>
+        <Divider/>
         <List.Item
           title='Theme'
         />
@@ -73,7 +75,7 @@ export function Settings() {
         />
         <ToggleButton.Row value={dataSource} onValueChange={v => {if (!!v) setDataSource(v);}} style={styles.btnRow}>
           <ToggleButton icon={() => <Text>TripSit</Text>} value='tripsit' style={{minWidth: 80}} />
-          <ToggleButton icon={() => <Text>Psychonaut</Text>} value='psychonaut' style={{minWidth: 100}} />
+          <ToggleButton icon={() => <Text>PsychonautWiki</Text>} value='psychonaut' style={{minWidth: 120}} />
         </ToggleButton.Row>
         <List.Item
           title='Compact dose cards'
@@ -83,8 +85,38 @@ export function Settings() {
           }
           onPress={() => {setCompactDoseCards(!compactDoseCards)}}
         />
+      </List.Section>
+      <List.Section>
+        <List.Subheader>About</List.Subheader>
         <Divider/>
         <Version/>
+        <Row>
+          <List.Item style={{flex: 1}} title='Alpyne' description='Creator'/>
+          <List.Item style={{flex: 1}} title='Mango Aphro' description='Logo Design'/>
+        </Row>
+        <List.Item
+          title='Website' description='chemlog.app'
+          left={() => <List.Icon icon={require('../assets/favicon.png')} color={theme.dark ? 'white' : 'black'}/>}
+          onPress={() => Linking.openURL('https://chemlog.app')}
+        />
+        <List.Item
+          title='GitHub'
+          description='AlpyneDreams/ChemLog'
+          left={() => <List.Icon icon='github'/>}
+          onPress={() => Linking.openURL('https://github.com/AlpyneDreams/ChemLog')}
+        />
+        <List.Item
+          title='PsychonautWiki'
+          description='Substance information'
+          left={() => <List.Icon icon='eye-circle-outline'/>}
+          onPress={() => Linking.openURL('https://psychonautwiki.org/')}
+        />
+        <List.Item
+          title='Tripsit'
+          description='Substance information'
+          left={() => <View><List.Icon icon={require('../assets/icons/tripsit.png')}/></View>}
+          onPress={() => Linking.openURL('https://tripsit.me/')}
+        />
         {devMenu && <DevMenu/>}
       </List.Section>
       
@@ -94,6 +126,6 @@ export function Settings() {
 
 const styles = StyleSheet.create({
   btnRow: {
-    marginLeft: 16, marginBottom: 24, marginTop: 2
+    marginLeft: 16, marginBottom: 16, marginTop: 2
   }
 })
