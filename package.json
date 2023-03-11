@@ -1,12 +1,12 @@
 {
+  "name": "chemlog",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject",
-    "build.android": "eas build -p android --profile=preview"
+    "build:android": "eas build -p android --profile=preview"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.17.3",

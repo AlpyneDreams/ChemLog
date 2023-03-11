@@ -6,15 +6,12 @@
     "version": "3.2.1",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
+    "backgroundColor": "#000000",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#8106ff"
-    },
-    "backgroundColor": "#000000",
-    "updates": {
-      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
@@ -34,6 +31,5 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
   }
 }
