@@ -95,7 +95,7 @@ export default function ItemDetails({navigation, route}) {
       <Row style={{flex: 1}}>
         <Pressable style={{flex: 1}} onLongPress={longPressNote}>
           <Stat label={note ? 'Note' : 'Notes'}>
-            <Text style={{paddingLeft: 18, marginVertical: 6, fontSize: 15, lineHeight: 20}}>
+            <Text style={{paddingLeft: 16, marginVertical: 6, fontSize: 15, lineHeight: 20}}>
               {
                 item.notes 
                 || <Button uppercase={false} icon={ICON_ADD_NOTE} onPress={() => edit({focus: 'notes'})}>

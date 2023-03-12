@@ -133,7 +133,7 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
             </View>
           : null}
         />
-        {!compactDoseCards && dose.notes ? <>
+        {(!compactDoseCards && dose.notes) ? <>
           <Divider/>
           <View style={{padding: 16}}>
             <NoteText>
