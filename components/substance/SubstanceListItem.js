@@ -37,6 +37,7 @@ export function SubstanceListItem({item: s, priority: score = 0, swipeable, onLo
       key={key}
       title={s.pretty_name}
       description={aliases ? aliases.join(', ') : null}
+      descriptionStyle={{color: theme.colors.outline}}
       left={() => <List.Icon icon={s.icon} color={s.color ?? theme.colors.text} />}
       onPress={onPress}
       onLongPress={pickerMode ? () => {
