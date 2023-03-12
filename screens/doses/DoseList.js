@@ -262,7 +262,7 @@ export default class DoseList extends Component {
           addDose={() => navigation.navigate('AddDose')}
           addNote={() => navigation.navigate('AddNote')}
         />
-        <ConfirmDialog
+        {confirmDelete && <ConfirmDialog
           title={
             this.state.selectedItems.size === 1 ? 
               'Delete selected entries?' : 'Delete selected entries?'
@@ -270,7 +270,7 @@ export default class DoseList extends Component {
           acceptLabel='Delete'
           state={[confirmDelete, setConfirmDelete]}
           onAccept={() => this.deleteSelected()}
-        />
+        />}
         <Snackbar 
           visible={showSnackbar}
           duration={1000}

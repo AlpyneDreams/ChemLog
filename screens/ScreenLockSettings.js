@@ -93,7 +93,7 @@ export function ScreenLockSettings() {
         <AutoLockSettings enabled={screenLock} value={autoLock} onChange={setAutoLock} />
       </List.Section>
       <Portal key='passcode-prompt'>
-        <Dialog
+        {prompt > 0 && <Dialog
           visible={prompt > 0}
           onDismiss={cancel}
         >
@@ -105,7 +105,7 @@ export function ScreenLockSettings() {
             <Dialog.Actions>
               <Button onPress={cancel}>Cancel</Button>
             </Dialog.Actions>
-        </Dialog> 
+        </Dialog>}
       </Portal> 
       
     </ScrollView>
