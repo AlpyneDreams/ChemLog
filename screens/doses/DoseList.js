@@ -18,6 +18,7 @@ import { Icon } from '../../components/Icon';
 
 function HomeContextMenu({select, selectAll}) {
   const userData = UserData.useContext()
+  const screenLock = userData.prefs.screenLock
   const navigation = useNavigation()
   const [menu, setMenu] = useState(false)
 
@@ -30,8 +31,8 @@ function HomeContextMenu({select, selectAll}) {
       onDismiss={() => setMenu(false)}
       style={{minWidth: 150}}
       anchor={
-        <Row>
-          {userData.prefs.screenLock && <IconButton icon='lock-open' onPress={() => lockScreen(navigation)} />}
+        <Row style={{flex: 1}}>
+          <IconButton icon='lock-open' style={!screenLock && {opacity: 0}} onPress={() => screenLock && lockScreen(navigation)} />
           <IconButton icon={MORE_ICON} onPress={() => setMenu(true)} />
         </Row>
       }
