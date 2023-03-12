@@ -24,7 +24,7 @@ export function ChooseDialog2({state, title, options={}, value, onChange, clear=
               titleStyle={{marginBottom: 2}}
               onPress={() => {
                 close()
-                onChange(name)
+                onChange(name, options[name])
               }}
               left={() =>
                 <View pointerEvents='none'>

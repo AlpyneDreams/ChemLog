@@ -11,21 +11,48 @@ export const _substances = {
 /// SUBSTANCE OVERRIDES ///
 
   cannabis: {
-    categories: ['cannabinoid']
+    categories: ['cannabinoid'],
+    roaAliases: {
+      Oral: 'Edibles'
+    },
+    quickDoses: {
+      Smoked: {
+        Joint: '0.32g',
+        Bowl: '0.2g',
+        'Bong hit': '0.1g',
+      },
+      Oral: {
+        Edibles: '10mg',
+      }
+    }
   },
   marinol: {
     icon: 'pill',
     categories: ['cannabinoid']
   },
 
-  lsd: {icon: icons.lsd},
+  lsd: {
+    icon: icons.lsd,
+    quickDoses: {
+      Sublingual: {
+        Tab: '100µg',
+      },
+    }
+  },
+
   '1b-lsd': {icon: icons.lsd},
   '1cp-lsd': {icon: icons.lsd},
   '1p-lsd': {icon: icons.lsd},
   'ald-52': {icon: icons.lsd},
 
   mushrooms: {
-    icon: 'mushroom-outline'
+    icon: 'mushroom-outline',
+    quickDoses: {
+      Oral: {
+        'Gram of Dried Mushrooms': '1g',
+        'Microdose': '0.25g',
+      }
+    }
   },
   kratom: {
     icon: 'leaf',
@@ -35,15 +62,41 @@ export const _substances = {
     icon: categories.empathogen.icon,
     color: categories.empathogen.color
   },
+
   alcohol: {
-    icon: 'glass-cocktail'
+    icon: 'glass-cocktail',
+    quickDoses: {
+      Oral: {
+        'Glass of Wine': {amount: 100, unit: 'mL', concentration: 0.15},
+        'Beer': {amount: 500, unit: 'mL', concentration: 0.05},
+        'Vodka Shot': {amount: 50, unit: 'mL', concentration: 0.4},
+      }
+    }
   },
+
   caffeine: {
     icon: 'coffee',
     //color: '#a34f27'
+    qucikDoses: {
+      Oral: {
+        Coffee: '100mg',
+        Tea: '40mg',
+        'Energy Drink': '80mg',
+        Pill: '200mg',
+      }
+    }
   },
+
   nicotine: {
-    icon: require('../assets/icons/cigarette.png')
+    icon: require('../assets/icons/cigarette.png'),
+    quickDoses: {
+      Smoked: {
+        Cigarette: '10mg',
+        Cigar: '100mg',
+        '3% Juul Pod': '23mg',
+        '1 mL of 3mg/mL Juice': '3mg'
+      }
+    }
   },
 
 
@@ -54,7 +107,21 @@ export const _substances = {
     psychonaut: 'Lophophora_williamsii' // Golly
   },
   dxm: {
-    psychonaut: 'Dextromethorphan'
+    psychonaut: 'Dextromethorphan',
+    quickDoses: {
+      Oral: {
+        'Gelcap': '15mg',
+        'Robotab': '30mg',
+      }
+    }
+  },
+
+  alprazolam: {
+    quickDoses: {
+      Oral: {
+        Bar: '2mg',
+      }
+    }
   },
 
 /// CUSTOM SUBSTANCES ///

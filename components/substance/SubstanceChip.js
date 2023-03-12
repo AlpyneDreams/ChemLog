@@ -14,6 +14,12 @@ export default function SubstanceChip({substance: id, style, onPress, colorful=t
   const color = colorful ? substance?.color : null
   const icon = substance?.icon
 
+  const chipStyle = color ? {
+    backgroundColor: color.slice(0, 7) + '40',
+    borderColor: color,
+    borderWidth: 1, ...style
+  } : {borderWidth: 1, ...style}
+
   return (
     <Chip
       mode='flat'
@@ -23,11 +29,7 @@ export default function SubstanceChip({substance: id, style, onPress, colorful=t
         Haptics.longPress()
         navigation.navigate('Substance', {substance: id})
       } : null}
-      style={color ? {
-        backgroundColor: color.slice(0, 7) + '40',
-        borderColor: color,
-        borderWidth: 1, ...style
-      } : {borderWidth: 1, ...style}}
+      style={chipStyle}
       theme={color ? {colors: {text: color}} : null}
       textStyle={{color: theme.colors.text}}
       {...props}

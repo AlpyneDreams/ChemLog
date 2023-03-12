@@ -8,7 +8,8 @@ import SubstanceChip from '../substance/SubstanceChip'
 import { Row } from '../Util'
 import { Icon } from '../Icon'
 import { LayoutAnims } from '../../util/Util'
-import Haptics from '../../util/Haptics'
+import { RadioChips } from './RadioChips'
+import Substances from '../../store/Substances'
 
 /**
  * Substance picker input. Opens full screen substance list.
@@ -23,31 +24,17 @@ export default function InputSubstance({value: substance, onChange: changeValue,
   const route = useRoute()
   let {recentSubstances} = UserData.useContext()
 
-  // Remember whatever substances were recently selected (even if not recorded)
-  {
-    const [localRecentSubstances, setLocalRecents] = useState([])
-    useEffect(() => {
-      if (substance && !recentSubstances.includes(substance.name))
-        setLocalRecents([...localRecentSubstances, substance.name])
-    }, [substance])
-
-    recentSubstances = recentSubstances.concat(localRecentSubstances)
-  }
-
   // Check if substance is changed after return from SubstancePicker
   useEffect(() => {
     return navigation.addListener('focus', e => {
       if (route?.params?.substance)
-        onChange(route.params.substance)
+        changeValue(route.params.substance)
     })
-  }, [route?.params?.substance, substance])
+  }, [route?.params?.substance])
 
-  const onChange = (x) => {
-    LayoutAnimation.configureNext(LayoutAnims.ease)
-    changeValue(x)
-  }
+  recentSubstances = Object.fromEntries(recentSubstances.map(x => [x, Substances[x]]))
 
-  function renderChip(s) {
+  function renderChip(s, onChange) {
     const isCurrent = substance?.name === s
     const isVisible = !substance || isCurrent
     const borderWidth = isVisible ? 1 : 0
@@ -57,35 +44,24 @@ export default function InputSubstance({value: substance, onChange: changeValue,
         substance={s}
         colorful={isCurrent}
         onClose={isCurrent ? () => onChange(null) : null}
-        onPress={() => onChange(!!substance ? null : {id: s})}
+        onPress={() => onChange(!!substance ? null : Substances[s])}
         style={{
-          backgroundColor: !substance ? 'transparent' : null,
+          ...(!substance ? {backgroundColor: 'transparent'} : {}),
           display: isVisible ? null : 'none', borderWidth,
           ...styles.chip
         }} />
     )
   }
 
-  return <View style={{marginBottom: 8}}>
-    <Caption>{substance ? 'Substance' : 'Choose Substance'}</Caption>
-    <Row style={{flexWrap: 'wrap', alignItems: 'flex-start'}}>
-      {recentSubstances.map(renderChip)}
-      {substance && !recentSubstances.includes(substance.name) && renderChip(substance.name)}
-      {!substance && (
-        <Chip mode='flat'
-          selected={false}
-          style={styles.chip}
-          icon={({size, color: iconColor}) => 
-            <Icon icon={'plus'} color={theme.colors.onSurface} size={size}/>
-          }
-          onPress={() => {
-            Haptics.longPress()
-            navigation.navigate('SubstancePicker', {current: substance?.id, returnTo})
-          }}
-        >More</Chip>
-      )}
-    </Row>
-  </View>
+  return <RadioChips
+    label={substance ? 'Substance' : 'Choose Substance'}
+    options={recentSubstances}
+    value={substance} onChange={changeValue}
+    renderChip={(s, onChange) => renderChip(s.name, onChange)}
+    findMore={() => {
+      navigation.navigate('SubstancePicker', {current: substance, returnTo})
+    }}
+  />
 }
 
 const styles = StyleSheet.create({
