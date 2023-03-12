@@ -44,7 +44,8 @@ export default function MainFABGroup({visible, empty=false, addDose, addNote}) {
         icon='beaker-plus-outline'
         label='Dose'
         uppercase={false}
-        style={{backgroundColor: theme.colors.primary}}
+        style={{backgroundColor: theme.colors.primary, color: theme.colors.onPrimary}}
+        color={theme.colors.onPrimary}
         onPress={addDose}
       />
     </View>

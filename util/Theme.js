@@ -1,7 +1,8 @@
 import { merge } from 'lodash'
 import {
   MD3LightTheme as PaperLight,
-  MD3DarkTheme as PaperDark
+  MD3DarkTheme as PaperDark,
+  MD3Colors
 } from 'react-native-paper'
 
 import {
@@ -15,13 +16,14 @@ import {
 export const DefaultTheme = merge(PaperLight, NavLight, {
   colors: {
     disabled: PaperLight.colors.onSurfaceDisabled,
-    primary: PaperLight.colors.primary
+    primary: '#7855ed', //PaperLight.colors.primary,
   }
 })
 
 export const DarkTheme = merge(PaperDark, NavDark, {
   colors: {
     disabled: PaperDark.colors.onSurfaceDisabled,
-    primary: '#7855ed' //PaperLight.colors.primary
+    primary: '#7855ed', //PaperLight.colors.primary,
+    onPrimary: MD3Colors.primary100
   }
 })

@@ -12,7 +12,7 @@ export default function Stat({label, value, children, style, ...props}) {
 
   return (props.visible === true || (visible && (hasValue || children)) ? 
     <List.Section {...props} style={[{flex: 1}, style]}>
-      <List.Subheader>{label}</List.Subheader>
+      <List.Subheader style={{opacity: 0.8}}>{label}</List.Subheader>
       <List.Item title={value} left={() => children} titleNumberOfLines={2} style={{paddingTop: 0}} />
     </List.Section> : null
   )
