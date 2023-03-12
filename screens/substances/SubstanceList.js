@@ -183,7 +183,7 @@ export default function SubstanceList() {
   const route = useRoute()
   const navigation = useNavigation()
   
-  const {pickerMode, skipButton, returnTo} = route?.params ?? {}
+  const {pickerMode, returnTo} = route?.params ?? {}
 
   const scrollRef = React.useRef(null)
   useScrollToTop(scrollRef)
@@ -196,21 +196,6 @@ export default function SubstanceList() {
 
   const [loading, setLoading] = React.useState(false)
   const [list, setList] = React.useState(substanceEntries)
-
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: skipButton ? () => 
-        <Button
-          mode='flat'
-          style={{marginEnd: 8, borderRadius: 20}}
-          uppercase={false}
-          onPress={() => 
-            navigation.navigate({name: returnTo, params: {substance: null}, merge: true})
-          }
-        >Skip</Button>
-      : null
-    })
-  }, [navigation, route])
 
   function updateList(query, cats) {
     setLoading(true)
