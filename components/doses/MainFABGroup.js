@@ -24,7 +24,7 @@ export default function MainFABGroup({visible, empty=false, addDose, addNote}) {
         <View style={{transform: [
           {rotateZ: '-8deg'}
         ]}}>
-          <Text style={{color: theme.colors.placeholder}}>Add Doses or Notes</Text>
+          <Text style={{color: theme.colors.onSurfaceVariant}}>Add Doses or Notes</Text>
         </View>
         <Icon icon={require('../../assets/icons/arrow-right-bottom.png')} size={24} color={theme.colors.disabled}/>
       </View>

@@ -60,7 +60,6 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
         {
           margin: 8,
           marginTop: 0,
-          borderRadius: theme.roundness,
           overflow: 'hidden',
           elevation: elevated ? 2 : 1
         },
@@ -68,10 +67,13 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
           ? null
           : (theme.dark ? {backgroundColor: theme.colors.surface} : null)
       ]}
+      contentStyle = {{
+        margin: 0,
+      }}
     >
       <TouchableRipple
         style={{
-          borderRadius: theme.roundness,
+          borderRadius: 3 * theme.roundness,
           borderWidth: 2,
           borderColor: selected ? theme.colors.primary : 'transparent',
         }}
@@ -124,7 +126,7 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
               <Text style={{
                 color: theme.colors.disabled,
                 textAlign: 'right',
-                marginEnd: 8,
+                marginRight: -8
               }}>
                 {timestamp}
               </Text>
@@ -148,8 +150,8 @@ export default function DoseEntry({dose, index, selecting, list, elevated}) {
 
 const styles = StyleSheet.create({
   left: {
-    margin: 8,
-    marginLeft: 0,
+    margin: 0,
+    marginStart: 8,
     height: 40,
     width: 40,
     alignItems: 'center',
