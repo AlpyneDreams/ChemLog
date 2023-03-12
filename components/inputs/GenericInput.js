@@ -38,7 +38,7 @@ export default function GenericInput({
         onPress={onPress}
         style={{borderRadius: theme.roundness}}
       >
-        <View style={{height: 64}} />
+        <View style={{height: 56}} />
       </TouchableRipple>
     </View>
   )

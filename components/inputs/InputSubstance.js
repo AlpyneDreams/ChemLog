@@ -28,7 +28,7 @@ export default function InputSubstance({value: substance, onChange, returnTo}) {
       label='Substance'
       mode='flat'
       value={substance?.pretty_name}
-      left={substance ? <TextInput.Icon icon={substance.icon} color={substance.color}/> : null}
+      left={substance ? <TextInput.Icon icon={substance.icon} color={() => substance.color}/> : null}
       right={<TextInput.Icon icon='menu-down'/>}
       onPress={() => {
         navigation.navigate('SubstancePicker', {current: substance?.id, returnTo})

@@ -45,6 +45,7 @@ export class AddDose extends Component {
       headerRight: () => (
         <Button
           mode='contained'
+          dark={this.props.theme.dark}
           style={{marginEnd: 8, borderRadius: 20}}
           uppercase={false}
           disabled={!this.state.substance}
@@ -120,7 +121,7 @@ export class AddDose extends Component {
           startOpen={oldDose && oldDose.amount}
         />
         <InputROA value={this.state.roa} onChange={roa => this.setState({roa})} startOpen={oldDose && oldDose.roa} />
-        <InputExpand title='Add notes' icon='note' style={{marginTop: 12}} startOpen={noteOpen}>
+        <InputExpand title='Add notes' icon='note' style={{paddingTop: 12}} startOpen={noteOpen}>
           <TextInput
             placeholder='Add notes'
             autoFocus={focusNotes}
