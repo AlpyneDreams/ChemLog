@@ -121,9 +121,9 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"psychedelic",
 			"tentative",
-			"research-chemical"
+			"research-chemical",
+			"psychedelic"
 		]
 	},
 	"1cp-lsd": {
@@ -702,8 +702,8 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"dissociative",
 			"tentative",
+			"dissociative",
 			"habit-forming"
 		],
 		"aliases": [
@@ -962,8 +962,8 @@
 		},
 		"pretty_name": "2-methyl-2-butanol",
 		"categories": [
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"tentative"
 		],
 		"aliases": [
@@ -1180,9 +1180,9 @@
 			"n-piperidinecathinone"
 		],
 		"categories": [
-			"stimulant",
 			"research-chemical",
 			"habit-forming",
+			"stimulant",
 			"tentative"
 		],
 		"formatted_effects": [
@@ -1990,8 +1990,8 @@
 		},
 		"pretty_name": "25I-NBF",
 		"categories": [
-			"psychedelic",
 			"tentative",
+			"psychedelic",
 			"research-chemical"
 		]
 	},
@@ -2520,8 +2520,8 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"psychedelic",
 			"tentative",
+			"psychedelic",
 			"research-chemical"
 		],
 		"formatted_onset": {
@@ -2822,9 +2822,9 @@
 			"2cbflynbome"
 		],
 		"categories": [
+			"tentative",
 			"psychedelic",
 			"empathogen",
-			"tentative",
 			"research-chemical"
 		]
 	},
@@ -3943,9 +3943,9 @@
 			"2ct7"
 		],
 		"categories": [
-			"psychedelic",
+			"research-chemical",
 			"empathogen",
-			"research-chemical"
+			"psychedelic"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -5041,9 +5041,9 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"empathogen",
 			"stimulant",
-			"habit-forming"
+			"habit-forming",
+			"empathogen"
 		]
 	},
 	"3-mmc": {
@@ -5076,9 +5076,9 @@
 			}
 		},
 		"categories": [
-			"empathogen",
 			"stimulant",
-			"habit-forming"
+			"habit-forming",
+			"empathogen"
 		],
 		"aliases": [
 			"3mmc",
@@ -5175,11 +5175,11 @@
 			"3-hydroxyphenazepam"
 		],
 		"categories": [
-			"benzodiazepine",
-			"depressant",
 			"tentative",
 			"research-chemical",
-			"habit-forming"
+			"benzodiazepine",
+			"habit-forming",
+			"depressant"
 		]
 	},
 	"3c-e": {
@@ -5199,8 +5199,8 @@
 		},
 		"categories": [
 			"psychedelic",
-			"stimulant",
-			"research-chemical"
+			"research-chemical",
+			"stimulant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -5353,8 +5353,8 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"empathogen",
 			"stimulant",
+			"empathogen",
 			"habit-forming",
 			"tentative"
 		],
@@ -5478,8 +5478,8 @@
 			"_unit": "minutes"
 		},
 		"categories": [
-			"psychedelic",
 			"tentative",
+			"psychedelic",
 			"research-chemical"
 		],
 		"aliases": [
@@ -5891,9 +5891,9 @@
 			}
 		},
 		"categories": [
+			"tentative",
 			"psychedelic",
 			"empathogen",
-			"tentative",
 			"research-chemical"
 		]
 	},
@@ -6006,9 +6006,9 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"empathogen",
 			"stimulant",
 			"research-chemical",
+			"empathogen",
 			"habit-forming"
 		]
 	},
@@ -6275,10 +6275,10 @@
 			"4-fluoroamphetamine"
 		],
 		"categories": [
-			"empathogen",
 			"stimulant",
 			"research-chemical",
 			"habit-forming",
+			"empathogen",
 			"common"
 		],
 		"formatted_dose": {
@@ -6568,10 +6568,10 @@
 			"4fma"
 		],
 		"categories": [
-			"empathogen",
 			"stimulant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -6745,8 +6745,8 @@
 		"categories": [
 			"psychedelic",
 			"empathogen",
-			"stimulant",
-			"tentative"
+			"tentative",
+			"stimulant"
 		]
 	},
 	"4-ho-det": {
@@ -6929,8 +6929,8 @@
 			"n-dipropyltryptamine"
 		],
 		"categories": [
-			"psychedelic",
 			"tentative",
+			"psychedelic",
 			"research-chemical"
 		]
 	},
@@ -7445,9 +7445,9 @@
 			"4-meo-bf"
 		],
 		"categories": [
-			"opioid",
 			"tentative",
 			"research-chemical",
+			"opioid",
 			"habit-forming"
 		],
 		"formatted_aftereffects": {
@@ -7704,8 +7704,8 @@
 		},
 		"pretty_name": "4-MPD",
 		"categories": [
-			"stimulant",
 			"tentative",
+			"stimulant",
 			"habit-forming"
 		]
 	},
@@ -7724,8 +7724,8 @@
 		},
 		"pretty_name": "4-MTA",
 		"categories": [
-			"empathogen",
 			"research-chemical",
+			"empathogen",
 			"tentative"
 		],
 		"aliases": [
@@ -7848,8 +7848,8 @@
 			}
 		},
 		"categories": [
-			"stimulant",
 			"tentative",
+			"stimulant",
 			"habit-forming"
 		],
 		"aliases": [
@@ -7884,9 +7884,9 @@
 		],
 		"categories": [
 			"psychedelic",
-			"empathogen",
 			"stimulant",
 			"research-chemical",
+			"empathogen",
 			"habit-forming"
 		],
 		"formatted_dose": {
@@ -7938,10 +7938,10 @@
 			"effects": "Euphoria, increased energy/alertness, Decreased need for sleep, Increased sociability, mood lift, increase sexuality, Excessive talking, Decreased appetite, Weight loss, Sweating, Distrubed sleep patterns, Bruxia, Visual and audiotory hallucinations itchiness, agressiveness, moodiness."
 		},
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
+			"empathogen",
 			"habit-forming"
 		],
 		"formatted_dose": {
@@ -8067,9 +8067,9 @@
 		},
 		"pretty_name": "5-BPDI",
 		"categories": [
-			"stimulant",
 			"habit-forming",
 			"research-chemical",
+			"stimulant",
 			"tentative"
 		],
 		"formatted_dose": {
@@ -8144,8 +8144,8 @@
 		},
 		"pretty_name": "5-DBFPV",
 		"categories": [
-			"stimulant",
 			"tentative",
+			"stimulant",
 			"habit-forming",
 			"research-chemical"
 		],
@@ -8190,10 +8190,10 @@
 			"5eapb"
 		],
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
+			"empathogen",
 			"habit-forming"
 		],
 		"formatted_dose": {
@@ -8323,11 +8323,11 @@
 			"5iai"
 		],
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"empathogen"
 		],
 		"pretty_name": "5-IAI",
 		"formatted_effects": [
@@ -8377,11 +8377,11 @@
 			"5-api"
 		],
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -8447,9 +8447,9 @@
 		},
 		"categories": [
 			"psychedelic",
-			"empathogen",
 			"stimulant",
 			"research-chemical",
+			"empathogen",
 			"habit-forming"
 		],
 		"aliases": [
@@ -8524,10 +8524,10 @@
 			}
 		},
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
-			"research-chemical"
+			"psychedelic",
+			"research-chemical",
+			"empathogen"
 		],
 		"aliases": [
 			"5mapdb"
@@ -8587,10 +8587,10 @@
 			"5meoamt"
 		],
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
-			"research-chemical"
+			"psychedelic",
+			"research-chemical",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -8819,8 +8819,8 @@
 		],
 		"categories": [
 			"psychedelic",
-			"empathogen",
-			"research-chemical"
+			"research-chemical",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -9286,8 +9286,8 @@
 		},
 		"categories": [
 			"psychedelic",
-			"empathogen",
 			"research-chemical",
+			"empathogen",
 			"common"
 		],
 		"formatted_duration": {
@@ -9460,9 +9460,9 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"psychedelic",
 			"tentative",
-			"research-chemical"
+			"research-chemical",
+			"psychedelic"
 		]
 	},
 	"5-methyl-bk-mdea": {
@@ -9706,10 +9706,10 @@
 			"6apb"
 		],
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
+			"empathogen",
 			"habit-forming"
 		],
 		"formatted_dose": {
@@ -9767,10 +9767,10 @@
 			"4-desoxy-mda"
 		],
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
+			"empathogen",
 			"habit-forming"
 		],
 		"formatted_dose": {
@@ -9833,10 +9833,10 @@
 			"dose": "Light: 50-75mg Common: 75-100mg Strong: 100-150mg+"
 		},
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
+			"empathogen",
 			"habit-forming"
 		],
 		"formatted_duration": {
@@ -9908,10 +9908,10 @@
 			}
 		},
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
+			"empathogen",
 			"habit-forming"
 		],
 		"formatted_duration": {
@@ -9972,9 +9972,9 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		],
 		"aliases": [
 			"6-methylenedihydrodesoxymorphine"
@@ -10070,8 +10070,8 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"empathogen",
 			"stimulant",
+			"empathogen",
 			"habit-forming",
 			"research-chemical",
 			"tentative"
@@ -10401,9 +10401,9 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"aliases": [
 			"acetyl-fentanyl",
@@ -10490,10 +10490,10 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"research-chemical",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		],
 		"formatted_duration": {
 			"value": "3-5",
@@ -10781,10 +10781,10 @@
 		],
 		"categories": [
 			"psychedelic",
-			"empathogen",
 			"stimulant",
 			"research-chemical",
-			"tentative"
+			"tentative",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -10900,9 +10900,9 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -11472,9 +11472,9 @@
 			"_unit": "minutes"
 		},
 		"categories": [
-			"depressant",
 			"barbiturate",
 			"tentative",
+			"depressant",
 			"habit-forming"
 		],
 		"formatted_dose": {
@@ -11704,8 +11704,8 @@
 		],
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -12847,9 +12847,9 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"depressant",
 			"barbiturate",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		]
 	},
 	"bentazepam": {
@@ -12954,8 +12954,8 @@
 		"pretty_name": "Benzydamine",
 		"categories": [
 			"deliriant",
-			"stimulant",
-			"tentative"
+			"tentative",
+			"stimulant"
 		],
 		"pweffects": {
 			"Abnormal heartbeat": "https://psychonautwiki.org/wiki/Abnormal_heartbeat",
@@ -13306,8 +13306,8 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"stimulant",
 			"depressant",
+			"stimulant",
 			"research-chemical",
 			"nootropic"
 		],
@@ -13368,8 +13368,8 @@
 		],
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -13552,10 +13552,10 @@
 			"bioavailability": "Oral 70% +/- 24%."
 		},
 		"categories": [
+			"depressant",
 			"benzodiazepine",
-			"depressant",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -13664,8 +13664,8 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_duration": {
 			"Low": "Dose",
@@ -13786,10 +13786,10 @@
 		],
 		"categories": [
 			"psychedelic",
-			"empathogen",
 			"stimulant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -13840,10 +13840,10 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"research-chemical",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		],
 		"formatted_duration": {
 			"Oral": "3-4",
@@ -14152,9 +14152,9 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		],
 		"formatted_onset": {
 			"value": "45-90",
@@ -14198,9 +14198,9 @@
 			"hash"
 		],
 		"categories": [
-			"psychedelic",
-			"stimulant",
 			"depressant",
+			"stimulant",
+			"psychedelic",
 			"habit-forming",
 			"common"
 		],
@@ -14544,9 +14544,9 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"stimulant",
 			"nootropic",
-			"tentative"
+			"tentative",
+			"stimulant"
 		]
 	},
 	"changa": {
@@ -14797,8 +14797,8 @@
 		],
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Light:": {
@@ -14919,8 +14919,8 @@
 		],
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -15011,9 +15011,9 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"research-chemical",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_duration": {
@@ -15196,8 +15196,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"research-chemical"
 		]
 	},
@@ -15231,10 +15231,10 @@
 			"tranzene"
 		],
 		"categories": [
+			"depressant",
 			"benzodiazepine",
-			"depressant",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -15316,9 +15316,9 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		],
 		"aliases": [
 			"clozan",
@@ -15614,8 +15614,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -16024,9 +16024,9 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
 			"tentative",
 			"research-chemical",
+			"depressant",
 			"habit-forming"
 		]
 	},
@@ -16211,9 +16211,9 @@
 			"warning": "Datura can be incredibly dangerous, dosing can be hard to determine and caution should be used. In general this drug should be avoided."
 		},
 		"categories": [
-			"deliriant",
 			"depressant",
-			"tentative"
+			"tentative",
+			"deliriant"
 		],
 		"formatted_dose": {
 			"none": {
@@ -16384,8 +16384,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_duration": {
 			"value": "12-16",
@@ -16441,8 +16441,8 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_duration": {
 			"value": "4-6",
@@ -16499,10 +16499,10 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"research-chemical",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		],
 		"aliases": [
 			"etizolam-2"
@@ -16709,8 +16709,8 @@
 			}
 		},
 		"categories": [
-			"benzodiazepine",
 			"depressant",
+			"benzodiazepine",
 			"habit-forming",
 			"research-chemical"
 		]
@@ -16925,8 +16925,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"aliases": [
@@ -17030,8 +17030,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -17187,8 +17187,8 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Light:": {
@@ -17271,9 +17271,9 @@
 			"_unit": "minutes"
 		},
 		"categories": [
+			"research-chemical",
 			"psychedelic",
 			"empathogen",
-			"research-chemical",
 			"tentative"
 		],
 		"aliases": [
@@ -17420,8 +17420,8 @@
 		"categories": [
 			"opioid",
 			"depressant",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -18103,9 +18103,9 @@
 			"_unit": "hours"
 		},
 		"categories": [
+			"tentative",
 			"psychedelic",
 			"stimulant",
-			"tentative",
 			"research-chemical"
 		]
 	},
@@ -18317,8 +18317,8 @@
 			"after-effects": "1-6 hours."
 		},
 		"categories": [
-			"deliriant",
-			"depressant"
+			"depressant",
+			"deliriant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -18367,8 +18367,8 @@
 			"benadryl"
 		],
 		"categories": [
-			"deliriant",
 			"depressant",
+			"deliriant",
 			"common"
 		],
 		"formatted_dose": {
@@ -18617,8 +18617,8 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"deliriant",
 			"depressant",
+			"deliriant",
 			"common"
 		],
 		"formatted_effects": [
@@ -19223,8 +19223,8 @@
 		],
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"pretty_name": "Estazolam",
 		"formatted_effects": [
@@ -19338,8 +19338,8 @@
 			"_unit": "minutes"
 		},
 		"categories": [
-			"psychedelic",
-			"research-chemical"
+			"research-chemical",
+			"psychedelic"
 		],
 		"links": {
 			"experiences": "https://www.erowid.org/experiences/subs/exp_ETHLAD.shtml",
@@ -19375,9 +19375,9 @@
 		},
 		"categories": [
 			"depressant",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -19514,8 +19514,8 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"empathogen",
 			"stimulant",
+			"empathogen",
 			"tentative",
 			"research-chemical"
 		]
@@ -19546,8 +19546,8 @@
 			"eth-cat"
 		],
 		"categories": [
-			"psychedelic",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
 			"habit-forming"
 		],
@@ -19610,8 +19610,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_duration": {
 			"value": "4-5",
@@ -19677,11 +19677,11 @@
 			"bk-mdea"
 		],
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -19849,9 +19849,9 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -20001,8 +20001,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"aliases": [
 			"fent"
@@ -20133,9 +20133,9 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -20215,9 +20215,9 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_duration": {
 			"value": "6-12",
@@ -20336,8 +20336,8 @@
 		],
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -20460,10 +20460,10 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"dissociative",
 			"research-chemical",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"dissociative"
 		],
 		"formatted_onset": {
 			"value": "15-45",
@@ -20505,8 +20505,8 @@
 			"_unit": "minutes"
 		},
 		"categories": [
-			"depressant",
 			"tentative",
+			"depressant",
 			"habit-forming"
 		],
 		"formatted_aftereffects": {
@@ -20557,8 +20557,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"pretty_name": "Flurazepam",
 		"formatted_effects": [
@@ -20618,8 +20618,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_duration": {
 			"value": "3-8",
@@ -20673,8 +20673,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"aliases": [
 			"restas"
@@ -20805,11 +20805,11 @@
 		},
 		"dose_note": " NOTE: Very potent opioid, be very careful while dosing.",
 		"categories": [
-			"opioid",
-			"depressant",
 			"research-chemical",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"opioid",
+			"depressant"
 		],
 		"aliases": [
 			"fu-f",
@@ -20909,8 +20909,8 @@
 		],
 		"categories": [
 			"depressant",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -21110,8 +21110,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"tentative"
 		]
 	},
@@ -21188,8 +21188,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"pretty_name": "Halazepam",
 		"formatted_effects": [
@@ -21376,8 +21376,8 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -21526,8 +21526,8 @@
 		},
 		"pretty_name": "Hexen",
 		"categories": [
-			"stimulant",
 			"tentative",
+			"stimulant",
 			"habit-forming",
 			"research-chemical"
 		],
@@ -21595,8 +21595,8 @@
 			"_unit": "minutes"
 		},
 		"categories": [
-			"depressant",
 			"barbiturate",
+			"depressant",
 			"habit-forming",
 			"tentative"
 		],
@@ -21755,9 +21755,9 @@
 		],
 		"categories": [
 			"psychedelic",
-			"empathogen",
 			"research-chemical",
-			"tentative"
+			"tentative",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -21873,10 +21873,10 @@
 			"after-effects": "1-12 hours."
 		},
 		"categories": [
+			"depressant",
 			"opioid",
-			"depressant",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -21955,8 +21955,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -22033,8 +22033,8 @@
 			"atarax"
 		],
 		"categories": [
-			"deliriant",
-			"depressant"
+			"depressant",
+			"deliriant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -22081,9 +22081,9 @@
 			"iboga"
 		],
 		"categories": [
-			"dissociative",
 			"psychedelic",
 			"opioid",
+			"dissociative",
 			"depressant"
 		],
 		"formatted_dose": {
@@ -22306,9 +22306,9 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -22433,10 +22433,10 @@
 			"_unit": "minutes"
 		},
 		"categories": [
-			"stimulant",
 			"research-chemical",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"stimulant"
 		],
 		"pretty_name": "Isopropylphenidate",
 		"links": {
@@ -22599,8 +22599,8 @@
 		},
 		"dose_note": " Note: We recommend against insufflating this substance, it is extremely painful and damaging to the nasal cavity.",
 		"categories": [
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_aftereffects": {
 			"value": "1-8",
@@ -22965,8 +22965,8 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -23023,8 +23023,8 @@
 			"_unit": "minutes"
 		},
 		"categories": [
-			"stimulant",
-			"habit-forming"
+			"habit-forming",
+			"stimulant"
 		],
 		"formatted_aftereffects": {
 			"value": "1-10",
@@ -23052,8 +23052,8 @@
 		"categories": [
 			"opioid",
 			"stimulant",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -23184,8 +23184,8 @@
 		],
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Light:": {
@@ -23294,8 +23294,8 @@
 		],
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -23943,10 +23943,10 @@
 			]
 		},
 		"categories": [
-			"empathogen",
 			"stimulant",
 			"research-chemical",
 			"tentative",
+			"empathogen",
 			"habit-forming"
 		],
 		"formatted_dose": {
@@ -24067,8 +24067,8 @@
 		},
 		"categories": [
 			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"empathogen",
 			"habit-forming",
 			"common"
 		],
@@ -24121,10 +24121,10 @@
 		},
 		"categories": [
 			"psychedelic",
-			"empathogen",
 			"stimulant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -24186,8 +24186,8 @@
 			}
 		},
 		"categories": [
-			"empathogen",
 			"stimulant",
+			"empathogen",
 			"tentative"
 		],
 		"aliases": [
@@ -24238,9 +24238,9 @@
 			"md"
 		],
 		"categories": [
+			"stimulant",
 			"psychedelic",
 			"empathogen",
-			"stimulant",
 			"habit-forming",
 			"common"
 		],
@@ -24434,11 +24434,11 @@
 			"after-effects": "1-6 hours."
 		},
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
 			"tentative",
+			"empathogen",
 			"habit-forming"
 		],
 		"formatted_dose": {
@@ -24759,8 +24759,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"tentative"
 		],
 		"formatted_duration": {
@@ -24831,8 +24831,8 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"benzodiazepine",
 			"depressant",
+			"benzodiazepine",
 			"habit-forming"
 		],
 		"aliases": [
@@ -25036,10 +25036,10 @@
 			"4mmc"
 		],
 		"categories": [
-			"empathogen",
 			"stimulant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -25161,11 +25161,11 @@
 			"_unit": "minutes"
 		},
 		"categories": [
-			"empathogen",
 			"stimulant",
 			"research-chemical",
 			"tentative",
-			"habit-forming"
+			"habit-forming",
+			"empathogen"
 		],
 		"formatted_aftereffects": {
 			"value": "1-8",
@@ -25517,9 +25517,9 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"depressant",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		]
 	},
 	"metaxalone": {
@@ -25588,8 +25588,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -25778,10 +25778,10 @@
 		],
 		"categories": [
 			"psychedelic",
-			"empathogen",
 			"stimulant",
 			"research-chemical",
 			"tentative",
+			"empathogen",
 			"habit-forming"
 		],
 		"formatted_duration": {
@@ -26191,10 +26191,10 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"opioid",
 			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"opioid"
 		]
 	},
 	"methoxyketamine": {
@@ -26376,11 +26376,11 @@
 			"mdmc"
 		],
 		"categories": [
-			"psychedelic",
-			"empathogen",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
 			"habit-forming",
+			"empathogen",
 			"common"
 		],
 		"formatted_dose": {
@@ -26622,8 +26622,8 @@
 		"pretty_name": "Metizolam",
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"research-chemical",
+			"depressant",
 			"habit-forming",
 			"tentative"
 		],
@@ -26870,8 +26870,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_duration": {
 			"value": "4-8",
@@ -27209,9 +27209,9 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
-			"common"
+			"common",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -27387,9 +27387,9 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -28215,10 +28215,10 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"research-chemical",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		],
 		"formatted_duration": {
 			"value": "10-18",
@@ -28285,8 +28285,8 @@
 		],
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -28444,8 +28444,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -28534,8 +28534,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"tentative"
 		]
 	},
@@ -28748,8 +28748,8 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"empathogen",
-			"stimulant"
+			"stimulant",
+			"empathogen"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -28924,8 +28924,8 @@
 		],
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		]
 	},
 	"norflurazepam": {
@@ -29002,10 +29002,10 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"research-chemical",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		],
 		"aliases": [
 			"odt",
@@ -29126,8 +29126,8 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -29331,8 +29331,8 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -29444,8 +29444,8 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -29549,8 +29549,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"aliases": [
 			"dextromoramide"
@@ -29595,9 +29595,9 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_duration": {
 			"value": "30-60",
@@ -30031,9 +30031,9 @@
 			"_unit": "minutes"
 		},
 		"categories": [
-			"opioid",
+			"habit-forming",
 			"depressant",
-			"habit-forming"
+			"opioid"
 		],
 		"sources": {
 			"_general": [
@@ -30190,8 +30190,8 @@
 			"after-effects": "1-6 hours."
 		},
 		"categories": [
-			"psychedelic",
 			"stimulant",
+			"psychedelic",
 			"research-chemical",
 			"habit-forming"
 		],
@@ -30358,9 +30358,9 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -30706,8 +30706,8 @@
 			}
 		},
 		"categories": [
-			"depressant",
 			"nootropic",
+			"depressant",
 			"habit-forming"
 		],
 		"links": {
@@ -31269,8 +31269,8 @@
 			"_unit": "minutes"
 		},
 		"categories": [
-			"psychedelic",
-			"tentative"
+			"tentative",
+			"psychedelic"
 		]
 	},
 	"prolintane": {
@@ -31773,8 +31773,8 @@
 		],
 		"categories": [
 			"psychedelic",
-			"empathogen",
 			"tentative",
+			"empathogen",
 			"research-chemical"
 		]
 	},
@@ -32167,8 +32167,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -32373,8 +32373,8 @@
 			]
 		},
 		"categories": [
-			"deliriant",
 			"dissociative",
+			"deliriant",
 			"depressant",
 			"common"
 		],
@@ -32730,8 +32730,8 @@
 			"youvitan"
 		],
 		"categories": [
-			"stimulant",
 			"tentative",
+			"stimulant",
 			"habit-forming",
 			"supplement"
 		],
@@ -32759,8 +32759,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -32823,8 +32823,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -32886,8 +32886,8 @@
 		],
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"research-chemical"
 		]
 	},
@@ -32928,8 +32928,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		]
 	},
 	"th-pvp": {
@@ -32977,9 +32977,9 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"stimulant",
 			"tentative",
 			"research-chemical",
+			"stimulant",
 			"habit-forming"
 		]
 	},
@@ -33075,9 +33075,9 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"depressant",
 			"barbiturate",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_aftereffects": {
 			"value": "1-24",
@@ -33152,9 +33152,9 @@
 			"after-effects": "1-8 hours."
 		},
 		"categories": [
-			"opioid",
+			"habit-forming",
 			"depressant",
-			"habit-forming"
+			"opioid"
 		],
 		"formatted_duration": {
 			"value": "4-6",
@@ -33292,8 +33292,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"aliases": [
 			"tilidate",
@@ -33476,8 +33476,8 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"habit-forming",
+			"depressant",
 			"common"
 		],
 		"formatted_dose": {
@@ -33695,8 +33695,8 @@
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -33866,8 +33866,8 @@
 			"jeebs"
 		],
 		"categories": [
-			"depressant",
 			"barbiturate",
+			"depressant",
 			"habit-forming"
 		],
 		"formatted_aftereffects": {
@@ -33897,9 +33897,9 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_dose": {
 			"Oral": {
@@ -33976,8 +33976,8 @@
 		},
 		"pretty_name": "U-49900",
 		"categories": [
-			"dissociative",
 			"opioid",
+			"dissociative",
 			"research-chemical",
 			"tentative"
 		]
@@ -34016,10 +34016,10 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"dissociative",
-			"opioid",
-			"depressant",
 			"tentative",
+			"opioid",
+			"dissociative",
+			"depressant",
 			"research-chemical"
 		],
 		"aliases": [
@@ -34230,10 +34230,10 @@
 		},
 		"categories": [
 			"opioid",
-			"depressant",
 			"research-chemical",
 			"habit-forming",
-			"tentative"
+			"tentative",
+			"depressant"
 		],
 		"pretty_name": "W-15",
 		"formatted_effects": [
@@ -34301,8 +34301,8 @@
 			"_unit": "hours"
 		},
 		"categories": [
-			"stimulant",
 			"common",
+			"stimulant",
 			"habit-forming",
 			"nootropic"
 		]
@@ -34324,8 +34324,8 @@
 			"anadenanthera"
 		],
 		"categories": [
-			"psychedelic",
-			"empathogen"
+			"empathogen",
+			"psychedelic"
 		]
 	},
 	"zolazepam": {
