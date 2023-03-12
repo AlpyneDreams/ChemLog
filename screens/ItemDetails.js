@@ -17,6 +17,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import DateGroupedList from '../components/DateGroupedList'
 import * as Clipboard from 'expo-clipboard'
 import Haptics from '../util/Haptics'
+import MainFABGroup from '../components/doses/MainFABGroup'
 
 export default function ItemDetails({navigation, route}) {
   let item = route.params.dose ?? route.params.stash
@@ -107,6 +108,11 @@ export default function ItemDetails({navigation, route}) {
         </Pressable>
       </Row>
     </View>
+    <MainFABGroup
+      style={{marginBottom: 24 + 48}}
+      addDose={() => navigation.navigate('AddDose', {substance: {id: item.substance}})}
+      addNote={() => navigation.navigate('AddNote')}
+    />
     {!entry &&
       <StashDoses stash={stash} />
     }

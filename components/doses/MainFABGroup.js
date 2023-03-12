@@ -7,7 +7,7 @@ import { Row } from '../Util'
 import { LayoutAnims, usePrevious, ICON_ADD_NOTE } from '../../util/Util'
 import { Icon } from '../Icon'
 
-export default function MainFABGroup({visible, empty=false, addDose, addNote}) {
+export default function MainFABGroup({visible, empty=false, addDose, addNote, style}) {
   const theme = useTheme()
 
   const wasVisible = usePrevious(visible)
@@ -29,9 +29,10 @@ export default function MainFABGroup({visible, empty=false, addDose, addNote}) {
         <Icon icon={require('../../assets/icons/arrow-right-bottom.png')} size={24} color={theme.colors.disabled}/>
       </View>
     }
-    <View style={CommonStyles.fab}>
+    <View style={[CommonStyles.fab, style]}>
       <FAB
         visible={visible}
+        mode='flat'
         icon={ICON_ADD_NOTE}
         label='Note'
         uppercase={false}
@@ -41,6 +42,7 @@ export default function MainFABGroup({visible, empty=false, addDose, addNote}) {
       />
       <FAB
         visible={visible}
+        mode='flat'
         icon='beaker-plus-outline'
         label='Dose'
         uppercase={false}
