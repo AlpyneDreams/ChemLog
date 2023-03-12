@@ -36,5 +36,6 @@ export default {
     'drug-contradictions': 'Drug Contradictions',
     'contraindictions': 'Contraindictions',
     'chemistry': 'Chemistry',
+    'dose_to_diazepam': 'Dose to Diazepam',
   }
 }
