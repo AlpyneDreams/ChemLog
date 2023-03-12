@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as SecureStore from 'expo-secure-store'
 import bcrypt from '../util/bcrypt'
-import { getRandomBytes } from 'expo-random'
+import { getRandomBytes } from 'expo-crypto'
 
 bcrypt.setRandomFallback(getRandomBytes)
 
