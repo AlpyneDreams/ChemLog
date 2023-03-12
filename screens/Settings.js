@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { ScrollView, View, StyleSheet, Linking, Image } from 'react-native'
-import { RadioButton, List, Divider, Text, useTheme, TextInput, ToggleButton } from 'react-native-paper'
+import { RadioButton, List as PaperList, Divider, Text, useTheme, TextInput, ToggleButton } from 'react-native-paper'
 import ChooseDialog from '../components/dialogs/ChooseDialog'
 import UserData from '../store/UserData'
 import Constants from 'expo-constants'
@@ -16,6 +16,11 @@ function IconText({icon, children}) {
     <Text>{children}</Text>
   </Row>
 }
+
+const List = Object.assign({}, PaperList, {
+  Icon: (props) => <PaperList.Icon {...props} style={{marginLeft: 16, ...props.style}} />,
+  Item: (props) => <PaperList.Item {...props} style={{paddingRight: 8, ...props.style}} />,
+})
 
 export function Settings() {
   const navigation = useNavigation()
@@ -47,7 +52,7 @@ export function Settings() {
         <Divider/>
         <List.Item
           title='Screen lock'
-          description={`Lock app with passcode`}
+          description={screenLock ? 'App is locked with passcode' : 'Lock app with passcode'}
           onPress={() => {
             if (screenLock) {
               navigation.navigate('LockScreen', {destination: 'ScreenLockSettings', prompt: true, returnTo: 'Settings', icon: 'cog'})

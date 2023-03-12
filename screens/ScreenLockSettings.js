@@ -83,6 +83,7 @@ export function ScreenLockSettings() {
             <Switch value={screenLock} onValueChange={setEnabled} />
           }
           onPress={() => {setEnabled(!screenLock)}}
+          style={{paddingRight: 8}}
         />
         <ListItem
           title='Change passcode' disabled={!screenLock}
