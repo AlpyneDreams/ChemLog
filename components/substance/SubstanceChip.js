@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Chip, ThemeProvider, useTheme } from 'react-native-paper'
 import Substances from '../../store/Substances'
 import { Icon } from '../Icon'
+import Haptics from '../../util/Haptics'
 
 export default function SubstanceChip({substance: id, style, onPress, colorful=true, ...props}) {
 
@@ -18,7 +19,10 @@ export default function SubstanceChip({substance: id, style, onPress, colorful=t
       mode='flat'
       icon={icon ? ({size, color: iconColor}) => <Icon icon={icon} color={colorful ? color ?? iconColor : theme.colors.onSurfaceVariant} size={size} /> : null}
       onPress={onPress ?? (() => navigation.navigate('Substance', {substance: id}))}
-      onLongPress={onPress ? () => navigation.navigate('Substance', {substance: id}) : null}
+      onLongPress={onPress ? () => {
+        Haptics.longPress()
+        navigation.navigate('Substance', {substance: id})
+      } : null}
       style={color ? {
         backgroundColor: color.slice(0, 7) + '40',
         borderColor: color,

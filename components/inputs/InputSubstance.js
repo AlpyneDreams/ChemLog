@@ -8,6 +8,7 @@ import SubstanceChip from '../substance/SubstanceChip'
 import { Row } from '../Util'
 import { Icon } from '../Icon'
 import { LayoutAnims } from '../../util/Util'
+import Haptics from '../../util/Haptics'
 
 /**
  * Substance picker input. Opens full screen substance list.
@@ -78,29 +79,13 @@ export default function InputSubstance({value: substance, onChange: changeValue,
             <Icon icon={'plus'} color={theme.colors.onSurface} size={size}/>
           }
           onPress={() => {
+            Haptics.longPress()
             navigation.navigate('SubstancePicker', {current: substance?.id, returnTo})
           }}
         >More</Chip>
       )}
     </Row>
   </View>
-
-  return (
-    <GenericInput
-      label='Substance'
-      mode='flat'
-      value={substance?.pretty_name}
-      left={substance ? <TextInput.Icon icon={substance.icon} color={() => substance.color}/> : null}
-      right={<TextInput.Icon icon='menu-down'/>}
-      onPress={() => {
-        if (substance)
-          onChange(null)
-        else
-          navigation.navigate('SubstancePicker', {current: substance?.id, returnTo})
-      }}
-      inputStyle={style}
-    />
-  )
 }
 
 const styles = StyleSheet.create({

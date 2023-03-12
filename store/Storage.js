@@ -11,7 +11,7 @@ async function set(key, value) {
   return await AsyncStorage.setItem(STORAGE_PREFIX+key, JSON.stringify(value)).catch(console.error)
 }
 
-const Storage = {get, set}
+export const Storage = {get, set}
 export default Storage
 
 export class DataStore {
