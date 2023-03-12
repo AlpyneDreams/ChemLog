@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
-import { useTheme, Button, Menu, TextInput, TouchableRipple, Text, IconButton } from 'react-native-paper'
-import DropDown from './DropDown'
+import { useTheme, Button, Menu, TouchableRipple, Text, IconButton } from 'react-native-paper'
 import InputExpand from './InputExpand'
 import Units from '../../data/Units'
+import { TextInput } from './TextInput'
+import { ChooseDialog2 } from '../dialogs/ChooseDialog2'
+import GenericInput from './GenericInput'
 
 const units = Object.values(Units)
   .filter(u => !u.hidden)
@@ -29,18 +31,19 @@ export default function InputAmount({startOpen = false, ...props}) {
         style={{flex: 1, marginEnd: 8, backgroundColor: colors.background}}
       />
       <View style={{flex: 1}}>
-        <DropDown
+        <GenericInput
           label='Unit'
           mode='flat'
-          inputProps={{style: {backgroundColor: colors.background}, underlineColor: colors.outline}}
-          visible={unitMenu}
-          showDropDown={() => showUnits(true)}
-          onDismiss={() => showUnits(false)}
-          setValue={props.onChangeUnit}
           value={props.unit}
-          list={units}
+          onPress={() => showUnits(true)}
+          right={<TextInput.Icon icon='menu-down'/>}
         />
       </View>
+      <ChooseDialog2
+        state={[unitMenu, showUnits]}
+        title='Unit' options={Units} clear={false}
+        value={props.unit} onChange={props.onChangeUnit}
+      />
     </InputExpand>
 )
 }

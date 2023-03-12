@@ -1,6 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
-import { TouchableRipple, Text, TextInput, useTheme } from 'react-native-paper'
+import { TouchableRipple, Text, useTheme } from 'react-native-paper'
+import { TextInput } from './TextInput'
 
 /**
  * Button that looks like a TextInput (for opening modals, etc.)

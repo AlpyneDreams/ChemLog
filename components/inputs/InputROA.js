@@ -1,48 +1,40 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { Text, useTheme } from 'react-native-paper'
-import DropDown from './DropDown'
 import InputExpand from './InputExpand'
 import ROA from '../../data/ROA'
+import GenericInput from './GenericInput'
+import { TextInput } from './TextInput'
+import { ChooseDialog2 } from '../dialogs/ChooseDialog2'
 
-const roas = ROA.roas.map(roa => ({
-  label: roa.name, value: roa.name,
-  custom: (
-    // TODO: DropDown sucks so we can't have the active color while also customizing the item.
-    // Perhaps replace it altogether.
-    <View>
-      <Text>{roa.name}</Text>
-      {roa.description ? <Text style={{opacity: 0.5}}>{roa.description}</Text> : null}
-    </View>
-  )
-}))
-
-roas.unshift({
-  label: '(None)', value: null
-})
+const roas = {}
+for (const roa of ROA.roas) {
+  roas[roa.name] = roa
+}
 
 export default function InputROA({value, onChange, startOpen = false}) {
   const theme = useTheme()
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(!startOpen)
 
   const onExpand = () => {onChange(ROA.default)}
 
   return (
     <InputExpand title='Add route' icon='eyedropper' style={{paddingTop: 12}} startOpen={startOpen} onExpand={onExpand}>
       <View style={{flex: 1}}>
-        <DropDown
+        <GenericInput
           label='Route'
           mode='flat'
-          inputProps={{style: {backgroundColor: theme.colors.background}, underlineColor: theme.colors.outline}}
-          dropDownContainerMaxHeight={300}
-          visible={open}
-          showDropDown={() => setOpen(true)}
-          onDismiss={() => setOpen(false)}
           value={value}
-          setValue={onChange}
-          list={roas}
+          onPress={() => setOpen(true)}
+          right={<TextInput.Icon icon='menu-down'/>}
         />
       </View>
+      <ChooseDialog2
+        state={[open, setOpen]}
+        title='Route' value={value} onChange={onChange}
+        options={roas}
+      />
     </InputExpand>
   )
 }
+
