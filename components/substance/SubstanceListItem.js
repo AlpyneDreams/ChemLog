@@ -45,7 +45,7 @@ export function SubstanceListItem({item: s, priority: score = 0, swipeable, onLo
       } : onLongPress}
       right={props =>  icon && <IconButton icon={icon} />}
       style={[
-        {backgroundColor: theme.colors.background},
+        {backgroundColor: theme.colors.background, padding: 16},
         swipeable ? {
           borderRadius: theme.roundness,
           marginRight: -4, marginLeft: -4 // hide rounded corenrs unless being swiped

@@ -47,7 +47,7 @@ export default function ItemDetails({navigation, route}) {
 
     navigation.setOptions({
       title: note ? 'Note' : item.name,
-      headerTitle: (props) => <Row>
+      headerTitle: (props) => <Row style={{paddingRight: 80}}>
         <Icon icon={icon} size={24} style={{marginTop: 2, marginRight: 6}} />
         <HeaderTitle {...props} />
       </Row>,
@@ -79,23 +79,23 @@ export default function ItemDetails({navigation, route}) {
       {!note ? <>
         <Row>
           <Stat label='Substance'>
-            <SubstanceChip substance={item.substance} />
+            <SubstanceChip substance={item.substance} style={{marginStart: 8}}/>
           </Stat>
         </Row>
         <Row>
-          <Stat label='Amount' visible={item.amount} value={`${item.amount} ${item.unit}`} style={{flex: 1.25}} />
+          <Stat label='Amount' visible={item.amount} value={`${item.amount} ${item.unit}`} style={{flex: 1.4}} />
           <Stat label='Route' value={item.roa} style={{flex: 2}} />
         </Row>
       </> : null}
       <Row>
-        <Stat label={entry ? 'When' : 'Created'} value={date.fromNow()} visible={date.isValid()} style={{flex: 1.25}} />
+        <Stat label={entry ? 'When' : 'Created'} value={date.fromNow()} visible={date.isValid()} style={{flex: 1.4}} />
         <Stat label='Date' value={dateDate} visible={date.isValid()} />
         <Stat label='Time' value={dateTime} visible={date.isValid()} />
       </Row>
       <Row style={{flex: 1}}>
         <Pressable style={{flex: 1}} onLongPress={longPressNote}>
           <Stat label={note ? 'Note' : 'Notes'}>
-            <Text style={{paddingLeft: 8, marginVertical: 6, fontSize: 15, lineHeight: 20}}>
+            <Text style={{paddingLeft: 18, marginVertical: 6, fontSize: 15, lineHeight: 20}}>
               {
                 item.notes 
                 || <Button uppercase={false} icon={ICON_ADD_NOTE} onPress={() => edit({focus: 'notes'})}>

@@ -41,6 +41,7 @@ export default function CategoryChip({category, selectable = false, onChange = (
 
 const styles = StyleSheet.create({
   category: {
+    backgroundColor: 'transparent',
     marginEnd: 6,
     marginVertical: 4
   },

@@ -4,7 +4,7 @@ import { Chip, ThemeProvider, useTheme } from 'react-native-paper'
 import Substances from '../../store/Substances'
 import { Icon } from '../Icon'
 
-export default function SubstanceChip({substance: id}) {
+export default function SubstanceChip({substance: id, style}) {
 
   const theme = useTheme()
   const navigation = useNavigation()
@@ -21,8 +21,8 @@ export default function SubstanceChip({substance: id}) {
       style={color ? {
         backgroundColor: color.slice(0, 7) + '40',
         borderColor: color,
-        borderWidth: 1
-      } : {borderWidth: 1}}
+        borderWidth: 1, ...style
+      } : {borderWidth: 1, ...style}}
       theme={color ? {colors: {text: color}} : null}
       textStyle={{color: theme.colors.text}}
     >
