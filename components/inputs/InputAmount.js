@@ -20,6 +20,7 @@ export default function InputAmount({startOpen = false, ...props}) {
       <TextInput
         label='Amount'
         mode='flat'
+        underlineColor={colors.outline}
         value={props.amount}
         autoFocus={!startOpen}
         keyboardType='numeric'
@@ -27,12 +28,13 @@ export default function InputAmount({startOpen = false, ...props}) {
           if (!Number.isNaN(Number.parseFloat(amount)) || amount === '')
             props.onChangeAmount(amount)
         }}
-        style={{flex: 1, marginEnd: 8}}
+        style={{flex: 1, marginEnd: 8, backgroundColor: colors.background}}
       />
       <View style={{flex: 1}}>
         <DropDown
           label='Unit'
           mode='flat'
+          inputProps={{style: {backgroundColor: colors.background}, underlineColor: colors.outline}}
           visible={unitMenu}
           showDropDown={() => showUnits(true)}
           onDismiss={() => showUnits(false)}

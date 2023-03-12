@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
-import { Text } from 'react-native-paper'
+import { Text, useTheme } from 'react-native-paper'
 import DropDown from './DropDown'
 import InputExpand from './InputExpand'
 import ROA from '../../data/ROA'
-import GenericInput from './GenericInput'
 
 const roas = ROA.roas.map(roa => ({
   label: roa.name, value: roa.name,
@@ -23,7 +22,7 @@ roas.unshift({
 })
 
 export default function InputROA({value, onChange, startOpen = false}) {
-
+  const theme = useTheme()
   const [open, setOpen] = useState(false)
 
   const onExpand = () => {onChange(ROA.default)}
@@ -34,6 +33,7 @@ export default function InputROA({value, onChange, startOpen = false}) {
         <DropDown
           label='Route'
           mode='flat'
+          inputProps={{style: {backgroundColor: theme.colors.background}, underlineColor: theme.colors.outline}}
           dropDownContainerMaxHeight={300}
           visible={open}
           showDropDown={() => setOpen(true)}

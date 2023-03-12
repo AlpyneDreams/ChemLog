@@ -128,7 +128,8 @@ export class AddDose extends Component {
             onLayout={(e) => {focusNotes && this.textInput.current.focus()}}
             mode='flat'
             multiline={true}
-            style={{flex: 1}}
+            style={{flex: 1, backgroundColor: theme.colors.background}}
+            underlineColor={theme.colors.outline}
             value={this.state.notes}
             onChangeText={notes => this.setState({notes})}
           />

@@ -28,8 +28,9 @@ export default function GenericInput({
           value={value}
           {...props}
           outlineColor={focused ? colors.primary : null}
-          underlineColor={focused ? colors.primary : null}
-          theme={dimText ? {colors: {text: colors.disabled}} : null}
+          underlineColor={focused ? colors.primary : colors.outline}
+          textColor={dimText ? colors.onSurfaceDisabled : null}
+          style={props?.mode === 'flat' ? {backgroundColor: colors.background, ...props?.style} : props?.style}
         />
       </View>
       <TouchableRipple 
