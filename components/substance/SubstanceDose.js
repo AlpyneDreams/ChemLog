@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Caption, ToggleButton, Title, Subheading, Text, Colors, useTheme, ActivityIndicator, ProgressBar, overlay, RadioButton } from 'react-native-paper'
+import { Caption, ToggleButton, Title, Subheading, Text, MD2Colors as Colors, useTheme, ActivityIndicator, ProgressBar, overlay, RadioButton } from 'react-native-paper'
 import { styles } from './common'
 import { Row } from '../Util'
 import Table from './Table'

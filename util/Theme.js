@@ -1,7 +1,7 @@
 import { merge } from 'lodash'
 import {
-  DefaultTheme as PaperLight,
-  DarkTheme as PaperDark
+  MD3LightTheme as PaperLight,
+  MD3DarkTheme as PaperDark
 } from 'react-native-paper'
 
 import {

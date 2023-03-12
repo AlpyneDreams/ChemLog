@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, LayoutAnimation } from 'react-native'
-import { Card, FAB, Button, Text, Portal, Provider, useTheme, Colors, Surface, IconButton } from 'react-native-paper'
+import { Card, FAB, Button, Text, Portal, Provider, useTheme, Surface, IconButton } from 'react-native-paper'
 import Haptics from '../../util/Haptics'
 import CommonStyles from '../CommonStyles'
 import { Row } from '../Util'

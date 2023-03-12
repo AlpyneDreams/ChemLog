@@ -1,6 +1,6 @@
 import React from 'react'
 import { LayoutAnimation, Switch as NativeSwitch, View, StyleSheet } from 'react-native'
-import { Colors, TouchableRipple, useTheme } from 'react-native-paper'
+import { MD2Colors as Colors, TouchableRipple, useTheme } from 'react-native-paper'
 import { usePrevious } from '../util/Util'
 
 const layoutAnim = {...LayoutAnimation.Presets.easeInEaseOut, duration: 100}
