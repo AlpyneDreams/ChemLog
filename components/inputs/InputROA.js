@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { Text } from 'react-native-paper'
-import DropDown from 'react-native-paper-dropdown'
+import DropDown from './DropDown'
 import InputExpand from './InputExpand'
 import ROA from '../../data/ROA'
 import GenericInput from './GenericInput'

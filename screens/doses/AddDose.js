@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { ScrollView, StyleSheet } from 'react-native'
 import { View } from "react-native";
 import { Title, Button, FAB, List, TextInput, IconButton, withTheme } from 'react-native-paper';
-import DropDown from 'react-native-paper-dropdown'
 import InputAmount from '../../components/inputs/InputAmount';
 import InputDate from '../../components/inputs/InputDate';
 import InputExpand from '../../components/inputs/InputExpand';
