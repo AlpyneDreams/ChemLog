@@ -161,9 +161,14 @@ function AppLayout() {
   })
   
   const surfaceColor = theme.dark ? theme.colors.surface : theme.colors.background
-  const itemDetailsOptions = {
+
+  const surfaceStyles = {
     headerStyle: {backgroundColor: surfaceColor, elevation: 0},
-    cardStyle: theme.dark ? {backgroundColor: theme.colors.surface} : null,
+    cardStyle: {backgroundColor: surfaceColor},
+  }
+
+  const itemDetailsOptions = {
+    ...surfaceStyles,
     ...merge(TransitionPresets.DefaultTransition, {
       transitionSpec: {
         open: {config: {duration: 125}},
@@ -191,8 +196,8 @@ function AppLayout() {
               >
                 <Stack.Screen name='Home' component={Home} options={{headerShown: false}} />
                 <Stack.Screen name='LockScreen' component={LockScreen} options={{headerShown: false}} />
-                <Stack.Screen name='Settings' component={Settings} options={{cardStyle: {backgroundColor: surfaceColor}, headerStyle: {backgroundColor: surfaceColor, elevation: 0}}} />
-                <Stack.Screen name='ScreenLockSettings' component={ScreenLockSettings} options={{title: 'Passcode Lock', cardStyle: {backgroundColor: surfaceColor}, headerStyle: {backgroundColor: surfaceColor, elevation: 0}}} />
+                <Stack.Screen name='Settings' component={Settings} options={surfaceStyles} />
+                <Stack.Screen name='ScreenLockSettings' component={ScreenLockSettings} options={{title: 'Passcode Lock', ...surfaceStyles}} />
                 <Stack.Screen
                   name='AddDose'
                   component={AddDose}
@@ -249,10 +254,9 @@ function AppLayout() {
                   component={SubstanceView}
                   options={{
                     headerLeft: CloseBackButton,
-                    headerStyle: {backgroundColor: surfaceColor, elevation: 0},
-                    cardStyle: {backgroundColor: surfaceColor},
+                    ...surfaceStyles,
                     gestureEnabled: true,
-                    ...TransitionPresets.ModalPresentationIOS,
+                    ...TransitionPresets.SlideFromRightIOS,
                   }}
                 />
                 <Stack.Screen
