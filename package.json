@@ -1,6 +1,7 @@
 {
   "name": "chemlog",
   "main": "node_modules/expo/AppEntry.js",
+  "type": "module",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",

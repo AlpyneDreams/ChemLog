@@ -7,11 +7,11 @@
 				"1,4-bd",
 				"14bd"
 			],
-			"onset": "10-45 minutes.",
+			"onset": "10-45 minutes",
 			"duration": "3-5 hours",
 			"avoid": "All other CNS depressants.",
 			"dose": "Light: 0.5-1ml Common: 1-1.5ml Strong: 1.5ml+",
-			"summary": "1,4-BD is a clear liquid with intoxicating effects. It is a pro-drug for GHB, and has similar though reportedly inferior effects. It also carries the potential for more health risks than GHB, such as liver toxicity.",
+			"summary": "1,4-BD is a clear liquid with intoxicating effects. It is a pro-drug for GHB, and has similar though reportedly inferior effects. It also carries the potential for more health risks than GHB, such as liver damage and neurotoxicity.",
 			"categories": [
 				"depressant",
 				"habit-forming"
@@ -18308,7 +18308,7 @@
 			"summary": "A first generation antihistamine and anticholinergic, originally used to treat nausea and itching, and later as a sleep aid. Causes drowsiness, and delirium in overdose. Sometimes used with opioids to combat nausea and potentiate effects.",
 			"onset": "20-30 minutes",
 			"duration": "6-8 hours",
-			"dose": "Threshold: 6.25mg Common: 10-20mg Heavy: 20-50mg.",
+			"dose": "Threshold: 10mg Light: 75-200mg Common: 200-350mg Heavy: 350mg+",
 			"warning": "As with other first generation antihistamines, if you take too much you could have a delirant like experience.",
 			"categories": [
 				"depressant",
@@ -18322,9 +18322,10 @@
 		],
 		"formatted_dose": {
 			"Oral": {
-				"Threshold": "6.25mg",
-				"Common": "10-20mg",
-				"Heavy": "20-50mg."
+				"Threshold": "10mg",
+				"Light": "75-200mg",
+				"Common": "200-350mg",
+				"Heavy": "350mg+"
 			}
 		},
 		"formatted_duration": {
@@ -22657,7 +22658,7 @@
 	"ketamine": {
 		"name": "ketamine",
 		"properties": {
-			"dose": "Insufflated Threshold: 5-10mg Light: 20-50mg Common: 50-125mg Strong: 125-175mg Heavy: 175-250mg | NOTE: Ketamine is based on weight. These are figures for the average 150 pound male There is no concrete dose for the \"K-Hole\" as each user is different.",
+			"dose": "Insufflated Threshold: 5-10mg Light: 20-50mg Common: 50-125mg Strong: 125-175mg Heavy: 175mg+ | NOTE: Ketamine is based on weight. These are figures for the average 150 pound male There is no concrete dose for the \"K-Hole\" as each user is different.",
 			"duration": "1-2 hours",
 			"summary": "A short acting dissociative anaesthetic and hallucinogen commonly used in emergency medicine. It is the prototypical dissociative, and is widely used at sub-anesthetic doses recreationally. Small doses are comparable with alcohol, while larger doses are immobilising and lead to psychedelic experiences: the \"K-Hole.\"",
 			"onset": "Insufflated: 7.5-20 minutes | Oral: 10-75 minutes | Intramuscular: 2-7.5 minutes | Intravenous: 0-2 minutes",
@@ -22694,7 +22695,7 @@
 				"Light": "20-50mg",
 				"Common": "50-125mg",
 				"Strong": "125-175mg",
-				"Heavy": "175-250mg"
+				"Heavy": "175mg+"
 			}
 		},
 		"formatted_effects": [
@@ -29298,7 +29299,7 @@
 	"oxycodone": {
 		"name": "oxycodone",
 		"properties": {
-			"dose": "Oral Light: 2.5-10mg  Common: 10-25mg  Strong: 25-40mg | Insufflated Light: 2.5-7.5mg  Common: 7.5-15mg  Strong: 15-25mg",
+			"dose": "Oral Light: 2.5-10mg  Common: 10-25mg  Strong: 25-40mg | Insufflated Light: 2.5-7.5mg  Common: 7.5-15mg  Strong: 15-25mg | Note: Dosages reflect that, while nasal bioavailability (BA) may be less than oral BA, nasal administration causes an additional 'rush' (due to quicker onset); this may lead to a subjective experience of greater strength than an equivalent oral dose.",
 			"onset": "Oral_IR: 20 minutes | Oral_ER: 40 minutes | Insufflated: 2-5 minutes | IV: 0-1 minutes",
 			"potentiators": "Avoid grapefruit juice, alcohol, and diphenhydramine. These products may react negatively and cause an overdose. Also do not consume more than 4g APAP (acetaminophen) in a day.",
 			"detection": "3-5 days for minimal use, 5-8 for regular use.",
@@ -29412,7 +29413,8 @@
 		"formatted_aftereffects": {
 			"value": "1-24",
 			"_unit": "hours"
-		}
+		},
+		"dose_note": " Note: Dosages reflect that, while nasal bioavailability (BA) may be less than oral BA, nasal administration causes an additional 'rush' (due to quicker onset); this may lead to a subjective experience of greater strength than an equivalent oral dose."
 	},
 	"oxymorphone": {
 		"name": "oxymorphone",
@@ -31904,7 +31906,7 @@
 		"properties": {
 			"summary": "RC benzodiazepine discovered by Hoffman-LaRoche in the 1970s. Came to the RC market in the early 2010s. At lower doses it is mainly an anxiolytic compound, yet at higher doses can be quite sedating, hypnotic, amnesic, and can cause loss of inhibitions. Structurally similar to Alprazolam, Bromazepam, and Triazolam. Is 12x as potent as Diazepam.",
 			"duration": "Oral: 5-8 hours. | Insufflated: 3-5 hours.",
-			"dose": "Oral Light: 1-2mg Common: 2-3mg Strong: 3-4mg's.",
+			"dose": "Oral Light: .5-.75mg Common: .75-1.5mg Strong: 1.5-3mg's.",
 			"categories": [
 				"benzodiazepine",
 				"research-chemical",
@@ -31914,20 +31916,20 @@
 			"onset": "Oral: 10-15 minutes. | Insufflated: 5 minutes.",
 			"effects": "Anxiolytic, Sedative, Muscle Relaxant, Amnesia, Dystaxia.",
 			"after-effects": "1-12 hours.",
-			"dose_to_diazepam": "Pyrazolam - 10-20mg ~=10mg Diazepam."
+			"dose_to_diazepam": "Pyrazolam - 1-2mg ~=10mg Diazepam."
 		},
 		"formatted_dose": {
 			"Oral": {
-				"Light": "1-2mg",
-				"Common": "2-3mg",
-				"Strong": "3-4mg"
+				"Light": ".5-.75mg",
+				"Common": ".75-1.5mg",
+				"Strong": "1.5-3mg"
 			}
 		},
 		"categories": [
 			"benzodiazepine",
-			"depressant",
 			"research-chemical",
-			"habit-forming"
+			"habit-forming",
+			"depressant"
 		],
 		"formatted_duration": {
 			"Oral": "5-8",
@@ -33013,6 +33015,41 @@
 			"stimulant",
 			"nootropic"
 		]
+	},
+	"theobromine": {
+		"name": "theobromine",
+		"properties": {
+			"summary": "Theobromine is the principal bitter alkaloid of the cacao bean. It has been used in various pharmaceutical products as vasodilator, diuretic and as heart stimulant. Theobromine is consumed in cocoa, chocolate and in various forms of chocolate-based foods. It is also present in small amounts in green coffee beans, tea, mate and the kola nut.",
+			"effects": "elevated heart rate, vasodilation, sweating, trembling, headaches",
+			"dose": "Light: 100-200mg Common: 200-300mg Strong: 300-600mg Heavy: 600mg+",
+			"duration": "onset: 30-40 minutes duration: 7-12 hours after-effects: 5-12 hours",
+			"duration:": "7-12 hours.",
+			"onset": "2-3 hours."
+		},
+		"pretty_name": "Theobromine",
+		"formatted_effects": [
+			"elevated heart rate",
+			"vasodilation",
+			"sweating",
+			"trembling",
+			"headaches"
+		],
+		"formatted_dose": {
+			"Oral": {
+				"Light": "100-200mg",
+				"Common": "200-300mg",
+				"Strong": "300-600mg",
+				"Heavy": "600mg+"
+			}
+		},
+		"formatted_duration": {
+			"onset": "30-40",
+			"_unit": "hours"
+		},
+		"formatted_onset": {
+			"value": "2-3",
+			"_unit": "hours"
+		}
 	},
 	"thiopental": {
 		"name": "thiopental",
