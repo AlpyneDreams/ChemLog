@@ -99,7 +99,7 @@ export class AddDose extends Component {
       <View style={{padding: 12, flex: 1}}>
         <InputSubstance
           value={substance}
-          onChange={substance => this.setState({substance})}
+          onChange={s => this.setState({substance: s ? {id: s.name, name: s.pretty_name} : null})}
           returnTo={!edit ? 'AddDose' : 'EditDose'}
         />
         <InputDate 
@@ -108,6 +108,7 @@ export class AddDose extends Component {
         />
         <InputAmount
           amount={this.state.amount}
+          substance={substance} roa={this.state.roa}
           onChangeAmount={amount => this.setState({amount})}
           unit={this.state.unit}
           onChangeUnit={unit => this.setState({unit})}
