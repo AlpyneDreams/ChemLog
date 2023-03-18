@@ -12,6 +12,7 @@ export default function GenericInput({
   value,
   onPress,
   style,
+  inputStyle,
   dimText,
   ...props
 }) {
@@ -31,7 +32,7 @@ export default function GenericInput({
           outlineColor={focused ? colors.primary : null}
           underlineColor={focused ? colors.primary : colors.outline}
           textColor={dimText ? colors.onSurfaceDisabled : null}
-          style={props?.mode === 'flat' ? {backgroundColor: colors.background, ...props?.style} : props?.style}
+          style={props?.mode === 'flat' ? {backgroundColor: colors.background, ...inputStyle} : inputStyle}
         />
       </View>
       <TouchableRipple 

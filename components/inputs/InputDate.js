@@ -9,7 +9,7 @@ import InputExpand from './InputExpand';
 /**
  * Displays the current live time if no value is provided.
  */
-export default function InputDate({value, onChange}) {
+export default function InputDate({value, onChange, style}) {
   const theme = useTheme()
   const [datePicker, showDate] = React.useState(false)
   const [timePicker, showTime] = React.useState(false)
@@ -60,7 +60,7 @@ export default function InputDate({value, onChange}) {
       mode='flat'
       value={date.format('MMM D, YYYY')}
       focused={datePicker}
-      style={{flex: 1}}
+      style={{flex: 1}} inputStyle={style}
       dimText={dimText}
       onPress={() => showDate(true)}
     />
@@ -77,7 +77,7 @@ export default function InputDate({value, onChange}) {
       mode='flat'
       value={date.format('HH:mm')}
       focused={timePicker}
-      style={{marginStart: 8, flex: 1}}
+      style={{marginStart: 8, flex: 1}} inputStyle={style}
       dimText={dimText}
       onPress={() => showTime(true)}
     />
