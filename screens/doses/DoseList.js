@@ -1,11 +1,11 @@
 import React, { Component, useState } from 'react'
 import { useEffect } from 'react';
-import { View, StyleSheet, ToastAndroid, Vibration, ScrollView } from 'react-native'
+import { View, StyleSheet, ToastAndroid, Vibration, ScrollView, LayoutAnimation } from 'react-native'
 import { FAB, IconButton, List, Text, Snackbar, Menu, Portal, ActivityIndicator, Headline, Subheading, useTheme, Button } from 'react-native-paper';
 import { Dose, DoseStorage } from '../../store/Dose'
 import { useNavigation } from '@react-navigation/native'
 import Haptics from '../../util/Haptics'
-import { DAY_MS, MORE_ICON, separateByDate } from '../../util/Util';
+import { DAY_MS, LayoutAnims, MORE_ICON, separateByDate } from '../../util/Util';
 import ConfirmDialog from '../../components/dialogs/ConfirmDialog';
 import DoseEntry from '../../components/doses/DoseEntry'
 import MainFABGroup from '../../components/doses/MainFABGroup'
@@ -15,6 +15,7 @@ import UserData from '../../store/UserData';
 import { lockScreen } from '../LockScreen';
 import { Row } from '../../components/Util';
 import { Icon } from '../../components/Icon';
+import AddDoseCard from '../../components/doses/AddDoseCard';
 
 function HomeContextMenu({select, selectAll}) {
   const userData = UserData.useContext()
@@ -244,6 +245,10 @@ export default class DoseList extends Component {
       <View style={{height: '100%'}}>
         {/* TODO: Use FlatList */}
         <ScrollView>
+          <AddDoseCard onSubmit={() => {
+            LayoutAnimation.configureNext(LayoutAnims.ease)
+            this.setState(this.state)
+          }}/>
           {empty && <NoDoses/>}
           <List.Section style={{paddingBottom: 64}}>
             {this.state.loaded ? doses.map((dose, index) => 
